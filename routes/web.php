@@ -30,4 +30,6 @@ Route::get('users/user', function () {
 
 });
 
+Route::resource('/admin/users', 'admin\UsersController');
+
 Route::get('/home', 'HomeController@index')->name('home');

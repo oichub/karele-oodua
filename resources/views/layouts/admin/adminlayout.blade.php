@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('plugins/dist/css/adminlte.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
+
   {{--  <script src="{{ asset('plugins/datatables/jquery.dataTables.js')}}"></script>  --}}
   {{--  <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>  --}}
   <!-- overlayScrollbars -->
@@ -101,7 +103,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('users.create') }}" class="nav-link">
                   <i class="fas fa-user-plus nav-icon"></i>
                   <p>Add Users</p>
                 </a>
@@ -149,6 +151,18 @@
                 <a href="#" class="nav-link">
                   <i class="fas fa-video"></i>
                   <p>Manage Video</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-wifi"></i>
+                  <p>Go live</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-upload"></i>
+                  <p>Upload Video</p>
                 </a>
               </li>
 
