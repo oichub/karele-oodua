@@ -25,5 +25,9 @@ Route::get('admin', function () {
     return view('users.admin.index');
 
 });
+Route::get('users/user', function () {
+    return view('users.user.index');
+
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
