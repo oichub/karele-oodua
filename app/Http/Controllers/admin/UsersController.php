@@ -25,9 +25,7 @@ class UsersController extends Controller
     public function create()
     {
         //
-
-        return view('users.admin.video.manage_video');
-
+        return view('users.admin.admin.add_admin');
     }
 
     /**

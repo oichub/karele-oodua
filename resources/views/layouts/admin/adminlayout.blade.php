@@ -170,43 +170,7 @@
             </ul>
           </li>
           <!-- // Agents -->
-            <!-- Agents -->
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
-                <p> Staffs</p>
-                <i class="right fas fa-angle-left"></i>
-
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="fas fa-user-plus nav-icon"></i>
-                    <p>Add Staff</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="fas fa-users"></i>
-                    <p>My Staff</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="fas fa-users"></i>
-                    <p>Manage Staff</p>
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="fas fa-users"></i>
-                    <p>Pending Staffs</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <!-- // Students -->
+           
 
              <!-- Agents -->
              <li class="nav-item has-treeview">
