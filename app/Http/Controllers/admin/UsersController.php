@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UsersRegistartionRequest;
+use App\User;
 use Illuminate\Http\Request;
 
 class UsersController extends Controller
@@ -25,7 +27,7 @@ class UsersController extends Controller
     public function create()
     {
         //
-        return view('users.admin.admin.add_admin');
+        return view('users.admin.users.index');
     }
 
     /**
@@ -34,9 +36,18 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UsersRegistartionRequest $request)
     {
         //
+
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->country = $request->country;
+        $user->password = bcrypt($request->phone);
+        $user->save();
+        return redirect()->back()->with('success', "New user added successfully");
     }
 
     /**
