@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\UsersRegistartionRequest;
 use App\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UsersRegistartionRequest;
 
 class UsersController extends Controller
 {
@@ -45,7 +46,7 @@ class UsersController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->country = $request->country;
-        $user->password = bcrypt($request->phone);
+        $user->password = Hash::make($request->phone);
         $user->save();
         return redirect()->back()->with('success', "New user added successfully");
     }

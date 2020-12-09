@@ -66,7 +66,7 @@
                   <label for="inputExperience" class="col-sm-2 col-form-label">Country</label>
                   <div class="col-sm-10">
                     <select class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }} " name="country">
-                        <option  value="{{ old('country') }}">Seletct</option>
+                    <option  value="{{ old('country') }}">Seletct</option>
                     <option value="Afganistan">Afghanistan</option>
                     <option value="Albania">Albania</option>
                     <option value="Algeria">Algeria</option>
