@@ -7,24 +7,61 @@
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <form class="form-horizontal">
+            @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong style="font-size:15px;">Success :{{session('success') }}</strong><br/>
+            </div>
+            @endif
+
+
+            @if($errors->any())
+            {{-- {{ dd($errors) }} --}}
+            <div class="alert alert-danger alert-dismissible fade show">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong style="font-size:20px;">Oops!
+                   {{ "Kindly rectify below errors" }}</strong><br/>
+              @foreach ($errors->all() as $error)
+              {{$error }} <br/>
+              @endforeach
+            </div>
+            @endif
+
+            <form class="form-horizontal"  action="{{ route('videos.store') }}" enctype="multipart/form-data" method="POST">
+                {{ csrf_field() }}
                 <div class="form-group row">
                   <label for="inputName" class="col-sm-2 col-form-label">Video Name</label>
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputName" placeholder="Full name">
-                  </div>
+                    <input type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }} " id="inputName" name="title" value="{{ old('title') }}" placeholder="Full name">
+                    @if ($errors->has('title'))
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $errors->first('title') }}</strong>
+                    </span>
+                    @endif
+                </div>
+
                 </div>
                 <div class="form-group row">
                   <label for="inputEmail" class="col-sm-2 col-form-label">Date</label>
                   <div class="col-sm-10">
-                    <input type="date" class="form-control" id="inputEmail" placeholder="Video Date">
-                  </div>
+                    <input type="date" id="inputEmail" name="date"  value="{{ old('date') }}" class="form-control{{ $errors->has('date') ? ' is-invalid' : '' }} " placeholder="Video Date">
+                    @if ($errors->has('date'))
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $errors->first('date') }}</strong>
+                    </span>
+                    @endif
+                </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputName2" class="col-sm-2 col-form-label">Choose Video</label>
                   <div class="col-sm-10">
-                    <input type="file" class="form-control" id="inputName2" placeholder="Choose Video">
-                  </div>
+                    <input type="file"  name="video" value="{{ old('video') }}" class="form-control{{ $errors->has('video') ? ' is-invalid' : '' }} " id="inputName2" placeholder="Choose Video">
+                    @if ($errors->has('video'))
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $errors->first('video') }}</strong>
+                    </span>
+                    @endif
+                </div>
                 </div>
 
 

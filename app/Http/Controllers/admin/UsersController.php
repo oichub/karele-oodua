@@ -46,6 +46,7 @@ class UsersController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->country = $request->country;
+        $user->role ="user";
         $user->password = Hash::make($request->phone);
         $user->save();
         return redirect()->back()->with('success', "New user added successfully");

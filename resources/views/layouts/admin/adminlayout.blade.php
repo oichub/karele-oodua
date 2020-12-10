@@ -109,14 +109,14 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('users.index') }}" class="nav-link">
                   <i class="fas fa-users"></i>
                   <p>Manage my users</p>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('users.index') }}" class="nav-link">
                   <i class="fas fa-users"></i>
                   <p>Manage all users</p>
                 </a>
@@ -136,19 +136,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('videos.create') }}" class="nav-link">
                   <i class="fas fa-user-plus nav-icon"></i>
                   <p>Add Video</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('videos.index') }}" class="nav-link">
                   <i class="fas fa-video"></i>
                   <p>My Video</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('videos.index') }}" class="nav-link">
                   <i class="fas fa-video"></i>
                   <p>Manage Video</p>
                 </a>
@@ -170,7 +170,7 @@
             </ul>
           </li>
           <!-- // Agents -->
-           
+
 
              <!-- Agents -->
              <li class="nav-item has-treeview">

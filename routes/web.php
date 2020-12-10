@@ -21,15 +21,20 @@ Route::get('/', function () {
 Auth::routes();
 
 // admin middleware will go here
-Route::get('admin', function () {
-    return view('users.admin.index');
+Route::group(['middleware' => ['admin', 'auth']], function () {
+    Route::get('/users/admin/dashboard', 'admin\AdminController@index')->name('adminDashboard');
+    Route::resource('/admin/users', 'admin\UsersController');
+Route::resource('/admin/videos', 'admin\VideoController');
 
 });
-Route::get('users/user', function () {
-    return view('users.user.index');
+
+
+
+
+
+Route::group(['middleware' => ['auth', 'user']], function () {
+    Route::get('/home', 'HomeController@index')->name('index');
+    Route::get('/users/dashboard', 'users\UsersController@index')->name('usersdashboard');
 
 });
 
-Route::resource('/admin/users', 'admin\UsersController');
-
-Route::get('/home', 'HomeController@index')->name('home');

@@ -13,7 +13,7 @@ class VideoRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,7 +26,17 @@ class VideoRequest extends FormRequest
         return [
             //
             'title' => 'required|string',
-            'video' => 'required|file|mimes:mp4, mkv, 3gp',
+            'date' => 'required|date',
+            'video' => 'required|file|mimes:mp4,mkv,3gp',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Please provide video title',
+            'date.required' => 'Please provide video date ',
+            'video.required' => 'Please provide video ',
         ];
     }
 }
