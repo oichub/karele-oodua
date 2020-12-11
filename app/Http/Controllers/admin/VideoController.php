@@ -19,7 +19,9 @@ class VideoController extends Controller
     public function index()
     {
         //
-        return view('users.admin.video.manage_video');
+        $videos = Video::with(['file', 'user'])->orderBy('id', 'desc')->get();
+        // return $video;
+        return view('users.admin.video.manage_video', compact(['videos']) );
     }
 
     /**
@@ -27,6 +29,11 @@ class VideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function confirmVideoDelete(Request $request){
+        $id = $request->delete;
+        $video = Video::with(['file'])->where('id', $id)->firstOrFail();
+        return view('users.modal.confirm_video_delete', compact(['video']));
+    }
     public function create()
     {
         //
@@ -58,13 +65,7 @@ class VideoController extends Controller
         $video->slug = strtolower(str_replace(" ", "-",$videotitle)."-". time());
         $video->user_id = Auth::user()->id;
         $video->save();
-        return redirect()->back()->with('success', 'New video added successfully');
-
-
-
-
-
-        return $request->all();
+        return redirect()->route('videos.index')->with('success', 'New video added successfully');
     }
 
     /**
@@ -109,6 +110,12 @@ class VideoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $video = Video::with(['file'])->where('id', $id)->firstOrFail();
+        $file = File::where('id', $video->file->id)->firstOrFail();
+        unlink(\public_path().$video->file->video);
+        $file->forceDelete();
+        $video->forceDelete();
+        return redirect()->back()->with('success', $video->title." deleted successfully");
+
     }
 }

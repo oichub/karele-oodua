@@ -23,6 +23,7 @@ Auth::routes();
 // admin middleware will go here
 Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::get('/users/admin/dashboard', 'admin\AdminController@index')->name('adminDashboard');
+    Route::post('confirm_video_delete', 'admin\VideoController@confirmVideoDelete')->name('confirmVideoDelete');
     Route::resource('/admin/users', 'admin\UsersController');
 Route::resource('/admin/videos', 'admin\VideoController');
 
