@@ -19,6 +19,8 @@ class UsersAccount extends Controller
     public function index()
     {
         //
+        $historys = Account::with(['user'])->where('user_id', Auth::user()->id)->get();
+        return view('users.user.account.deposite_history', compact(['historys']));
 
     }
 
