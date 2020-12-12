@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\users;
 
-use App\User;
-use App\Account;
+use App\Video;
+use App\Subscriber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\AccountRequest;
 
-class UsersAccount extends Controller
+class UserVideoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +18,6 @@ class UsersAccount extends Controller
     public function index()
     {
         //
-        $historys = Account::with(['user'])->where('user_id', Auth::user()->id)->get();
-        
-        return view('users.user.account.deposite_history', compact(['historys']));
-
     }
 
     /**
@@ -33,7 +28,6 @@ class UsersAccount extends Controller
     public function create()
     {
         //
-        return view('users.user.account.deposit');
     }
 
     /**
@@ -42,18 +36,9 @@ class UsersAccount extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AccountRequest $request)
+    public function store(Request $request)
     {
         //
-        $account = new Account();
-        $account->amount = $request->amount;
-        $account->ref = "karele".time();
-        $account->user_id = Auth::user()->id;
-        $user = User::where('id', Auth::user()->id)->firstOrFail();
-        $user->balance +=$request->amount;
-        $user->update();
-        $account->save();
-        return redirect()->route('usersdashboard')->with('success', 'You have deposit '. $request->amount. ' naira successfully');
     }
 
     /**
@@ -65,6 +50,10 @@ class UsersAccount extends Controller
     public function show($id)
     {
         //
+        $video = Video::with(['file'])->where('slug', $id)->firstOrFail();
+        $sub = Subscriber::where(['user_id'=>Auth::user()->id, 'video_id' => $video->id])->get();
+        $substatus = count($sub);
+        return view('users.user.videos.view_video', compact(['video', 'substatus']));
     }
 
     /**
@@ -77,7 +66,10 @@ class UsersAccount extends Controller
     {
         //
     }
-
+public function confirm_subscription(Request $request){
+            $video = Video::where('id', $request->subscribed)->firstOrFail();
+            return view('users.user.videos.confirm_subscribe', compact(['video']));
+}
     /**
      * Update the specified resource in storage.
      *

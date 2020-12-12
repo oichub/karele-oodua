@@ -34,7 +34,7 @@
             <div class="row">
                   <div class="col">
                 <button type="button" class="btn btn-info">
-                    Subscriber <span class="badge badge-danger">4</span>
+                    Subscriber <span class="badge badge-danger">{{ $video->totalsubscriber }}</span>
                   </button>
                 </div>
                   <div class="col">
@@ -87,6 +87,5 @@
     })
   })
     </script>
-</script>
 @endsection
 

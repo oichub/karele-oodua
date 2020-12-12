@@ -2,7 +2,7 @@
 @section('title', $video->title)
 
 @section('content')
-<h3>Are you sure you want delete</h3>
+<h3>Are you sure you want subscribe</h3>
 
 <div class="card card-dark card-outline">
     <div class="card-body">
@@ -25,25 +25,15 @@
               </button>
             </div>
               <div class="col">
-              <button type="button" class="btn btn-primary">
-                Watch <span class="badge badge-danger">4</span>
-              </button>
-            </div>
-        </div>
-        </div>
-        <div class="row">
-
-            <div class="col">
-                <a href="{{ url($video->file->video) }}" target="_blank" class="btn btn-sm btn-primary btn-block">Watch</a>
-            </div>
-            <div class="col">
-                <form action="{{ route('videos.destroy', $video->id) }}" method="post">
-                    @method('DELETE')
+              <form action="{{ route('usersubscribed.store') }}" method="post">
                     {{ csrf_field() }}
-                    <button type="submit" class="btn btn-sm btn-danger btn-block btn-lg">Delete</button>
+                    <input type="hidden"  value="{{ $video->id }}" name="subscribedid">
+                    <button type="submit" class="btn btn-danger btn-block btn-lg">Subscribe</button>
                 </form>
             </div>
         </div>
+        </div>
+
     </div>
 
 </div>

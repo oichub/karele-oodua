@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\users;
 
 use App\User;
+use App\Video;
+use App\Subscriber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +20,11 @@ class UsersController extends Controller
     {
         //
         $user  = User::where('id', Auth::user()->id)->firstOrFail();
-        return view('users.user.index', compact(['user']));
+        $videos  = Video::where('date', '>', now())->get();
+        $upcoming = count($videos);
+        $subscribed = Subscriber::with(['user', 'video'])->where(['user_id'=>Auth::user()->id])->get();
+    //    return $subscribed;
+        return view('users.user.index', compact(['user', 'upcoming', 'videos','subscribed']));
     }
 
     /**

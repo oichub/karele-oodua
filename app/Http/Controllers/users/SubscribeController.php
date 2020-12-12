@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\users;
 
 use App\User;
-use App\Account;
+use App\Video;
+use App\Subscriber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\AccountRequest;
 
-class UsersAccount extends Controller
+class SubscribeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +19,6 @@ class UsersAccount extends Controller
     public function index()
     {
         //
-        $historys = Account::with(['user'])->where('user_id', Auth::user()->id)->get();
-        
-        return view('users.user.account.deposite_history', compact(['historys']));
-
     }
 
     /**
@@ -33,7 +29,6 @@ class UsersAccount extends Controller
     public function create()
     {
         //
-        return view('users.user.account.deposit');
     }
 
     /**
@@ -42,18 +37,20 @@ class UsersAccount extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AccountRequest $request)
+    public function store(Request $request)
     {
         //
-        $account = new Account();
-        $account->amount = $request->amount;
-        $account->ref = "karele".time();
-        $account->user_id = Auth::user()->id;
+        $subscribe = new Subscriber();
+        $subscribe->user_id = Auth::user()->id;
+        $subscribe->video_id = $request->subscribedid;
+        $video = Video::where('id', $request->subscribedid)->firstOrFail();
+        $video->totalsubscriber +=1;
+        $video->update();
         $user = User::where('id', Auth::user()->id)->firstOrFail();
-        $user->balance +=$request->amount;
+        $user->totalsub +=1;
         $user->update();
-        $account->save();
-        return redirect()->route('usersdashboard')->with('success', 'You have deposit '. $request->amount. ' naira successfully');
+        $subscribe->save();
+        return redirect()->route('usersdashboard')->with('success', 'Congratulation, you have successfully subscribed to '. $video->title);
     }
 
     /**

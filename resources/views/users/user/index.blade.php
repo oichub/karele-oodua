@@ -43,7 +43,7 @@
 
         <div class="info-box-content">
           <span class="info-box-text">Incoming Event</span>
-          <span class="info-box-number">760</span>
+          <span class="info-box-number">{{ $upcoming }}</span>
         </div>
         <!-- /.info-box-content -->
       </div>
@@ -103,7 +103,30 @@
                 <!-- /.card-body -->
               </div>
               <!-- /.card -->
+              <div class="card card-primary card-outline">
+                <div class="card-body box-profile">
 
+
+                  <h3 class="profile-username text-center text-uppercase">upcoming event</h3>
+
+                  {{--  <p class="text-muted text-center">Software Engineer</p>  --}}
+
+                  <ul class="list-group list-group-unbordered mb-3">
+                    <li class="list-group-item">
+                        <b>Title </b> <a class="float-right">Price</a>
+                      </li>
+                      @foreach ($videos as $video)
+
+
+                    <li class="list-group-item">
+                      <a href="{{ route('video.show', $video->slug) }}"><b class="text-uppercase">{{ $video->title }}</b></a> <a class="float-right"><i class="fa fa">&#8358;</i>{{ $video->price }}</a>
+                    </li>
+                    @endforeach
+                  </ul>
+
+                </div>
+                <!-- /.card-body -->
+              </div>
 
             </div>
             <!-- /.col -->
@@ -122,57 +145,22 @@
                     <!-- /.card-header -->
                     <div class="card-body p-0">
                       <ul class="products-list product-list-in-card pl-2 pr-2">
+                          @foreach ($subscribed as $sub)
+
+
                         <li class="item">
-                          <div class="product-img">
-                            <img src="{{ url('plugins/dist/img/default-150x150.png') }}" alt="Product Image" class="img-size-50">
-                          </div>
+                          {{-- <div class="product-img">
+                            <img src="" alt="Product Image" class="img-size-50">
+                          </div> --}}
                           <div class="product-info">
-                            <a href="javascript:void(0)" class="product-title">Sam
-                            <span class="product-description">
+                            <a href="javascript:void(0)" class="product-title">{{ strtoupper($sub->video->title) }}
+                            {{-- <span class="product-description">
                             Lorem, ipsum dolor sit amet consectetur adipisicing elit. sapiente doloribus ullam ab..
-                            </span>
+                            </span> --}}
                           </div>
                         </li>
-                        <!-- /.item -->
-                        <li class="item">
-                          <div class="product-img">
-                            <img src="{{ url('plugins/dist/img/default-150x150.png') }}" alt="Product Image" class="img-size-50">
-                          </div>
-                          <div class="product-info">
-                            <a href="javascript:void(0)" class="product-title">Bicycle
-                            <span class="product-description">
-                              temporibus odio voluptates nemo nisi cupiditate incidunt,
-                            </span>
-                          </div>
-                        </li>
-                        <!-- /.item -->
-                        <li class="item">
-                          <div class="product-img">
-                            <img src="{{ url('plugins/dist/img/default-150x150.png') }}" alt="Product Image" class="img-size-50">
-                          </div>
-                          <div class="product-info">
-                            <a href="javascript:void(0)" class="product-title">
-                              box One
-                            </a>
-                            <span class="product-description">
-                              Culpa magni hic distinctio facilis libero voluptatum possimus quae quia voluptatib.
-                            </span>
-                          </div>
-                        </li>
-                        <!-- /.item -->
-                        <li class="item">
-                          <div class="product-img">
-                            <img src="{{ asset('plugins/dist/img/default-150x150.png') }}" alt="Product sdsImage" class="img-size-50">
-                          </div>
-                          <div class="product-info">
-                            <a href="javascript:void(0)" class="product-title">Play
-                             <a>
-                            <span class="product-description">
-                            Lorem ipsum dolor sit amet..
-                            </span>
-                          </div>
-                        </li>
-                        <!-- /.item -->
+                         @endforeach
+                       
                       </ul>
                     </div>
                     <!-- /.card-body -->

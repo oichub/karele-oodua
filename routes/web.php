@@ -37,6 +37,9 @@ Route::group(['middleware' => ['auth', 'user']], function () {
     Route::get('/home', 'HomeController@index')->name('index');
     Route::get('/users/dashboard', 'users\UsersController@index')->name('usersdashboard');
     Route::resource('/users/account', 'users\UsersAccount');
+    Route::resource('/user/videos/video', 'users\UserVideoController');
+    Route::resource('/users/usersubscribed', 'users\SubscribeController');
+    Route::post('congirmed_subscription', 'users\UserVideoController@confirm_subscription')->name('confirm_subscription');
 
 });
 
