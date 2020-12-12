@@ -20,6 +20,7 @@ class CreateVideosTable extends Migration
             $table->string('title');
             $table->string('date');
             $table->string('slug');
+            $table->string('price');
             $table->timestamps();
         });
     }

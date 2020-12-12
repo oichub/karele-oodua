@@ -42,6 +42,19 @@
 
                 </div>
                 <div class="form-group row">
+                    <label for="inputName" class="col-sm-2 col-form-label">Video Price</label>
+                    <div class="col-sm-10">
+                      <input type="number" class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }} " id="inputName" name="price" value="{{ old('price') }}" placeholder="Video Price">
+                      @if ($errors->has('price'))
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('price') }}</strong>
+                      </span>
+                      @endif
+                  </div>
+
+                  </div>
+
+                <div class="form-group row">
                   <label for="inputEmail" class="col-sm-2 col-form-label">Date</label>
                   <div class="col-sm-10">
                     <input type="date" id="inputEmail" name="date"  value="{{ old('date') }}" class="form-control{{ $errors->has('date') ? ' is-invalid' : '' }} " placeholder="Video Date">

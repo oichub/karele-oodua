@@ -18,6 +18,10 @@ class UsersController extends Controller
     public function index()
     {
         //
+        $users  = User::where('role', 'user')->get();
+        // return $users;
+        return view('users.admin.users.manage_users', compact(['users']));
+
     }
 
     /**
@@ -47,6 +51,9 @@ class UsersController extends Controller
         $user->phone = $request->phone;
         $user->country = $request->country;
         $user->role ="user";
+        $user->slug =strtolower(str_replace(" ", "-", $request->name)).time();
+        $user->totalsub = 0;
+        $user->balance =0.00;
         $user->password = Hash::make($request->phone);
         $user->save();
         return redirect()->back()->with('success', "New user added successfully");
@@ -61,6 +68,8 @@ class UsersController extends Controller
     public function show($id)
     {
         //
+        $user = User::where('slug', $id)->firstOrFail();
+        return view('users.admin.users.users_details', compact(['user']));
     }
 
     /**

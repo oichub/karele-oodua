@@ -108,17 +108,12 @@
                   <p>Add Users</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="{{ route('users.index') }}" class="nav-link">
-                  <i class="fas fa-users"></i>
-                  <p>Manage my users</p>
-                </a>
-              </li>
+
 
               <li class="nav-item">
                 <a href="{{ route('users.index') }}" class="nav-link">
                   <i class="fas fa-users"></i>
-                  <p>Manage all users</p>
+                  <p>Manage users</p>
                 </a>
               </li>
             </ul>

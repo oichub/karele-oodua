@@ -75,6 +75,9 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'country' => $data['country'],
             'role' => "user",
+            'balance' => 0.00,
+            'slug' =>strtolower(str_replace(" ", "-", $data['name'])).time(),
+            'totalsub' =>0,
             'password' => Hash::make($data['password']),
         ]);
     }

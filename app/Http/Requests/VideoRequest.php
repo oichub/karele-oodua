@@ -27,6 +27,7 @@ class VideoRequest extends FormRequest
             //
             'title' => 'required|string',
             'date' => 'required|date',
+            'price' => 'required|numeric',
             'video' => 'required|file|mimes:mp4,mkv,3gp',
         ];
     }
@@ -37,6 +38,7 @@ class VideoRequest extends FormRequest
             'title.required' => 'Please provide video title',
             'date.required' => 'Please provide video date ',
             'video.required' => 'Please provide video ',
+            'price.required' => 'Please provide video subscribed price ',
         ];
     }
 }

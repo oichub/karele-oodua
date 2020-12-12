@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('phone')->unique();
             $table->string('country');
             $table->string('role');
+            $table->string('totalsub');
+            $table->decimal('balance');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

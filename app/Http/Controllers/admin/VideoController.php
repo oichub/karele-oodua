@@ -62,6 +62,7 @@ class VideoController extends Controller
         $video->title = $videotitle;
         $video->file_id = $file->id;
         $video->date = $videodate;
+        $video->price = $request->price;
         $video->slug = strtolower(str_replace(" ", "-",$videotitle)."-". time());
         $video->user_id = Auth::user()->id;
         $video->save();
