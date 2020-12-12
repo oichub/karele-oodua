@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\users;
 
 use App\User;
+use App\Account;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\AccountRequest;
 
-class UsersController extends Controller
+class UsersAccount extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +19,7 @@ class UsersController extends Controller
     public function index()
     {
         //
-        $user  = User::where('id', Auth::user()->id)->firstOrFail();
-        return view('users.user.index', compact(['user']));
+
     }
 
     /**
@@ -29,6 +30,7 @@ class UsersController extends Controller
     public function create()
     {
         //
+        return view('users.user.account.deposit');
     }
 
     /**
@@ -37,9 +39,18 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AccountRequest $request)
     {
         //
+        $account = new Account();
+        $account->amount = $request->amount;
+        $account->ref = "karele".time();
+        $account->user_id = Auth::user()->id;
+        $user = User::where('id', Auth::user()->id)->firstOrFail();
+        $user->balance +=$request->amount;
+        $user->update();
+        $account->save();
+        return redirect()->route('usersdashboard')->with('success', 'You have deposit '. $request->amount. ' naira successfully');
     }
 
     /**

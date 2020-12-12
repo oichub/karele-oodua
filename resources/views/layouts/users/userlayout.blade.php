@@ -76,20 +76,14 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
+            <a href="{{ route('usersdashboard') }}" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
-                {{-- <i class="right fas fa-angle-left"></i> --}}
               </p>
             </a>
-            {{-- <ul class="nav nav-treeview">
 
-              </ul> --}}
           </li>
-        <!--users -->
-        {{-- @if(Auth::User()->hasRole(1)) --}}
-
 
           <!-- Students -->
           <li class="nav-item has-treeview">
@@ -101,24 +95,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('account.create') }}" class="nav-link">
                   <i class="fas fa-user-plus nav-icon"></i>
                   <p>Deposit</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('account.index') }}" class="nav-link">
                   <i class="fas fa-clock"></i>
                   <p>Account History</p>
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-users"></i>
-                  <p>Manage all users</p>
-                </a>
-              </li>
+
             </ul>
           </li>
           <!-- // Students -->
@@ -156,7 +145,7 @@
             </ul>
           </li>
           <!-- // Agents -->
-          
+
 
         {{-- @endif --}}
 

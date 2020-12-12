@@ -12,7 +12,7 @@
         <div class="info-box-content">
           <span class="info-box-text">Account Balance</span>
           <span class="info-box-number">
-            10
+              {{ $user->balance }}
           </span>
         </div>
         <!-- /.info-box-content -->
@@ -26,7 +26,7 @@
 
         <div class="info-box-content">
           <span class="info-box-text">Subscribed Video</span>
-          <span class="info-box-number">41,410</span>
+          <span class="info-box-number">{{ $user->totalsub }}</span>
         </div>
         <!-- /.info-box-content -->
       </div>
@@ -69,6 +69,12 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
+            @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong style="font-size:15px;">Success :{{session('success') }}</strong><br/>
+            </div>
+            @endif
           <div class="row">
             <div class="col-md-5">
 
@@ -77,19 +83,19 @@
                 <div class="card-body box-profile">
 
 
-                  <h3 class="profile-username text-center">Username</h3>
+                  <h3 class="profile-username text-center">{{ $user->name }}</h3>
 
                   {{--  <p class="text-muted text-center">Software Engineer</p>  --}}
 
                   <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
-                      <b>Email</b> <a class="float-right">oka@vb.com</a>
+                      <b>Email</b> <a class="float-right">{{ $user->email }}</a>
                     </li>
                     <li class="list-group-item">
-                      <b>phone Number</b> <a class="float-right">29739572</a>
+                      <b>phone Number</b> <a class="float-right">{{ $user->phone }}</a>
                     </li>
                     <li class="list-group-item">
-                      <b>Friends</b> <a class="float-right">13,287</a>
+                      <b>Country</b> <a class="float-right">{{ $user->country }}</a>
                     </li>
                   </ul>
 
