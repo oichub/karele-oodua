@@ -16,6 +16,11 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+//   public  function checkSub($user, $video){
+//         $subscri = Subscriber::where(['user_id'=>$user,'video_id'=>$video])->get();
+//         return count($subscri);
+//       }
     public function index()
     {
         //

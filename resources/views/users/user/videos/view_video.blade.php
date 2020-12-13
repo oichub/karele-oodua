@@ -28,8 +28,8 @@
                         </div>
                           <div class="col">
                               @if ($substatus)
-                              <a href="#subscribed" data-toggle="modal" subscribed ="{{ $video->id }}" class="btn btn-primary disabled  btn-block btn-lg">
-                            Subscribed
+                              <a href="#subscribed" data-toggle="modal" subscribed ="{{ $video->id }}" class="btn btn-danger disabled  btn-block btn-lg">
+                                <span class="ml-3">Subscribed <span class="ml-2 fab fa-youtube"></span></span></a>
                             </a>
                               @else
                              <a href="#subscribe" data-toggle="modal" subscribe ="{{ $video->id }}" class="btn btn-primary  btn-block btn-lg">

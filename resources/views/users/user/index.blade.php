@@ -113,13 +113,24 @@
 
                   <ul class="list-group list-group-unbordered mb-3">
                     <li class="list-group-item">
-                        <b>Title </b> <a class="float-right">Price</a>
+                        <b>Title </b>  <a class="float-right">Price</a>
                       </li>
+                      @php
+                          function checkSub($user, $video){
+                            $subscri = App\Subscriber::where(['user_id'=>$user,'video_id'=>$video])->get();
+                            return count($subscri);
+                          }
+                      @endphp
                       @foreach ($videos as $video)
 
 
                     <li class="list-group-item">
-                      <a href="{{ route('video.show', $video->slug) }}"><b class="text-uppercase">{{ $video->title }}</b></a> <a class="float-right"><i class="fa fa">&#8358;</i>{{ $video->price }}</a>
+                      <a href="{{ route('video.show', $video->slug) }}"><b class="text-uppercase">{{ $video->title }}</b>
+                        @if (checkSub(Auth::user()->id, $video->id))
+                            <span class="ml-3 text-danger">Subscribed <span class="ml-2 fab fa-youtube"></span></span></a>
+                        @else
+                        @endif
+                        <a class="float-right"><i class="fa fa">&#8358;</i>{{ $video->price }}</a>
                     </li>
                     @endforeach
                   </ul>
@@ -160,7 +171,7 @@
                           </div>
                         </li>
                          @endforeach
-                       
+
                       </ul>
                     </div>
                     <!-- /.card-body -->
