@@ -32,9 +32,17 @@
                                 <span class="ml-3">Subscribed <span class="ml-2 fab fa-youtube"></span></span></a>
                             </a>
                               @else
-                             <a href="#subscribe" data-toggle="modal" subscribe ="{{ $video->id }}" class="btn btn-primary  btn-block btn-lg">
-                            Subscribe Now
-                          </a>
+                              @if (Auth::user()->balance >= $video->price)
+                                <a href="#subscribe" data-toggle="modal" subscribe ="{{ $video->id }}" class="btn btn-primary  btn-block btn-lg">
+                                    Subscribe Now
+                                </a>
+
+                              @else
+                              <a href="#lowbalance" data-toggle="modal"  class="btn btn-primary  btn-block btn-lg">
+                                Subscribe Now
+                            </a>
+                             @endif
+
                               @endif
 
                         </div>
@@ -46,6 +54,36 @@
             </div>
         </div>
         <div class="col-md-2"></div>
+    </div>
+</div>
+<div class="modal" id="lowbalance">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h2 class="modal-title">Low balance</h2>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="card p-2">
+                <h1 class="text-danger font-weight-bold">
+                    OOPS! </h1>
+                    <h3>your balance is to low for this subscription,
+                    please fund your wallet
+                </h3>
+
+            </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
     </div>
 </div>
 <div id="subscribe" class="modal"></div>

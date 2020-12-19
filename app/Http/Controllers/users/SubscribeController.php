@@ -48,7 +48,9 @@ class SubscribeController extends Controller
         $video->update();
         $user = User::where('id', Auth::user()->id)->firstOrFail();
         $user->totalsub +=1;
+        $user->balance -=$video->price;
         $user->update();
+        $subscribe->amount= $video->price;
         $subscribe->save();
         return redirect()->route('usersdashboard')->with('success', 'Congratulation, you have successfully subscribed to '. $video->title);
     }
