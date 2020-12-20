@@ -30,9 +30,10 @@ class UsersController extends Controller
         $user  = User::where('id', Auth::user()->id)->firstOrFail();
         $videos  = Video::where('date', '>', now())->get();
         $upcoming = count($videos);
-        $subscribed = Subscriber::with(['user', 'video'])->where(['user_id'=>Auth::user()->id])->get();
+        $recentsub = Subscriber::with(['user', 'video'])->orderBy('id', 'desc')->where(['user_id'=>Auth::user()->id])->limit(10)->get();
+        $allsub = Subscriber::with(['user', 'video'])->orderBy('id', 'desc')->where(['user_id'=>Auth::user()->id])->get();
     //    return $subscribed;
-        return view('users.user.index', compact(['user', 'upcoming', 'videos','subscribed']));
+        return view('users.user.index', compact(['user', 'upcoming', 'videos','recentsub', 'allsub']));
     }
 
     /**
