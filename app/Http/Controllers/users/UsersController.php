@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ChangePassword;
+use App\Http\Requests\UserUpdateReuest;
 
 class UsersController extends Controller
 {
@@ -105,9 +106,16 @@ public function changepassword(ChangePassword $request)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateReuest $request, $id)
     {
         //
+        $user = User::where('id', $id)->firstOrFail();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->country = $request->country;
+        $user->update();
+        return redirect()->back()->with('success', 'Congratulation, you have successfully updated your profile');
     }
 
     /**

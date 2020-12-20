@@ -36,6 +36,7 @@ Route::resource('/admin/videos', 'admin\VideoController');
 Route::group(['middleware' => ['auth', 'user']], function () {
     Route::get('/home', 'HomeController@index')->name('index');
     Route::get('/users/dashboard', 'users\UsersController@index')->name('usersdashboard');
+    Route::resource('/users/user', 'users\UsersController');
     Route::resource('/users/account', 'users\UsersAccount');
     Route::resource('/user/videos/video', 'users\UserVideoController');
     Route::resource('/users/usersubscribed', 'users\SubscribeController');
