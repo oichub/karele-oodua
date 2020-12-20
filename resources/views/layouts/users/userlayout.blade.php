@@ -113,38 +113,7 @@
           <!-- // Students -->
 
 
-           <!-- Agents -->
-           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-video"></i>
-              <p> Video</p>
-              <i class="right fas fa-angle-left"></i>
 
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-user-plus nav-icon"></i>
-                  <p>New Video</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-video"></i>
-                  <p>Video History</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-video"></i>
-                  <p>Manage Video</p>
-                </a>
-              </li>
-
-
-            </ul>
-          </li>
-          <!-- // Agents -->
 
 
         {{-- @endif --}}
@@ -152,13 +121,7 @@
 
           <li class="nav-header">Settings</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-circle text-danger"></i>
-              <p class="text">My Profile</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('change_password') }}" class="nav-link">
               <i class="nav-icon far fa-circle text-danger"></i>
               <p class="text">Change Password</p>
             </a>
