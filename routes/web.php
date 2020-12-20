@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth', 'user']], function () {
     Route::resource('/users/account', 'users\UsersAccount');
     Route::resource('/user/videos/video', 'users\UserVideoController');
     Route::resource('/users/usersubscribed', 'users\SubscribeController');
+    Route::get('/subscibed/video/{userid}/{videoid}/{subid}/{video}', 'users\SubscribeController@subscriber')->name('subscribed_videos');
     Route::post('congirmed_subscription', 'users\UserVideoController@confirm_subscription')->name('confirm_subscription');
 
 });

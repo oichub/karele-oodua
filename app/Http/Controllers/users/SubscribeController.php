@@ -20,7 +20,11 @@ class SubscribeController extends Controller
     {
         //
     }
+public function subscriber($userid, $videoid, $subid,  $slug ){
+    $sub = Subscriber::where(['user_id'=>$userid, 'video_id'=>$videoid, 'id'=>$subid ])->with(['user', 'video'])->firstOrFail();
 
+    return view('users.user.videos.watch_video', compact(['sub']));
+}
     /**
      * Show the form for creating a new resource.
      *

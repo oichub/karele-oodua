@@ -156,6 +156,9 @@
                     <!-- /.card-header -->
                     <div class="card-body p-0">
                       <ul class="products-list product-list-in-card pl-2 pr-2">
+                          @php
+                              $userlogin = Auth::user()->id;
+                          @endphp
                           @foreach ($subscribed as $sub)
 
 
@@ -164,7 +167,7 @@
                             <img src="" alt="Product Image" class="img-size-50">
                           </div> --}}
                           <div class="product-info">
-                            <a href="javascript:void(0)" class="product-title">{{ strtoupper($sub->video->title) }}
+                            <a href="{{ route('subscribed_videos', ['userid'=> $userlogin, 'videoid'=>$sub->video_id,'subid'=>$sub->id, 'video'=>$sub->video->slug]) }}" class="product-title">{{ strtoupper($sub->video->title) }}
                             {{-- <span class="product-description">
                             Lorem, ipsum dolor sit amet consectetur adipisicing elit. sapiente doloribus ullam ab..
                             </span> --}}
