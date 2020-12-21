@@ -132,8 +132,9 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('videos.create') }}" class="nav-link">
-                  <i class="fas fa-user-plus nav-icon"></i>
-                  <p>Add Video</p>
+                   <i class="fas fa-upload"></i>
+                  <p>Upload Video</p>
+
                 </a>
               </li>
               <li class="nav-item">
@@ -154,12 +155,7 @@
                   <p>Go live</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-upload"></i>
-                  <p>Upload Video</p>
-                </a>
-              </li>
+             
 
 
             </ul>

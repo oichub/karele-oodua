@@ -8,18 +8,25 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ChangePassword;
+use App\Subscriber;
+use App\Video;
 
 class AdminController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource.whereIn('user_id', $sub)->
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         //
-        return view('users.admin.index');
+        $totaluser = count(User::get());
+        $totalsub = count(Subscriber::pluck('user_id')->unique());
+        $totalvideo = count(Video::get());
+        $totalrevenue = Subscriber::sum('amount');
+        // return $totalsub;
+        return view('users.admin.index', compact(['totaluser', 'totalsub', 'totalvideo', 'totalrevenue']));
     }
     public function gotochangepassword(){
         return view('users.admin.change_password');

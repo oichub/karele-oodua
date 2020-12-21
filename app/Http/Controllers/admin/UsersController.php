@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\User;
+use App\Video;
+use App\Subscriber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -69,7 +71,12 @@ class UsersController extends Controller
     {
         //
         $user = User::where('slug', $id)->firstOrFail();
-        return view('users.admin.users.users_details', compact(['user']));
+        $videos  = Video::where('date', '>', now())->get();
+        $upcoming = count($videos);
+        $recentsub = Subscriber::with(['user', 'video'])->orderBy('id', 'desc')->where(['user_id'=>$user->id])->limit(10)->get();
+        $allsub = Subscriber::with(['user', 'video'])->orderBy('id', 'desc')->where(['user_id'=>$user->id])->get();
+    //    return $subscribed;
+        return view('users.admin.users.users_details', compact(['user', 'upcoming', 'videos','recentsub', 'allsub']));
     }
 
     /**

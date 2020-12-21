@@ -8,14 +8,14 @@
       <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
-          <h3>72</h3>
+          <h3>{{ $totaluser }}</h3>
 
           <p>Users</p>
         </div>
         <div class="icon">
           <i class="fa fa-user"></i>
         </div>
-        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="{{ route('users.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
@@ -23,7 +23,7 @@
       <!-- small box -->
       <div class="small-box bg-success">
         <div class="inner">
-          <h3>66</h3>
+          <h3>{{ $totalsub }}</h3>
 
           <p>Subscribers</p>
         </div>
@@ -38,7 +38,7 @@
       <!-- small box -->
       <div class="small-box bg-warning ">
         <div class="inner text-white">
-          <h3>252</h3>
+          <h3>{{ $totalvideo }}</h3>
 
           <p>Live Videos</p>
         </div>
@@ -53,7 +53,7 @@
       <!-- small box -->
       <div class="small-box bg-danger">
         <div class="inner">
-          <h3>$4325.98</h3>
+          <h3><i class="fa fa">&#8358;</i>{{ $totalrevenue }}</h3>
 
           <p>Total Revenue</p>
         </div>
@@ -85,7 +85,7 @@
           </div>
         </div><!-- /.card-header -->
 
- 
+
         <div class="card-body">
             <div class="d-flex">
               <p class="d-flex flex-column">
