@@ -25,7 +25,11 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::get('/users/admin/dashboard', 'admin\AdminController@index')->name('adminDashboard');
     Route::post('confirm_video_delete', 'admin\VideoController@confirmVideoDelete')->name('confirmVideoDelete');
     Route::resource('/admin/users', 'admin\UsersController');
-Route::resource('/admin/videos', 'admin\VideoController');
+    Route::resource('/admin/videos', 'admin\VideoController');
+    Route::get('/users/admin/change_password', 'admin\AdminController@gotochangepassword')->name('admins_change_password');
+    Route::put('admin_change_password', 'users\UsersController@changepassword')->name('admin_change_password');
+
+
 
 });
 
