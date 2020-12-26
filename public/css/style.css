@@ -3,3 +3,75 @@
     visibility: hidden;
     visibility: visible;
 }
+.bg {
+    background-image: url("image/Desert.jpg");
+    background-size: 100%;
+    background-attachment: fixed;
+    height: 22em;
+    background-repeat: no-repeat;
+}
+.bgc {
+    background-color: rgb(241, 238, 238);
+}
+
+/* title */
+.title {
+    color: hsl(0, 38%, 66%);
+    font-family: 'Elsie Swash Caps';
+/* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+    /* text-align: center; */
+    padding: 0;
+    margin-right: 1rem;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+
+/* display background */
+.tag {
+    color: rgb(248, 236, 236);
+}
+
+div.bga {
+    background-color: rgb(238, 234, 234);
+    padding-top: 20px;
+}
+ /* Login and signup home page */
+ @media screen and (max-width: 420px){
+    .sidesearch{
+        margin-top: 0%;
+        padding-top: 0%;
+    }
+}
+
+@media screen and (max-width: 420px){
+    .form-field{
+        padding-top: 10%;
+    }
+}
+form-field
+.tour{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.bgm {
+    background-image: url("../image/IMG_5076.jpg");
+    background-size: 100%;
+    /* height: 400px;  */
+    background-position-x: left;
+    background-repeat: no-repeat;
+
+
+}
+.source {
+    font-size: larger;
+    text-align: center;
+    color: rgb(253, 250, 250);
+    font-weight: bold;
+}
+.form {
+    padding-left: 20px;
+}
+.cent {
+    width: 400px;
+    margin: auto;
+}
