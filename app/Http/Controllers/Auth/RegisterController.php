@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -28,8 +29,23 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
-
+    protected $redirectTo;
+    public function redirectTo()
+    {
+        switch(Auth::user()->role){
+            case 'admin':
+            $this->redirectTo ='/users/admin/dashboard';
+            return $this->redirectTo;
+                break;
+            case 'user':
+                    $this->redirectTo ='/users/dashboard';
+                return $this->redirectTo;
+                break;
+            default:
+                $this->redirectTo = '/login';
+                return $this->redirectTo;
+        }
+    }
     /**
      * Create a new controller instance.
      *
@@ -48,15 +64,17 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $validator= Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'phone' => 'required|string|digits_between:6,15|unique:users,phone,except,id',
             'country' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:5', 'confirmed'],
+            'register_email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'register_password' => ['required', 'string', 'min:5', 'confirmed'],
             'T&C' => 'required|string',
+            'dob' => 'required|date',
 
         ]);
+        return $validator;
     }
 
 
@@ -71,14 +89,15 @@ class RegisterController extends Controller
         // return $data;
         return User::create([
             'name' => $data['name'],
-            'email' => $data['email'],
+            'email' => $data['register_email'],
             'phone' => $data['phone'],
             'country' => $data['country'],
             'role' => "user",
             'balance' => 0.00,
             'slug' =>strtolower(str_replace(" ", "-", $data['name'])).time(),
             'totalsub' =>0,
-            'password' => Hash::make($data['password']),
+            'password' => Hash::make($data['register_password']),
+            'dob' => $data['dob'],
         ]);
     }
 }

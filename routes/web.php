@@ -20,6 +20,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Auth::routes(['verify' => true]);
+
 // admin middleware will go here
 Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::get('/users/admin/dashboard', 'admin\AdminController@index')->name('adminDashboard');
@@ -28,16 +30,8 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::resource('/admin/videos', 'admin\VideoController');
     Route::get('/users/admin/change_password', 'admin\AdminController@gotochangepassword')->name('admins_change_password');
     Route::put('admin_change_password', 'users\UsersController@changepassword')->name('admin_change_password');
-
-
-
 });
-
-
-
-
-
-Route::group(['middleware' => ['auth', 'user']], function () {
+Route::group(['middleware' => ['auth', 'user', 'verified']], function () {
     Route::get('/home', 'HomeController@index')->name('index');
     Route::get('/users/dashboard', 'users\UsersController@index')->name('usersdashboard');
     Route::resource('/users/user', 'users\UsersController');

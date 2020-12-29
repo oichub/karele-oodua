@@ -24,7 +24,9 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-
+                  @foreach ($errors->all() as $error)
+                  {{$error }} <br/>
+                  @endforeach
                 @endif
                 <div id="accordion">
                     <div id="login" class="collapse show" data-parent="#accordion">
@@ -47,7 +49,8 @@
                                 <label class="form-check-label">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}> Remember me
                                 </label>
-                            </div> </p>
+                            </div>
+                        </p>
                             <p>
                             <button type="submit" class="btn btn-danger">Log in</button>
                             @if (Route::has('password.request'))
@@ -64,18 +67,18 @@
                     <form method="post" action="{{ route('register') }}">
                         @csrf
                        <!-- First name -->
-                        <label for="email">First Name:</label><br>
-                        <input id="name" type="text" class="form-control @error('fname') is-invalid @enderror" name="fname" value="{{ old('fname') }}" required autocomplete="name" autofocus>
-                        @error('fname')
+                        <label for="email">Full Name:</label><br>
+                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                        @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                         <!--// First name -->
                         <!-- Last Name -->
-                        <label for="email">Last Name:</label><br>
-                        <input id="lname" type="text" class="form-control @error('lname') is-invalid @enderror" name="lname" value="{{ old('lname') }}" required autocomplete="lname" autofocus>
-                        @error('lname')
+                        <label for="email">Phone Number:</label><br>
+                        <input  type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
+                        @error('phone')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -92,9 +95,9 @@
                         <!--// DOB -->
                         <!-- Email -->
                         <label for="email">Email address:</label>
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                        <input id="email" type="email" class="form-control @error('register_email') is-invalid @enderror" name="register_email" value="{{ old('register_email') }}" required autocomplete="register_email">
 
-                        @error('email')
+                        @error('register_email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -357,9 +360,9 @@
                      <br/>
                      <!--Password -->
                         <label for="pwd">Password:</label><br>
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                        <input id="password" type="password" class="form-control @error('register_password') is-invalid @enderror" name="register_password" required autocomplete="new-password">
 
-                        @error('password')
+                        @error('register_password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -367,10 +370,24 @@
                         <!--- //Password-->
                         <!--- confirm Password-->
                         <label for="pwd">Confirm Password:</label><br>
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                        <input id="password-confirm" type="password" class="form-control" name="register_password_confirmation" required autocomplete="new-password">
 
                         <!--- // confirm Password-->
                         <br>
+                        <p>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" name="T&C" {{ old('T&C') ? 'checked' : '' }}>
+                                    I agree to the <a href="#">terms and conditions</a>
+                                </label>
+                            </div>
+                        </p>
+                              @if ($errors->has('tc'))
+                              <span class="text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                              </span>
+                              @endif
+
                         <button type="submit" class="btn btn-danger">Sign up</button>
                         </form>
                         <p> Do you have account with us? <a href="#login" data-toggle="collapse">login </a></p>
