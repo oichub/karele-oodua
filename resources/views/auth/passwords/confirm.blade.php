@@ -1,5 +1,5 @@
-@extends('layouts.app')
-
+@extends('pages.app')
+@section('title', 'Password Confirmation')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -18,7 +18,6 @@
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
