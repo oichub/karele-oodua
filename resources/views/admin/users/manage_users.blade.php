@@ -1,5 +1,5 @@
-@extends('layouts.admin.adminlayout')
-@section('title', "MANAGE USERS")
+@extends('admin.adminlayout')
+@section('title', "Manage Users")
 @section('content')
  <!-- Main content -->
  <section class="content py-3">

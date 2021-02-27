@@ -1,5 +1,5 @@
-@extends('layouts.admin.adminlayout')
-@section('title', "ADD NEW VIDEO")
+@extends('admin.adminlayout')
+@section('title', "Add Video")
 @section('content')
 
 <h3 class="font-weight-bold text-uppercase text-center py-3">add new videos</h3>

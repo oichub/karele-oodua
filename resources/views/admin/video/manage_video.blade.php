@@ -1,5 +1,5 @@
-@extends('layouts.admin.adminlayout')
-@section('title', "MANAGED VIDEOS")
+@extends('admin.adminlayout')
+@section('title', "Manage Video")
 @section('content')
 <h3 class="font-weight-bold text-uppercase text-center py-3">Manage videos</h3>
 <div class="container">

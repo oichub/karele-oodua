@@ -21,7 +21,7 @@ class VideoController extends Controller
         //
         $videos = Video::with(['file', 'user'])->orderBy('id', 'desc')->get();
         // return $video;
-        return view('users.admin.video.manage_video', compact(['videos']) );
+        return view('admin.video.manage_video', compact(['videos']) );
     }
 
     /**
@@ -32,12 +32,12 @@ class VideoController extends Controller
     public function confirmVideoDelete(Request $request){
         $id = $request->delete;
         $video = Video::with(['file'])->where('id', $id)->firstOrFail();
-        return view('users.modal.confirm_video_delete', compact(['video']));
+        return view('modal.confirm_video_delete', compact(['video']));
     }
     public function create()
     {
         //
-        return view('users.admin.video.add_video');
+        return view('admin.video.add_video');
     }
 
     /**

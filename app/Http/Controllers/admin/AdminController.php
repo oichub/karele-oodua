@@ -26,10 +26,10 @@ class AdminController extends Controller
         $totalvideo = count(Video::get());
         $totalrevenue = Subscriber::sum('amount');
         // return $totalsub;
-        return view('users.admin.index', compact(['totaluser', 'totalsub', 'totalvideo', 'totalrevenue']));
+        return view('admin.index', compact(['totaluser', 'totalsub', 'totalvideo', 'totalrevenue']));
     }
     public function gotochangepassword(){
-        return view('users.admin.change_password');
+        return view('admin.change_password');
     }
 
     public function changepassword(ChangePassword $request)

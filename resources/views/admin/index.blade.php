@@ -1,6 +1,5 @@
-@extends('layouts.admin.adminlayout')
-@section('title', "ADMIN DASHBOARD")
-
+@extends('admin.adminlayout')
+@section('title', "Admin Dashboard")
 @section('content')
  <!-- Small boxes (Stat box) -->
  <div class="row">
@@ -9,7 +8,6 @@
       <div class="small-box bg-info">
         <div class="inner">
           <h3>{{ $totaluser }}</h3>
-
           <p>Users</p>
         </div>
         <div class="icon">

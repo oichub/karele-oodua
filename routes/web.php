@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+ //  Paystack
+Route::post('/pay', 'Paystack\PaymentController@redirectToGateway')->name('pay');
+Route::get('/payment/callback', 'Paystack\PaymentController@handleGatewayCallback');
+
+
+
+
 Route::get('/', function () {
     return view('pages.index');
 });
@@ -25,6 +32,7 @@ Auth::routes(['verify' => true]);
 // admin middleware will go here
 Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::get('/users/admin/dashboard', 'admin\AdminController@index')->name('adminDashboard');
+    Route::resource('/users/admin/events', 'admin\AdminUpcomingEvent');
     Route::post('confirm_video_delete', 'admin\VideoController@confirmVideoDelete')->name('confirmVideoDelete');
     Route::resource('/admin/users', 'admin\UsersController');
     Route::resource('/admin/videos', 'admin\VideoController');

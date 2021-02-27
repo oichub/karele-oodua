@@ -1,5 +1,5 @@
-@extends('layouts.admin.adminlayout')
-@section('title', "UPDATE USER")
+@extends('admin.adminlayout')
+@section('title', "Update Users")
 @section('content')
 <h2 class="text-center text-uppercase font-weight-bold py-3">Update new users</h2>
 <div class="container">

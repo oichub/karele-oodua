@@ -53,21 +53,15 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ url('/') }}" class="brand-link">
-      <img src="#" alt="KARELE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
       <span class="brand-text font-weight-light">KARELE</span>
     </a>
-
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="#" class="img-circle elevation-2" alt="User Image">
-        </div>
         <div class="info">
           <a href="#" class="d-block">
-              {{--  {{ ucwords(Auth::User()->first_name) . " ". ucwords(Auth::User()->last_name) }}  --}}
+              {{ ucwords(Auth::User()->name) }}
             </a>
         </div>
       </div>
@@ -93,7 +87,7 @@
         {{-- @if(Auth::User()->hasRole(1)) --}}
 
 
-          <!-- Students -->
+          <!-- Users -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
@@ -108,8 +102,6 @@
                   <p>Add Users</p>
                 </a>
               </li>
-
-
               <li class="nav-item">
                 <a href="{{ route('users.index') }}" class="nav-link">
                   <i class="fas fa-users"></i>
@@ -118,10 +110,35 @@
               </li>
             </ul>
           </li>
-          <!-- // Students -->
+          <!-- // Users -->
+          <!--------- Upcoming events -------->
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>Events</p>
+              <i class="right fas fa-angle-left"></i>
+
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('events.create') }}" class="nav-link">
+                  <i class="fas fa-user-plus nav-icon"></i>
+                  <p>Add Event</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('events.index') }}" class="nav-link">
+                  <i class="fas fa-users"></i>
+                  <p>Manage Events</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+<!--------- // Upcoming events -------->
 
 
-           <!-- Agents -->
+           <!-- Video -->
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-video"></i>
@@ -160,7 +177,7 @@
 
             </ul>
           </li>
-          <!-- // Agents -->
+          <!-- // video -->
 
 
              <!-- Agents -->

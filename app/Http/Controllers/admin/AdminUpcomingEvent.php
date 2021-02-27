@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PlanRequest;
-use App\Plan;
 use Illuminate\Http\Request;
 
-class SubscriberPlan extends Controller
+class AdminUpcomingEvent extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +14,7 @@ class SubscriberPlan extends Controller
      */
     public function index()
     {
-        //
-        $plans = Plan::get();
-        return view('admin.plan.index', compact(['plans']));
+        return view('admin.events.index');
     }
 
     /**
@@ -28,8 +24,7 @@ class SubscriberPlan extends Controller
      */
     public function create()
     {
-        //
-        return view('admin.plan.add_plan');
+        return view('admin.events.create');
     }
 
     /**
@@ -38,15 +33,28 @@ class SubscriberPlan extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PlanRequest $request)
+    public function store(Request $request)
     {
-        //
-        $sub = new Plan();
-        $sub->name = $request->name;
-        $sub->price = $request->price;
-        $sub->duration = $request->duration;
-        $sub->save();
-        return redirect()->route('plan.index')->with('success', 'New plan added successfully');
+        $this->validate(
+            $request, 
+            [
+                'name' => 'required | string',
+                'price' => 'required',
+                'date' => 'required |date',
+                'time' => 'required',
+                'file' => 'nullable|file'
+            ],
+
+            [
+                'name.required' => 'Event\'s name is required',
+                'name.string' => 'Inavlid name',
+                'price.required' => 'Event\'s price is required',
+                'date.date' => 'Date is required',
+                'time.required' => 'Time is required',
+                'file.file' => 'It must be a valid file',     
+            ]
+        );
+       return $request->all();
     }
 
     /**

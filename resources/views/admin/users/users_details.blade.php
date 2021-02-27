@@ -1,5 +1,5 @@
-@extends('layouts.admin.adminlayout')
-@section('title', "VIEW ". strtoupper($user->name))
+@extends('admin.adminlayout')
+@section('title', "View ". strtoupper($user->name))
 @section('content')
 
 

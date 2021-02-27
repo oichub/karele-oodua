@@ -1,5 +1,5 @@
-@extends('layouts.admin.adminlayout')
-@section('title', 'CHANGE PASSWORD')
+@extends('admin.adminlayout')
+@section('title', 'Change Password')
 
 @section('content')
 <div class="m-2">

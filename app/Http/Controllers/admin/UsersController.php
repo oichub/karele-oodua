@@ -22,7 +22,7 @@ class UsersController extends Controller
         //
         $users  = User::where('role', 'user')->get();
         // return $users;
-        return view('users.admin.users.manage_users', compact(['users']));
+        return view('admin.users.manage_users', compact(['users']));
 
     }
 
@@ -34,7 +34,7 @@ class UsersController extends Controller
     public function create()
     {
         //
-        return view('users.admin.users.index');
+        return view('admin.users.index');
     }
 
     /**
@@ -88,7 +88,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         //
-        return view('users.admin.users.update');
+        return view('admin.users.update');
     }
 
     /**
