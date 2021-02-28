@@ -23,7 +23,7 @@ Route::get('/payment/callback', 'Paystack\PaymentController@handleGatewayCallbac
 
 Route::get('/', function () {
     return view('pages.index');
-});
+})->name('home');
 
 Auth::routes();
 
@@ -40,7 +40,7 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::put('admin_change_password', 'users\UsersController@changepassword')->name('admin_change_password');
 });
 Route::group(['middleware' => ['auth', 'user', 'verified']], function () {
-    Route::get('/home', 'HomeController@index')->name('index');
+    //Route::get('/home', 'HomeController@index')->name('index');
     Route::get('/users/dashboard', 'users\UsersController@index')->name('usersdashboard');
     Route::resource('/users/user', 'users\UsersController');
     Route::resource('/users/account', 'users\UsersAccount');

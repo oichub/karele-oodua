@@ -40,7 +40,22 @@
                         {{ ucwords(Auth::user()->name) }} <span class="caret"></span>
                       </a>
                       <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ url('/') }}"> Dashboard </a>
+                                                  @php
+                            switch(Auth::user()->role)
+                            {
+                                case 'admin':
+                                $url = 'adminDashboard';
+                                 break;
+                                 case 'user':
+                                $url = 'usersdashboard';
+                                 break;
+                                 default:
+                                 $url = 'home';
+                            }
+                            @endphp
+                        <a class="dropdown-item" href="{{ route($url) }}"> Dashboard </a>
+
+
                         <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                       document.getElementById('logout-form').submit();">
