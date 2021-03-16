@@ -6,35 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{--  <link rel="stylesheet" href="{{ asset('pages/css/bootstrap.min.css') }}">  --}}
     <link rel="stylesheet" href="{{ asset('pages/assets/css/style-starter.css')}}">
-    <link rel="stylesheet" href=" {{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href=" {{ asset('css/style.css') }}">
-    <link rel="stylesheet" href=" {{ asset('fontawesome-free/css/fontawesome.css') }}">
-    <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
-    @yield('style')
-    <style>
-        ul li {
-            text-decoration: none;
-            color: black;
-            list-style-type: none;
-            font-size: 18px;
-
-        }
-    </style>
-    </head>
-    <!--- Navigation Bar -->
+       @yield('style')
+   </head>
     <body>
-    {{--  <nav class="navbar navbar-inverse">
+      <header id="site-header" class="fixed-top">
         <div class="container-fluid">
-            <div class="navbar-header">
-            <a href="{{ url('/') }}" class="header-title" style="text-decoration: none;"> <h2 class="title text-center">  KÁRELÉ OÒDUÀ LAFEFE </h2></a>
-            </div>
-            <ul class="navbar">
-                @guest
+            <nav class="navbar navbar-expand-lg stroke">
+                <h2>
+                    <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+                        KÁRELÉ OÒDUÀ</a>
+                </h2>
+                <!-- if logo is image enable this
+    <a class="navbar-brand" href="#index.html">
+        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+    </a> -->
+                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
+                    data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav ml-lg-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                    @guest
                 <li class="nav-item">
-                    <a class="nav-link" href="#signup" data-toggle="collapse"> Sign Up</a></li>
+                    <a class="nav-link" href="{{ url('/signup') }}" data-toggle="collapse"> Sign Up</a></li>
                 <li class="ml-4 nav-item">
-                <a class="nav-link" href="{{ url('/') }}">Login</a></li>
+                <a class="nav-link" href="{{ url('/login') }}">Login</a></li>
                 @else
                 <li class="nav-item dropdown">
 
@@ -42,7 +44,7 @@
                         {{ ucwords(Auth::user()->name) }} <span class="caret"></span>
                       </a>
                       <div class="dropdown-menu">
-                                                  @php
+                             @php
                             switch(Auth::user()->role)
                             {
                                 case 'admin':
@@ -69,46 +71,15 @@
                      </form>
                       </div>
                 </li>
-            @endguest
-            </ul>
-
-            </div>
-    </nav>  --}}
-
-      <header id="site-header" class="fixed-top">
-        <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg stroke">
-                <h1>
-                    <a class="navbar-brand d-flex align-items-center" href="index.html">
-                        Happy Events</a>
-                </h1>
-                <!-- if logo is image enable this
-    <a class="navbar-brand" href="#index.html">
-        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
-    </a> -->
-                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
-                    data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
-                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <ul class="navbar-nav ml-lg-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                @endguest
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="services.html">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact Us</a>
+                            <a class="nav-link" href="/contact">Contact Us</a>
                         </li>
                         <!-- search button -->
-                        <div class="search-right ml-lg-3">
+                        {{--  <div class="search-right ml-lg-3">
                             <form action="#search" method="GET" class="search-box position-relative">
                                 <div class="input-search">
                                     <input type="search" placeholder="Enter Keyword" name="search" required="required"
@@ -117,12 +88,12 @@
                                 <button type="submit" class="btn search-btn"><i class="fa fa-search"
                                         aria-hidden="true"></i></button>
                             </form>
-                        </div>
+                        </div>  --}}
                         <!-- //search button -->
                     </ul>
                 </div>
                 <!-- toggle switch for light and dark theme -->
-                <div class="cont-ser-position">
+               <!-----// <div class="cont-ser-position">
                     <nav class="navigation">
                         <div class="theme-switch-wrapper">
                             <label class="theme-switch" for="checkbox">
@@ -134,7 +105,7 @@
                             </label>
                         </div>
                     </nav>
-                </div>
+                </div>--->
                 <!-- //toggle switch for light and dark theme -->
             </nav>
         </div>
