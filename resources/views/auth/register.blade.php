@@ -1,17 +1,25 @@
 @extends('pages.app')
 @section('title', 'Register')
 @section('style')
-
+ <link rel="stylesheet" href="{{ asset('pages/assets/css/register.css')}}">
 @endsection
 @section('content')
-<div class="container">
+
+<!------ New signup page--->
+
+
+<
+
+
+
+
+   {{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             @if($errors->any())
              @foreach($errors as $error)
               {{ $error }}
              @endforeach
-
             @endif
             <div class="card">
                 <div class="card-header" style="background-color: brown;color:white;">{{ __('Register') }}</div>
@@ -365,5 +373,16 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
+@endsection
+@section('script')
+    	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
 @endsection
