@@ -1,4 +1,4 @@
-<h5 class="text-center cent" style="margin-top: 2px; color: white; background-color: rgb(99, 2, 2);">PLACES OF NOTE </h5>
+<!-----<h5 class="text-center cent" style="margin-top: 2px; color: white; background-color: rgb(99, 2, 2);">PLACES OF NOTE </h5>
 <br>
 <hr>
 
@@ -26,8 +26,8 @@
 </div>
 
 </div>
- </div>
-<div class="container-fluid mt-5">
+ </div>---->
+<!---<div class="container-fluid mt-5">
     <div class="row bga">
         <div class="col-sm-3">
             <h5 class="ml-5" style="color: rgb(105, 3, 3);">Product</h5>
@@ -59,7 +59,7 @@
             <h5 style="color: rgb(105, 3, 3);">Payment Available</h5>
         </div>
     </div>
-</div>
+</div>--->
 <button onclick="topFunction()" id="movetop" title="Go to top">
         <span class="fa fa-level-up" aria-hidden="true"></span>
     </button>
@@ -86,7 +86,7 @@
     <!-- //move top -->
 
     <!-- common jquery plugin -->
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="{{ asset('pages/assets/js/jquery-3.3.1.min.js')}}"></script>
     <!-- //common jquery plugin -->
 
     <!-- slider-js -->
@@ -96,7 +96,7 @@
     <!-- //slider-js -->
 
     <!-- owl carousel -->
-    <script src="assets/js/owl.carousel.js"></script>
+    <script src="pages/assets/js/owl.carousel.js"></script>
     <!-- script for tesimonials carousel slider -->
     <script>
         $(document).ready(function () {
@@ -126,7 +126,7 @@
     <!-- //script for tesimonials carousel slider -->
 
     <!-- theme switch js (light and dark)-->
-    <script src="assets/js/theme-change.js"></script>
+    <script src="pages/assets/js/theme-change.js"></script>
     <script>
         function autoType(elementClass, typingSpeed) {
             var thhis = $(elementClass);

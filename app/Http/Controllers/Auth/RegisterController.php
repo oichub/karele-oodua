@@ -66,13 +66,27 @@ class RegisterController extends Controller
     {
         $validator= Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'phone' => 'required|string|digits_between:6,15|unique:users,phone,except,id',
+            'phone' => 'required|numeric|digits_between:6,15|unique:users,phone,except,id',
             'country' => ['required', 'string', 'max:255'],
-            'register_email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'register_email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'register_password' => ['required', 'string', 'min:5', 'confirmed'],
             'T&C' => 'required|string',
             'dob' => 'required|date',
-
+        ], [
+            'name.required' => 'Name is required',
+            'name.string' => 'Invalid name',
+            'name.max' => 'The expected words is exceeded',
+            'phone.required' => "Phone is required",
+            "phone.numeric" => 'Invalid number',
+            "phone.number" => 'Invalid number',
+            "phone.digit_between" => 'Invalid number',
+            'register_email.required' => "Email is required",
+            'register_email.max' => "Expected maximum email is exceeded",
+            'register_email.unique' => "Email already exist",
+            'country.string' => "Invalid country name",
+            'T&C.required' => "Check our terms and conditions",
+            'dob.required' => 'Date of birth is required',
+            'dob.date' => 'Enter valid date',
         ]);
         return $validator;
     }

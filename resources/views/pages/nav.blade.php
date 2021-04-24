@@ -4,8 +4,7 @@
     <title>Kárelé Oòduà :: @yield('title', '') </title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{--  <link rel="stylesheet" href="{{ asset('pages/css/bootstrap.min.css') }}">  --}}
-    <link rel="stylesheet" href="{{ asset('pages/assets/css/style-starter.css')}}">
+        <link rel="stylesheet" href="{{ asset('pages/assets/css/style-starter.css')}}">
        @yield('style')
    </head>
     <body>
@@ -34,7 +33,8 @@
                         </li>
                     @guest
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/signup') }}" data-toggle="collapse"> Sign Up</a></li>
+                    <a class="nav-link" href="{{ url('/register') }}"> Sign Up</a>
+                </li>
                 <li class="ml-4 nav-item">
                 <a class="nav-link" href="{{ url('/login') }}">Login</a></li>
                 @else

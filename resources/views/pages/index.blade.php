@@ -45,7 +45,6 @@
                         @enderror
                         <!--// First name -->
                         <!-- Last Name -->
-                        <label for="email">Phone Number:</label><br>
                         <input  type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
                         @error('phone')
                             <span class="invalid-feedback" role="alert">
