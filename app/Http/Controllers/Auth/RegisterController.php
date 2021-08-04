@@ -68,7 +68,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'phone' => 'required|numeric|digits_between:6,15|unique:users,phone,except,id',
             'country' => ['required', 'string', 'max:255'],
-            'register_email' => ['required', 'email', 'max:255', 'unique:users,email'],
+            'register_email' => ['required', 'email', 'max:255', 'kickbox', 'unique:users,email'],
             'register_password' => ['required', 'string', 'min:5', 'confirmed'],
             'T&C' => 'required|string',
             'dob' => 'required|date',

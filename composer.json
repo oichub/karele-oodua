@@ -11,8 +11,10 @@
         "php": "^7.2",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^7.2",
+        "intervention/image": "^2.5",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
+        "stuyam/laravel-kickbox-validator": "^1.0",
         "unicodeveloper/laravel-paystack": "^1.0"
     },
     "require-dev": {

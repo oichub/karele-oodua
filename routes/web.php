@@ -21,10 +21,10 @@ Route::get('/payment/callback', 'Paystack\PaymentController@handleGatewayCallbac
 
 
 
-Route::get('/', function () {
-    return view('pages.index');
-})->name('home');
-
+// Route::get('/', function () {
+//     return view('pages.index');
+// })->name('home');
+Route::get('/', 'PagesController@index')->name('home');
 Auth::routes();
 
 Auth::routes(['verify' => true]);

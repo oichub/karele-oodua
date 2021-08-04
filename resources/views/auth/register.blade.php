@@ -1,3 +1,4 @@
+
 @extends('pages.app')
 @section('title', 'Register')
 @section('style')
@@ -9,21 +10,17 @@
 <!------ New signup page--->
     <div class="container-fluid register-background ">
     <div class="row">
-  
+            @if($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                @foreach ($errors->all() as $error)
+                {{$error }} <br/>
+                @endforeach
+              @endif
+              </div>
             <div class="card">
-                <div class="card-header">
-                    <div class="register-box">
-                        @if($errors->any())
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                            @foreach ($errors->all() as $error)
-                            {{$error }} <br/>
-                            @endforeach
-                          @endif
-                          </div>
-                </div>
                 <div class="card-body">
                    <!-- sign up form -->
                     <form method="post" action="{{ route('register') }}">
@@ -348,20 +345,18 @@
                         <input id="password-confirm" type="password" class="form-control" name="register_password_confirmation" required autocomplete="new-password">
                         </div>
                         <!--- // confirm Password-->
-                        <div class="form-group">
                             <div class="form-check">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="T&C" {{ old('T&C') ? 'checked' : '' }} >
+                                 <label class="form-check-label">
+                                    <input type="checkbox" name="T&C" {{ old('T&C') ? 'checked' : '' }} >
                                     I agree to the <a href="#">terms and conditions</a>
                                 </label>
-                            </div>
-                      
+                           
                               @if ($errors->has('tc'))
                               <span class="text-danger" role="alert">
                                 <strong>{{ $message }}</strong>
                               </span>
                               @endif
-                        </div>
+                            </div>
                         <div class="form-group">
                         <button type="submit" class="btn btn-danger">Sign up</button>
                         </div>
