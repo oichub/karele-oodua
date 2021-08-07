@@ -6,7 +6,7 @@
     <section class="w3l-main-slider" id="home">
         <div class="banner-content">
             <div id="demo-1"
-                data-zs-src='["{{asset('pages/image/banner4.jpg')}}", "{{ asset('pages/image/banner2.jpg') }}"," {{ asset('pages/image/banner1.jpg') }}", "{{ asset('pages/image/banner3.jpg') }}", "{{ asset('pages/image/banner4.jpg') }}"]'
+                data-zs-src='["{{asset('pages/image/banner4.jpg')}}", "{{ asset('pages/image/banner2.jpg') }}"," {{ asset('pages/image/banner1.jpg') }}", "{{ asset('pages/image/banner3.jpg') }}"]'
                 data-zs-overlay="dots">
                 <div class="demo-inner-content">
                     <div class="container">
