@@ -16,9 +16,9 @@
                         KÁRELÉ OÒDUÀ</a>
                 </h2>
                 <!-- if logo is image enable this
-    <a class="navbar-brand" href="#index.html">
-        <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
-    </a> -->
+                <a class="navbar-brand" href="#index.html">
+                    <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+                </a> -->
                 <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
                     data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -28,14 +28,14 @@
 
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav ml-lg-auto">
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
                         </li>
                     @guest
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/register') }}"> Sign Up</a>
+                    <a class="nav-link" href="{{ url('/register') }}">Sign Up</a>
                 </li>
-                <li class="ml-4 nav-item">
+                <li class="nav-item">
                 <a class="nav-link" href="{{ url('/login') }}">Login</a></li>
                 @else
                 <li class="nav-item dropdown">

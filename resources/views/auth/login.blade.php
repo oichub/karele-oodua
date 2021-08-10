@@ -1,63 +1,76 @@
 @extends('pages.app')
 @section('title', 'Login')
 @section('style')
+
  <link rel="stylesheet" href="{{ asset('pages/assets/css/login.css')}}">
 @endsection
 @section('content')
-<div class="mid-class login">
-  <div class="art-right-w3ls">
-            <h2>Sign In and Sign Up</h2>
-             <form method="POST" action="{{ route('login') }}">
-                        @csrf
-               <div class="main">
-                  <div class="form-left-to-w3l">
-                   <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                  </div>
-                  <div class="form-left-to-w3l ">
-                      <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror   <div class="clear"></div>
-                  </div>
+<div class="blog-section">
+   <!-- ##### Breadcrumb Area Start ##### -->
+      <div class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url('pages/image/img.jpg');">
+         <div class="container h-100">
+            <div class="row h-100 align-items-center">
+            <div class="col-12">
+               <div class="breadcrumb-text">
+                  <h2>Sign-In</h2>
                </div>
-               <div class="left-side-forget">
-                  <input type="checkbox" class="checked">
-                  <span class="remenber-me">Remember me </span>
-
-               </div>
-               <div class="right-side-forget">
-                  <a href="#" class="for">Forgot password...?</a>
-               </div>
-               <div class="clear"></div>
-               <div class="btnn">
-                  <button type="submit">Sign In</button>
-               </div>
-            </form>
-            <div class="w3layouts_more-buttn">
-               <h3>Don't Have an account..?
-                  <a href="{{ url('/register') }}">Sign Up Here
-                  </a>
-               </h3>
+            </div>               
             </div>
-         </div>        
-<div class="art-left-w3ls">
- <h1 class="header-w3ls" style="color:#fb6049">
-   KÁRELÉ OÒDUÀ Users' Login
-            </h1>
+         </div>  
+      </div>
+   <!-- ##### Breadcrumb Area End ##### -->   
+   <div class="container">
+      <div class="row m-5">            
+         <div class="offset-md-3 col-md-6 col-12">
+               <!-- <div class="card-title"> -->
+                  <h1 class="text-center" style="font-size:x-large; font-weight:bold">Login</h1>                      
+               <!-- </div> -->
+               <div class="card-body">                                       
+               <form method="POST" action="{{ route('login') }}">
+                  @csrf                   
+                  <div class="form-group">
+                        <label for="email" class="mb-1">Email:</label>
+                        <input type="email" class="form-control @error('email') 
+                        is-invalid @enderror" id="email" name="email" autocomplete="email"
+                        placeholder="Enter email "required autofocus value="{{old('email')}}">                        
+                        @error('email')
+                           <span class="invalid-feedback" role="alert">
+                                 <strong>{{ $message }}</strong>
+                           </span>
+                        @enderror
+                  </div>                                    
+                  <div class="form-group">
+                        <label for="password" class="mb-1">Password:</label>
+                        <input type="password" class="form-control @error('password') 
+                        is-invalid @enderror" autocomplete="current-password"
+                        id="password" name="password" placeholder="Enter Password" required>
+                        @error('password')
+                           <span class="invalid-feedback" role="alert">
+                                 <strong>{{ $message }}</strong>
+                           </span>
+                        @enderror   <div class="clear"></div>
+                  </div>  
+               <div class="form-group pt-2">
+               <input type="submit" value="Log In" class="btn mb-2" style="background-color:#ff4c4c">
+               <div class="form-group pt-2">
+                  @if (Route::has('password.request'))
+                        <a class="float-left ml-3" href="{{ route('password.request') }}">
+                        {{ __('Forgot Your Password?') }}
+                        </a>
+                  @endif
+                        <a href="{{ url('/register') }}" class="float-right mr-3">Sign Up Here</a>
+               </form>
+               </div>
          </div>
+      </div>
+   </div>
 </div>
+
 @endsection
 @section('script')
     <script>
          addEventListener("load", function () { setTimeout(hideURLbar, 0); }, false); function hideURLbar() { window.scrollTo(0, 1); }
       </script> 
 @endsection
+
+
