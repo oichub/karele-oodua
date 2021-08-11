@@ -955,8 +955,8 @@ input.checked {
           @media only screen and (min-width: 768px) and (max-width: 991px) {
             .famie-breadcrumb .breadcrumb .breadcrumb-item a {
               font-size: 14px; } }
-          @media only screen and (max-width: 767px) {
-            .famie-breadcrumb .breadcrumb .breadcrumb-item a {
+         
+            .famie-breadcrumb .breadcrum @media only screen and (max-width: 767px) {b .breadcrumb-item a {
               font-size: 12px; } }
           .famie-breadcrumb .breadcrumb .breadcrumb-item a:hover, .famie-breadcrumb .breadcrumb .breadcrumb-item a:focus {
             font-weight: 400;

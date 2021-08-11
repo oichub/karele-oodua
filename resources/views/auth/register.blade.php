@@ -4,6 +4,7 @@
 @section('style')
 <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"> 
 <link rel="stylesheet" href="{{ asset('pages/assets/css/login.css')}}">
+
 @endsection
 @section('content')
 
@@ -23,7 +24,7 @@
         </div>
         <!-- ##### Breadcrumb Area End ##### -->
         <div class="container">
-        <div class="row m-5">            
+        <div class="row my-5">
             <div class="offset-md-3 col-md-6 col-12">                
                     <h1 class="text-center" style="font-size:x-large; font-weight:bold">Register</h1>
                 <div class="card-body"> 
@@ -46,7 +47,7 @@
                                 <!-- First name -->
                                 <div class="form-group">
                                     <label for="email">Full Name:</label>
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                    <input id="name" type="text" placeholder="Enter Fullname" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -57,7 +58,7 @@
                                     <!-- Phone -->
                                     <div class="form-group">
                                     <label for="email">Phone Number:</label><br>
-                                    <input  type="telphone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
+                                    <input  type="telphone" placeholder="Enter Phone Number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus>
                                     @error('phone')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -79,7 +80,7 @@
                                     <!-- Email -->
                                     <div class="form-group">
                                     <label for="email">Email address:</label>
-                                    <input id="email" type="email" class="form-control @error('register_email') is-invalid @enderror" name="register_email" value="{{ old('register_email') }}" required autocomplete="register_email">
+                                    <input id="email" placeholder="Enter Email Address" type="email" class="form-control @error('register_email') is-invalid @enderror" name="register_email" value="{{ old('register_email') }}" required autocomplete="register_email">
 
                                     @error('register_email')
                                         <span class="invalid-feedback" role="alert">
@@ -92,7 +93,7 @@
                                     <div class="form-group">
                                     <label for="country"> Residential Country</label>
                                     <select id="country" name="country" class="form-control">
-                                        <option value="" selected disabled></option>
+                                        <option value="" selected disabled>Select Country</option>
                                         <option value="Afghanistan">Afghanistan</option>
                                         <option value="Åland Islands">Åland Islands</option>
                                         <option value="Albania">Albania</option>
@@ -344,12 +345,11 @@
                                         </span>
                                     @enderror
                                     </div>
-                            <!-- // Country --->
-                                <br/>
+                                <!-- // Country --->                                
                                 <!--Password --->
                                 <div class="form-group">
                                     <label for="pwd">Password:</label><br>
-                                    <input id="password" type="password" class="form-control @error('register_password') is-invalid @enderror" name="register_password" required autocomplete="new-password">
+                                    <input id="password" placeholder="Enter New Password" type="password" class="form-control @error('register_password') is-invalid @enderror" name="register_password" required autocomplete="new-password">
 
                                     @error('register_password')
                                         <span class="invalid-feedback" role="alert">
@@ -361,20 +361,19 @@
                                     <!--- confirm Password-->
                                     <div class="form-group">
                                     <label for="pwd">Confirm Password:</label><br>
-                                    <input id="password-confirm" type="password" class="form-control" name="register_password_confirmation" required autocomplete="new-password">
+                                    <input id="password-confirm" placeholder="Confirm Password" type="password" class="form-control" name="register_password_confirmation" required autocomplete="new-password">
                                     </div>
-                                    <!--- // confirm Password-->                        
-                                
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck"  name="T&C" {{ old('T&C') ? 'checked' : '' }} >
-                                                <label class="custom-control-label" for="customCheck">I agree to the <a href="#">terms and conditions</a></label>
-                                                
-                                                @if ($errors->has('tc'))
-                                                <span class="text-danger" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                                </span>
-                                                @endif
-                                            </div>                                 
+                                    <!--- // confirm Password-->                                                        
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck"  name="T&C" {{ old('T&C') ? 'checked' : '' }} >
+                                        <label class="custom-control-label" for="customCheck">I agree to the <a href="#">terms and conditions</a></label>
+                                        
+                                        @if ($errors->has('tc'))
+                                        <span class="text-danger" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @endif
+                                    </div>                                 
                                     <div class="form-group pt-2">
                                     <input type="submit" value="Sign Up" class="btn mb-2" style="background-color:#ff4c4c">
                                     </div>

@@ -20,7 +20,7 @@
       </div>
    <!-- ##### Breadcrumb Area End ##### -->   
    <div class="container">
-      <div class="row m-5">            
+      <div class="row my-5">            
          <div class="offset-md-3 col-md-6 col-12">
                <!-- <div class="card-title"> -->
                   <h1 class="text-center" style="font-size:x-large; font-weight:bold">Login</h1>                      

@@ -19,7 +19,7 @@
       </div>
    <!-- ##### Breadcrumb Area End ##### -->  
     <div class="container"> 
-        <div class="row justify-content-center m-5">
+        <div class="row justify-content-center my-5">
             <div class="col-md-6 col-12">   
                 <div class="card">             
                     <div class="card-header">{{ __('Reset Password') }}</div>

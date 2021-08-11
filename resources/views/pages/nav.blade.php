@@ -4,7 +4,7 @@
     <title>Kárelé Oòduà :: @yield('title', '') </title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{{ asset('pages/assets/css/style-starter.css')}}">
+        <link rel="stylesheet" href="{{ asset('pages/assets/css/style-starter.css')}}">     
        @yield('style')
    </head>
     <body>
@@ -30,56 +30,53 @@
                     <ul class="navbar-nav ml-lg-auto">
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                    @guest
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/register') }}">Sign Up</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="{{ url('/login') }}">Login</a></li>
-                @else
-                <li class="nav-item dropdown">
-
-                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                        {{ ucwords(Auth::user()->name) }} <span class="caret"></span>
-                      </a>
-                      <div class="dropdown-menu">
-                             @php
-                            switch(Auth::user()->role)
-                            {
-                                case 'admin':
-                                $url = 'adminDashboard';
-                                 break;
-                                 case 'user':
-                                $url = 'usersdashboard';
-                                 break;
-                                 default:
-                                 $url = 'home';
-                            }
-                            @endphp
-                        <a class="dropdown-item" href="{{ route($url) }}"> Dashboard </a>
-
-
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                                      document.getElementById('logout-form').submit();">
-                         {{ __('Logout') }}
-                     </a>
-
-                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                         @csrf
-                     </form>
-                      </div>
-                </li>
-                @endguest
+                        </li>                   
                         <li class="nav-item">
                             <a class="nav-link" href="/about">About Us</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/contact">Contact Us</a>
                         </li>
+                        @guest                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/login') }}">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/register') }}">Sign Up</a>
+                            </li>
+                            @else
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                    {{ ucwords(Auth::user()->name) }} <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu">
+                                        @php
+                                        switch(Auth::user()->role)
+                                        {
+                                            case 'admin':
+                                            $url = 'adminDashboard';
+                                            break;
+                                            case 'user':
+                                            $url = 'usersdashboard';
+                                            break;
+                                            default:
+                                            $url = 'home';
+                                        }
+                                        @endphp
+                                    <a class="dropdown-item" href="{{ route($url) }}"> Dashboard </a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
                         <!-- search button -->
-                        {{--  <div class="search-right ml-lg-3">
+                        <!-- <div class="search-right ml-lg-3">
                             <form action="#search" method="GET" class="search-box position-relative">
                                 <div class="input-search">
                                     <input type="search" placeholder="Enter Keyword" name="search" required="required"
@@ -88,7 +85,7 @@
                                 <button type="submit" class="btn search-btn"><i class="fa fa-search"
                                         aria-hidden="true"></i></button>
                             </form>
-                        </div>  --}}
+                        </div>   -->
                         <!-- //search button -->
                     </ul>
                 </div>
