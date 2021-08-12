@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -101,7 +102,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         // return $data;
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['register_email'],
             'phone' => $data['phone'],
@@ -113,5 +114,20 @@ class RegisterController extends Controller
             'password' => Hash::make($data['register_password']),
             'dob' => $data['dob'],
         ]);
+
+        $email_data = array(
+            'name' => $data['name'],
+            'email' => $data['register_email'],
+            'phone' => $data['phone'],
+            'country' => $data['country'],
+            'dob' => $data['dob'],
+        );
+
+        Mail::send('welcome_email', $email_data, function ($message) use ($email_data){
+            $message->to($email_data['email'], $email_data['name'], $email_data['phone'], $email_data['country'], $email_data['dob'])
+            ->subject('Welcome to Karele Oodua')
+            ->from('info@kareleoodua.com', 'Karele-Oodua');
+        });
+        return $user;
     }
 }
