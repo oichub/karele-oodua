@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\users;
 
+use App\User;
 use App\Account;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -29,7 +30,8 @@ class UserPaymentController extends Controller
      */
     public function create()
     {
-        return view('users.user.account.deposit');
+        $user = User::where('email', Auth::user()->email)->firstOrFail();
+        return view('users.user.account.deposit', compact(['user']));
     }
 
     /**

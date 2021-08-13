@@ -46,6 +46,7 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
 Route::group(['middleware' => ['auth', 'user', 'verified']], function () {
     //Route::get('/home', 'HomeController@index')->name('index');
     Route::get('/users/dashboard', 'users\UsersController@index')->name('usersdashboard');
+    Route::resource('/users/user', 'users\UsersController');
     Route::any('/users/user/make-payment', 'users\UserPaymentController@deposit')->name('user.deposit');
     Route::resource('/users/account', 'users\UsersAccount');
     Route::resource('/user/videos/video', 'users\UserVideoController');

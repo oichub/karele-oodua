@@ -84,7 +84,7 @@
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
-              <p>Account</p>
+              <p>Payment</p>
               <i class="right fas fa-angle-left"></i>
 
             </a>
@@ -92,7 +92,7 @@
               <li class="nav-item">
                 <a href="{{ route('user.deposit') }}" class="nav-link">
                   <i class="fas fa-user-plus nav-icon"></i>
-                  <p>Deposit</p>
+                  <p>Make Payment</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -101,8 +101,6 @@
                   <p>Account History</p>
                 </a>
               </li>
-
-
             </ul>
           </li>
           <!-- // Students -->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\users;
 
 use App\User;
 use App\Video;
+use App\Account;
 use App\Subscriber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

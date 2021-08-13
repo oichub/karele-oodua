@@ -1,8 +1,6 @@
 @extends('layouts.users.userlayout')
-@section('title', "USER DASHBOARD")
+@section('title', "User Dashboard")
 @section('content')
-
-
 <!-- Info boxes -->
 <div class="row">
     <div class="col-12 col-sm-6 col-md-3">
@@ -34,7 +32,7 @@
     </div>
     <!-- /.col -->
 
-    <!-- fix for small devices only -->
+    <!----- fix for small devices only ----->
     <div class="clearfix hidden-md-up"></div>
 
     <div class="col-12 col-sm-6 col-md-3">
