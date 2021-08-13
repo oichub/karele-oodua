@@ -8,7 +8,7 @@
 @endsection
 @section('content')
 
-<!------ New signup page--->
+<!------ New signup page---->
 <div class="blog-section">
        <!-- ##### Breadcrumb Area Start ##### -->
         <div class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url('pages/image/img.jpg');">
