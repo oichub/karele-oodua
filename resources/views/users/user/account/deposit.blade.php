@@ -1,5 +1,5 @@
 @extends('layouts.users.userlayout')
-@section('title', ' Payment')
+@section('title', ' Make Payment')
 @section('content')
 <div class="container">
     <div class="w-50 ml-auto mr-auto">

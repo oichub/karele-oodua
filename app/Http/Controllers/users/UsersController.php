@@ -54,7 +54,15 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $account = new Account();
+        $account->amount = $request->amount;
+        $account->ref = "karele".time();
+        $account->user_id = Auth::user()->id;
+        $user = User::where('id', Auth::user()->id)->firstOrFail();
+        $user->balance +=$request->amount;
+        $user->update();
+        $account->save();
+        return redirect()->route('usersdashboard')->with('success', 'You have deposit '. $request->amount. ' naira successfully');
     }
 
     /**

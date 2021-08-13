@@ -90,7 +90,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('account.create') }}" class="nav-link">
+                <a href="{{ route('user.deposit') }}" class="nav-link">
                   <i class="fas fa-user-plus nav-icon"></i>
                   <p>Deposit</p>
                 </a>
