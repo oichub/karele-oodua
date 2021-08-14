@@ -80,7 +80,7 @@
 
           </li>
 
-          <!-- Students -->
+          <!-- Account -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
@@ -105,9 +105,34 @@
 
             </ul>
           </li>
-          <!-- // Students -->
+          <!-- // Account -->
+
+ <!-- Video -->
+ <li class="nav-item has-treeview">
+  <a href="#" class="nav-link">
+    <i class="nav-icon fas fa-users"></i>
+    <p>Video</p>
+    <i class="right fas fa-angle-left"></i>
+
+  </a>
+  <ul class="nav nav-treeview">
+    <li class="nav-item">
+      <a href="{{ route('user.livevideo') }}" class="nav-link">
+        <i class="fas fa-user-plus nav-icon"></i>
+        <p>Live Video</p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="{{ route('account.index') }}" class="nav-link">
+        <i class="fas fa-clock"></i>
+        <p>Account History</p>
+      </a>
+    </li>
 
 
+  </ul>
+</li>
+<!-- // Account -->
 
 
 

@@ -17,7 +17,7 @@ class UserVideoController extends Controller
      */
     public function index()
     {
-        //
+        return view('users.user.videos.index');
     }
 
     /**

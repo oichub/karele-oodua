@@ -39,12 +39,13 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::get('/users/admin/change_password', 'admin\AdminController@gotochangepassword')->name('admins_change_password');
     Route::put('admin_change_password', 'users\UsersController@changepassword')->name('admin_change_password');
 });
+
 Route::group(['middleware' => ['auth', 'user', 'verified']], function () {
     //Route::get('/home', 'HomeController@index')->name('index');
     Route::get('/users/dashboard', 'users\UsersController@index')->name('usersdashboard');
     Route::resource('/users/user', 'users\UsersController');
     Route::resource('/users/account', 'users\UsersAccount');
-    Route::resource('/user/videos/video', 'users\UserVideoController');
+    Route::get('/user/videos/livevideo', 'users\UserVideoController@index')->name('user.livevideo');
     Route::resource('/users/usersubscribed', 'users\SubscribeController');
     Route::get('/subscibed/video/{userid}/{videoid}/{subid}/{video}', 'users\SubscribeController@subscriber')->name('subscribed_videos');
     Route::get('/users/change_password', 'users\UsersController@gotochangepassword')->name('change_password');
