@@ -186,18 +186,10 @@
                 <i class="nav-icon fas fa-user"></i>
                 <p> Admin</p>
                 <i class="right fas fa-angle-left"></i>
-
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="fas fa-user-plus nav-icon"></i>
-                    <p>Add Admin</p>
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="{{route('adminsmanagement')}}" class="nav-link">
                     <i class="fas fa-users"></i>
                     <p>Manage Admin</p>
                   </a>

@@ -32,6 +32,7 @@ Auth::routes(['verify' => true]);
 // admin middleware will go here
 Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::get('/users/admin/dashboard', 'admin\AdminController@index')->name('adminDashboard');
+    Route::get('users/admin/admin_management', 'admin\AdminController@adminmanagement')->name('adminsmanagement');
     Route::resource('/users/admin/events', 'admin\AdminUpcomingEvent');
     Route::post('confirm_video_delete', 'admin\VideoController@confirmVideoDelete')->name('confirmVideoDelete');
     Route::resource('/admin/users', 'admin\UsersController');
