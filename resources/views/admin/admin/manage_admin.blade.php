@@ -109,7 +109,7 @@
             @csrf
                      <!-- color -->
          <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-12">
             <div class="form-group">
               <label> Name</label>
               <div class="input-group">
@@ -124,7 +124,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-12">
               <div class="form-group">
                 <label>Email</label>
                 <div class="input-group">
@@ -139,7 +139,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-12">
                 <div class="form-group">
                   <label>Phone</label>
                   <div class="input-group">
@@ -163,6 +163,131 @@
         </div>
       </div>
      
+      <!--------// Add Admin----------------------------->
+      
+
+  <!-------------Edit Admin------------->
+<div class="modal fade modal-info" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-notify modal-info" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> Update Admin
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ route('update.admin', 'admin') }}" role="form"   runat="server" method="POST">
+          @csrf
+          @method('PUT')
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label> Name</label>
+                <div class="input-group">
+                  <input id="name" type="text" name="name"  class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="Full name">
+                  @if ($errors->has('name'))
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $errors->first('name') }}</strong>
+                  </span>
+              @endif
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Email</label>
+                  <div class="input-group">
+                    <input id="email"  type="email" name="email"  class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Email">
+                    @if ($errors->has('email'))
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('email') }}</strong>
+                    </span>
+                @endif
+                  </div>
+                </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Phone</label>
+                    <div class="input-group">
+                      <input id="phone" type="text" name="phone"  class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="Phnone Number">
+                      @if ($errors->has('phone'))
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $errors->first('phone') }}</strong>
+                      </span>
+                  @endif
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary btn-lg">Update Admin</button>
+              </div>
+          </form>
+      </div>
+    </div>
+  </div>
+  <!-----------//--Edit Admin------------->
+  <!----------------Show Admin---------------------->
+<div class="modal fade modal-info" id="showModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-notify modal-info" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> Admin's Details
+       </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<div class="card card-solid">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Name</label>
+          <div class="input-group">
+            <input id="name" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Email</label>
+          <div class="input-group">
+            <input id="email" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Phone Number</label>
+          <div class="input-group">
+            <input id="phone" class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+  </div>
+  </div>
+  </div>
+</div>
+       <!----------------//--Show Admin ---------------->
+
   <!-- /.content -->
 @endsection
 

@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\admin;
 
 use App\User;
+use App\Admin;
+use App\Video;
+use App\Subscriber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\ChangePassword;
-use App\Subscriber;
-use App\Video;
 
 class AdminController extends Controller
 {
@@ -60,8 +61,63 @@ class AdminController extends Controller
  }
 
  // Add Admin
- public function addadmin(){
-     //
+ public function addadmin(Request $request){
+    $this->validate(
+        $request, 
+        [
+            'name' => 'required | string',
+            'email' => 'required | email |max:255 |unique:users,email',
+            'phone' => 'required |digits:20 | unique:users,phone',
+        ],
+        [
+            'name.required' => 'Admin name is required',
+            'name.string' => 'Invalid name',
+            'email.required' => 'Email is required',
+            'email.max' => 'Invalid email',
+            'email.unique' => 'Email already exist',
+            'phone.required' => 'Phone number is required',
+            'phone.digits' => 'Invalid phone number',
+            'Phone.unique' => "Phone number already exist"
+        ]
+    );
+    function createRandomPassword() {
+        $chars = "0123456789012345678901234567890123456789";
+        srand((double)microtime()*1000000);
+        $i = 0;
+        $pass = '' ;
+        while ($i <= 5) {
+
+            $num = rand() % 33;
+
+            $tmp = substr($chars, $num, 1);
+
+            $pass = $pass . $tmp;
+
+            $i++;
+
+        }
+        return $pass;
+    }
+    $slu=$request->name."-".createRandomPassword();
+    $slug= strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $slu), '-'));
+$admin = new User;
+$admin->name = $request->name; 
+$admin->email = $request->email; 
+$admin->phone= $request->phone; 
+$admin->slug= $slug; 
+$admin->role= 'admin';
+$admin->password= Hash::make($request->phone);
+$admin->save();
+/*Mail::send('welcome_email',$request->email, function ($message) use ($email_data){
+    $message->to($request->email, $request->name, $request->phone)
+    ->subject('Welcome to Karele Oodua Lafefe')
+    ->from('notreply@kareleoodualafefe.com', 'Karele Oodua Lafefe');
+}); */
+return redirect()->back()->with('success', 'New admin has been added successfully');
+
  }
+ public function updateadmin(){
+    //
+}
 
 }
