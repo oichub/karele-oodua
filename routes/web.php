@@ -35,7 +35,7 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::get('users/admin/admin_management', 'admin\AdminController@adminmanagement')->name('adminsmanagement');
     Route::post('users/admin/addadmin', 'admin\AdminController@addadmin')->name('add.admin');
     Route::put('users/admin/updateadmin', 'admin\AdminController@updateadmin')->name('update.admin');
-  
+    Route::delete('users/admin/deleteadmin', 'admin\AdminController@deleteadmin')->name('delete.admin');
     Route::resource('/users/admin/events', 'admin\AdminUpcomingEvent');
     Route::post('confirm_video_delete', 'admin\VideoController@confirmVideoDelete')->name('confirmVideoDelete');
     Route::resource('/admin/users', 'admin\UsersController');

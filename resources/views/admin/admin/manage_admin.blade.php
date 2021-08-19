@@ -72,7 +72,7 @@
                data-toggle="modal" data-target="#editModal" 
                class="btn btn-primary btn-sm" href="#" >
                <i class="far fa-edit"  style="font-size: 15px;"></i> </a>||
-               <a data-toggle="modal" data-target="#deleteModal" href="#" data-product_id="{{ $admin->id }}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> </a>
+               <a data-toggle="modal" data-target="#deleteModal" href="#" data-admin_slug="{{ $admin->slug }}" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i> </a>
              </td>
             </tr>
       @endforeach
@@ -181,6 +181,7 @@
         <form action="{{ route('update.admin', 'admin') }}" role="form"   runat="server" method="POST">
           @csrf
           @method('PUT')
+          <input type="hidden" name="slug" id="slug">
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
@@ -255,7 +256,7 @@
         <div class="form-group">
           <label>Name</label>
           <div class="input-group">
-            <input id="name" class="form-control">
+            <input id="name" class="form-control" disabled>
           </div>
         </div>
       </div>
@@ -263,7 +264,7 @@
         <div class="form-group">
           <label>Email</label>
           <div class="input-group">
-            <input id="email" class="form-control">
+            <input id="email" class="form-control" disabled>
           </div>
         </div>
       </div>
@@ -271,7 +272,7 @@
         <div class="form-group">
           <label>Phone Number</label>
           <div class="input-group">
-            <input id="phone" class="form-control">
+            <input id="phone" class="form-control" disabled>
           </div>
         </div>
       </div>
@@ -288,6 +289,42 @@
 </div>
        <!----------------//--Show Admin ---------------->
 
+      <!----------------Delete Admin---------------------------> 
+      
+<!---------------------Delete Admin Start Here ---------------->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-notidy" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete Admin Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <!--------------------------Creating form start here------------------------------------>
+
+       <form action="{{ route('delete.admin', 'admin') }}" role="form"   runat="server" method="POST">
+
+          @csrf
+          @method('DELETE')
+          <div class="row">
+              <div class="col-md-12">
+<input type="hidden" name="addmin_slug" id="admin_slug">
+<p class="text-center"> Are you sure you want to delete this admin</p>
+</div>
+</div>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-warning" data-dismiss="modal">No? Cancel</button>
+<button type="submit" class="btn btn-danger btn-lg">Yes? Delete This Admin</button>
+</div>
+</form>
+  </div>
+</div>
+</div>
+<!--------------------// Delete Admin------------------------------->
+
   <!-- /.content -->
 @endsection
 
@@ -297,4 +334,39 @@
 
 </script>
 
+<script>
+  // Edit admin detaiils
+$('#editModal').on('show.bs.modal', function(event){
+  var button =$(event.relatedTarget)
+  var name = button.data('name')
+  var email = button.data('email')
+  var phone = button.data('phone')
+  var slug = button.data('slug')
+  var modal = $(this)
+  modal.find('.modal-body #name').val(name)
+  modal.find('.modal-body #phone').val(phone)
+  modal.find('.modal-body #email').val(email)
+  modal.find('.modal-body #slug').val(slug)
+});
+// Show admin details
+$('#showModal').on('show.bs.modal', function(event){
+  var button =$(event.relatedTarget)
+  var name = button.data('name')
+  var email = button.data('email')
+  var phone = button.data('phone')
+  var slug = button.data('slug')
+  var modal = $(this)
+  modal.find('.modal-body #name').val(name)
+  modal.find('.modal-body #phone').val(phone)
+  modal.find('.modal-body #email').val(email)
+})
+// Delete admin details
+$('#deleteModal').on('show.bs.modal', function(event){
+var button =$(event.relatedTarget)
+var slug = button.data('admin_slug')
+var modal = $(this)
+modal.find('.modal-title').text('Delete Admin Details')
+modal.find('.modal-body #admin_slug').val(slug)
+})
+</script>
 @endsection

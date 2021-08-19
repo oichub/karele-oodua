@@ -67,7 +67,7 @@ class AdminController extends Controller
         [
             'name' => 'required | string',
             'email' => 'required | email |max:255 |unique:users,email',
-            'phone' => 'required |digits:20 | unique:users,phone',
+            'phone' => 'required |numeric|unique:users,phone',
         ],
         [
             'name.required' => 'Admin name is required',
@@ -76,7 +76,7 @@ class AdminController extends Controller
             'email.max' => 'Invalid email',
             'email.unique' => 'Email already exist',
             'phone.required' => 'Phone number is required',
-            'phone.digits' => 'Invalid phone number',
+            'phone.numeric' => 'Invalid number',
             'Phone.unique' => "Phone number already exist"
         ]
     );
@@ -107,6 +107,7 @@ $admin->phone= $request->phone;
 $admin->slug= $slug; 
 $admin->role= 'admin';
 $admin->password= Hash::make($request->phone);
+$admin->email_verified_at=now();
 $admin->save();
 /*Mail::send('welcome_email',$request->email, function ($message) use ($email_data){
     $message->to($request->email, $request->name, $request->phone)
@@ -116,8 +117,17 @@ $admin->save();
 return redirect()->back()->with('success', 'New admin has been added successfully');
 
  }
- public function updateadmin(){
-    //
-}
+ public function updateadmin(Request $request){
+    // $slug = User::findOrFail($request->slug);
+  User::where('slug', $request->slug)
+  ->update(['name'=> $request->name, 'email'=> $request->email, 'phone' => $request->phone]);
+  return redirect()->back()->with('success', 'Admin details has been updated successfully');
 
+}
+public function deleteadmin(Request $request){
+    if(User::where('slug', $request->addmin_slug)
+    ->forceDelete()){
+    return redirect()->back()->with('success', 'Admin name has been deleted successfully');
+}
+}
 }
