@@ -15,7 +15,7 @@
                         </div>
                     </p>
                     <input type="hidden" id="email" value="{{$user->email}}">
-                    <input type="hidden" id="amount" value="800"> 
+                    <input type="hidden" id="amount" value="10"> 
                     <input type="hidden" id="phone" value="{{$user->phone}}">
                     <input type="hidden" id="userid" value="{{$user->slug}}">
                      <p>
@@ -53,7 +53,7 @@
         tx_ref: "RX1_{{substr(rand(0, time()), 0, 7)}}",
         amount: amount,
         currency: "USD",
-        country: "US",
+        country: "NG",
         payment_options: " ",
         customer: {
           email,
@@ -65,14 +65,13 @@
          var _token = $("input[name='_token']").val();
           $.ajax({
             type: "POST",
-            url: "{{URL::to('/users/user/verify-payment')}}",
-            data: [
+            url: "{{URL::to('users/user/verify-payment')}}",
+            data: {
               _token,
               transaction_id,
-            ],
-            dataType: "dataType",
+          },
             success: function (response) {
-              console.log(responce);
+              console.log(response);
             }
           });
         },
