@@ -8,7 +8,7 @@
             <span class="info-box-icon bg-info elevation-1"><i class="fa fa">&#8358;</i></span>
 
             <div class="info-box-content">
-                <span class="info-box-text">Account Balance</span>
+                <span class="info-box-text">Balance</span>
                 <span class="info-box-number">
                     {{ $user->balance }}
                 </span>

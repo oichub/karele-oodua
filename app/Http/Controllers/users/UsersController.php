@@ -27,7 +27,7 @@ class UsersController extends Controller
 //       }
     public function index()
     {
-        //
+       
         $user  = User::where('id', Auth::user()->id)->firstOrFail();
         $videos  = Video::where('date', '>', now())->get();
         $upcoming = count($videos);

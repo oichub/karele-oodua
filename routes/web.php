@@ -14,13 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
- //  Paystack
-Route::post('/pay', 'Paystack\PaymentController@redirectToGateway')->name('pay');
-Route::get('/payment/callback', 'Paystack\PaymentController@handleGatewayCallback');
-
-
-
-
 // Route::get('/', function () {
 //     return view('pages.index');
 // })->name('home');
@@ -43,11 +36,13 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::get('/users/admin/change_password', 'admin\AdminController@gotochangepassword')->name('admins_change_password');
     Route::put('admin_change_password', 'users\UsersController@changepassword')->name('admin_change_password');
 });
+
 Route::group(['middleware' => ['auth', 'user', 'verified']], function () {
     //Route::get('/home', 'HomeController@index')->name('index');
     Route::get('/users/dashboard', 'users\UsersController@index')->name('usersdashboard');
+    Route::get('/users/user/makepayment', 'users\UserPaymentController@makepayment');
+    Route::post('/users/user/verify-payment', 'users\UserPaymentController@verifypayment');
     Route::resource('/users/user', 'users\UsersController');
-    Route::any('/users/user/make-payment', 'users\UserPaymentController@deposit')->name('user.deposit');
     Route::resource('/users/account', 'users\UsersAccount');
     Route::resource('/user/videos/video', 'users\UserVideoController');
     Route::resource('/users/usersubscribed', 'users\SubscribeController');
