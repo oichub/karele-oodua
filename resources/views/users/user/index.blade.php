@@ -1,8 +1,6 @@
 @extends('layouts.users.userlayout')
-@section('title', "USER DASHBOARD")
+@section('title', "User Dashboard")
 @section('content')
-
-
 <!-- Info boxes -->
 <div class="row">
     <div class="col-12 col-sm-6 col-md-3">
@@ -10,7 +8,7 @@
             <span class="info-box-icon bg-info elevation-1"><i class="fa fa">&#8358;</i></span>
 
             <div class="info-box-content">
-                <span class="info-box-text">Account Balance</span>
+                <span class="info-box-text">Balance</span>
                 <span class="info-box-number">
                     {{ $user->balance }}
                 </span>
@@ -34,7 +32,7 @@
     </div>
     <!-- /.col -->
 
-    <!-- fix for small devices only -->
+    <!----- fix for small devices only ----->
     <div class="clearfix hidden-md-up"></div>
 
     <div class="col-12 col-sm-6 col-md-3">

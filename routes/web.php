@@ -14,13 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
- //  Paystack
-Route::post('/pay', 'Paystack\PaymentController@redirectToGateway')->name('pay');
-Route::get('/payment/callback', 'Paystack\PaymentController@handleGatewayCallback');
-
-
-
-
 // Route::get('/', function () {
 //     return view('pages.index');
 // })->name('home');
@@ -32,6 +25,10 @@ Auth::routes(['verify' => true]);
 // admin middleware will go here
 Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::get('/users/admin/dashboard', 'admin\AdminController@index')->name('adminDashboard');
+    Route::get('users/admin/admin_management', 'admin\AdminController@adminmanagement')->name('adminsmanagement');
+    Route::post('users/admin/addadmin', 'admin\AdminController@addadmin')->name('add.admin');
+    Route::put('users/admin/updateadmin', 'admin\AdminController@updateadmin')->name('update.admin');
+    Route::delete('users/admin/deleteadmin', 'admin\AdminController@deleteadmin')->name('delete.admin');
     Route::resource('/users/admin/events', 'admin\AdminUpcomingEvent');
     Route::post('confirm_video_delete', 'admin\VideoController@confirmVideoDelete')->name('confirmVideoDelete');
     Route::resource('/admin/users', 'admin\UsersController');
@@ -43,6 +40,8 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
 Route::group(['middleware' => ['auth', 'user', 'verified']], function () {
     //Route::get('/home', 'HomeController@index')->name('index');
     Route::get('/users/dashboard', 'users\UsersController@index')->name('usersdashboard');
+    Route::get('/users/user/makepayment', 'users\UserPaymentController@makepayment');
+    Route::post('/users/user/verify-payment', 'users\UserPaymentController@verifypayment');
     Route::resource('/users/user', 'users\UsersController');
     Route::resource('/users/account', 'users\UsersAccount');
     Route::get('/user/videos/livevideo', 'users\UserVideoController@index')->name('user.livevideo');

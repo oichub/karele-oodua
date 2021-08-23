@@ -79,32 +79,35 @@
             </a>
 
           </li>
+<<<<<<< HEAD
 
           <!-- Account -->
+=======
+          <!-- Students -->
+>>>>>>> dfc4a8f51a4aaa9c28484ab376d3179eb963750c
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
-              <p>Account</p>
+              <p>Payment</p>
               <i class="right fas fa-angle-left"></i>
 
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('account.create') }}" class="nav-link">
+                <a href="{{ url('/users/user/makepayment') }}" class="nav-link">
                   <i class="fas fa-user-plus nav-icon"></i>
-                  <p>Deposit</p>
+                  <p>Make Payment</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('account.index') }}" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="fas fa-clock"></i>
-                  <p>Account History</p>
+                  <p>Payment History</p>
                 </a>
               </li>
-
-
             </ul>
           </li>
+<<<<<<< HEAD
           <!-- // Account -->
 
  <!-- Video -->
@@ -136,6 +139,9 @@
 
 
 
+=======
+          <!-- // Students -->
+>>>>>>> dfc4a8f51a4aaa9c28484ab376d3179eb963750c
         {{-- @endif --}}
 
 

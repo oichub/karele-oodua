@@ -4,6 +4,7 @@ namespace App\Http\Controllers\users;
 
 use App\User;
 use App\Video;
+use App\Account;
 use App\Subscriber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,7 +27,7 @@ class UsersController extends Controller
 //       }
     public function index()
     {
-        //
+       
         $user  = User::where('id', Auth::user()->id)->firstOrFail();
         $videos  = Video::where('date', '>', now())->get();
         $upcoming = count($videos);
@@ -54,7 +55,15 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $account = new Account();
+        $account->amount = $request->amount;
+        $account->ref = "karele".time();
+        $account->user_id = Auth::user()->id;
+        $user = User::where('id', Auth::user()->id)->firstOrFail();
+        $user->balance +=$request->amount;
+        $user->update();
+        $account->save();
+        return redirect()->route('usersdashboard')->with('success', 'You have deposit '. $request->amount. ' naira successfully');
     }
 
     /**
