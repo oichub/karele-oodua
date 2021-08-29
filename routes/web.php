@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth', 'user', 'verified']], function () {
     Route::post('/users/user/verify-payment', 'users\UserPaymentController@verifypayment');
     Route::resource('/users/user', 'users\UsersController');
     Route::resource('/users/account', 'users\UsersAccount');
-    Route::get('/user/videos/livevideo', 'users\UserVideoController@index')->name('user.livevideo');
+    Route::resource('/user/videos/previousvideos', 'users\UserVideoController');    
     Route::resource('/users/usersubscribed', 'users\SubscribeController');
     Route::get('/subscibed/video/{userid}/{videoid}/{subid}/{video}', 'users\SubscribeController@subscriber')->name('subscribed_videos');
     Route::get('/users/change_password', 'users\UsersController@gotochangepassword')->name('change_password');

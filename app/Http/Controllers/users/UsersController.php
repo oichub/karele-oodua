@@ -72,10 +72,8 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+ 
+
 public function gotochangepassword(){
     return view('users.user.change_password');
 }
