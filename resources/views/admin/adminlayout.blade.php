@@ -111,6 +111,14 @@
             </ul>
           </li>
           <!-- // Users -->
+          <!-------Plans----------->
+          <li class="nav-item">
+            <a href="{{ route('plan.add') }}" class="nav-link">
+              <i class="fas fa-users"></i>
+              <p> Subscription Plan</p>
+            </a>
+          </li>
+         <!--------//-- Plan-------------->
           <!--------- Upcoming events -------->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">

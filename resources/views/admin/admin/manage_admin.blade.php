@@ -288,9 +288,6 @@
   </div>
 </div>
        <!----------------//--Show Admin ---------------->
-
-      <!----------------Delete Admin---------------------------> 
-      
 <!---------------------Delete Admin Start Here ---------------->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-notidy" role="document">
