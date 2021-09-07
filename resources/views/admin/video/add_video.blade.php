@@ -26,19 +26,8 @@
             </div>
             @endif
 
-            <form class="form-horizontal"  action="{{ route('uploadvideo') }}" enctype="multipart/form-data" method="POST">
+            <form method="POST"  action="{{ route('uploadvideo') }}" enctype="multipart/form-data" >
                 {{ csrf_field() }}
-                <div class="form-group row">
-                  <label for="video" class="col-sm-2 col-form-label">Choose Video</label>
-                  <div class="col-sm-10">
-                    <input type="file"  name="video" value="{{ old('video') }}" class="form-control{{ $errors->has('video') ? ' is-invalid' : '' }} "  placeholder="Choose Video">
-                    @if ($errors->has('video'))
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $errors->first('video') }}</strong>
-                    </span>
-                    @endif
-                </div>
-                </div>
                 <div class="form-group row">
                   <label for="inputName" class="col-sm-2 col-form-label">Title</label>
                   <div class="col-sm-10">
@@ -58,6 +47,17 @@
                        @if ($errors->has('description'))
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $errors->first('description') }}</strong>
+                    </span>
+                    @endif
+                </div>
+                </div>
+                <div class="form-group row">
+                  <label for="video" class="col-sm-2 col-form-label">Choose Video</label>
+                  <div class="col-sm-10">
+                    <input type="file"  name="video">
+                    @if ($errors->has('video'))
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $errors->first('video') }}</strong>
                     </span>
                     @endif
                 </div>

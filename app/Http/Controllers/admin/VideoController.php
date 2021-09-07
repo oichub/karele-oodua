@@ -6,7 +6,6 @@ use App\File;
 use App\Video;
 use Illuminate\Http\Request;
 use Vimeo\Laravel\VimeoManager;
-use App\Http\Requests\VideoRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,22 +54,23 @@ class VideoController extends Controller
      */
     public function store(Request $request, VimeoManager $vimeo)
     {
-        /*$this->validate(
+    
+        $this->validate(
             $request, 
         [
             'title' => 'required|string',
             'description' => 'required|string',
-           //'video' => 'required|video',
+           'video' => 'required|video',
         ],
         
         [
             'title.required' => 'Please provide video title',
             'description.required' => 'Please provide the video\'s description',
             'video.required' => 'Please upload a  video',
-            //'video.mimes' => 'Must be a video format(mp4, mkv, 3gp)',
-        ]);*/
+            'video.mimes' => 'Must be a video format(mp4, mkv, 3gp)',
+        ]);
 
-        return $request->video;
+       
         
     $url= $vimeo->upload($request->video,
       [
