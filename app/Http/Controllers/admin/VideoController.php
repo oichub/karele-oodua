@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\File;
 use App\Video;
 use Illuminate\Http\Request;
+use Vimeo\Laravel\VimeoManager;
 use App\Http\Requests\VideoRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,17 @@ class VideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function livevideo(){
+
+        return "Working";
+         
+     }
+     public function uploadvideo(){
+
+        return view('admin.video.add_video');
+         
+     }
+
     public function index()
     {
         //
@@ -34,40 +46,41 @@ class VideoController extends Controller
         $video = Video::with(['file'])->where('id', $id)->firstOrFail();
         return view('modal.confirm_video_delete', compact(['video']));
     }
-    public function create()
-    {
-        //
-        return view('admin.video.add_video');
-    }
-
+ 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(VideoRequest $request)
+    public function store(Request $request, VimeoManager $vimeo)
     {
-        //
-        $video = new Video();
-        $videotitle = $request->title;
-        $videodate = $request->date;
-        $videofile = $request->file('video');
-        $file = new File();
-        $ext = $videofile->getClientOriginalExtension();
-        $filename = strtolower(str_replace(" ", "_",$videotitle)."_". time()).".".$ext;
-        $videofile->move('videos/', $filename);
-        $file->video = $filename;
-        $file->save();
-        $video->title = $videotitle;
-        $video->file_id = $file->id;
-        $video->date = $videodate;
-        $video->price = $request->price;
-        $video->slug = strtolower(str_replace(" ", "-",$videotitle)."-". time());
-        $video->user_id = Auth::user()->id;
-        $video->save();
-        return redirect()->route('videos.index')->with('success', 'New video added successfully');
-    }
+        /*$this->validate(
+            $request, 
+        [
+            'title' => 'required|string',
+            'description' => 'required|string',
+           //'video' => 'required|video',
+        ],
+        
+        [
+            'title.required' => 'Please provide video title',
+            'description.required' => 'Please provide the video\'s description',
+            'video.required' => 'Please upload a  video',
+            //'video.mimes' => 'Must be a video format(mp4, mkv, 3gp)',
+        ]);*/
+
+        return $request->video;
+        
+    $url= $vimeo->upload($request->video,
+      [
+          'name'=> $request->title,
+          'description' => $request->description
+      ]
+      );
+return $url;
+
+            }
 
     /**
      * Display the specified resource.

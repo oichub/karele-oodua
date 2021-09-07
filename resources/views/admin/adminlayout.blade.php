@@ -156,26 +156,26 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('videos.create') }}" class="nav-link">
-                   <i class="fas fa-upload"></i>
+                <a href="{{route('adminvideo.upload')}}" class="nav-link"> 
+                   <i class="fas fa-upload"></i> 
                   <p>Upload Video</p>
 
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('videos.index') }}" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="fas fa-video"></i>
                   <p>My Video</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('videos.index') }}" class="nav-link">
+                <a href="#" class="nav-link"> 
                   <i class="fas fa-video"></i>
                   <p>Manage Video</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('adminvideo.live') }}" class="nav-link">
                   <i class="fas fa-wifi"></i>
                   <p>Go live</p>
                 </a>
