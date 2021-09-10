@@ -1,34 +1,44 @@
 @extends('layouts.users.userlayout')
 @section('title', ' Make Payment')
 @section('content')
-<div class="container">
-    <div class="w-50 ml-auto mr-auto">
+<div class="container row" style="padding-top: 100px;">
+
+  <div class="col-md-4 offset-md-4">
+    <h4 style="text-align: center; padding-bottom:10px;">Fund your Karele Account</h4>
+    <div class="card">
+      <div class="card-body">
+        <p class="card-box-msg">Enter amount to fund your Account</p>
         <form id="paymentform">
-            @csrf
-            <div class="row" style="margin-bottom:40px;">
-                <div class="col-md-8 col-md-offset-2">
-                    <p>
-                        <div>
-                            Karele Oodua Yearly Subscription <br>
-                            ₦ 2,950
-                            
-                        </div>
-                    </p>
-                    <input type="hidden" id="email" value="{{$user->email}}">
-                    <input type="hidden" id="amount" value="10"> 
-                    <input type="hidden" id="phone" value="{{$user->phone}}">
-                    <input type="hidden" id="userid" value="{{$user->slug}}">
-                     <p>
-                        <button class="btn btn-success btn-lg btn-block" type="submit" value="Pay Now!">
-                            <i class="fa fa-plus-circle fa-lg"></i> Pay Now!
-                        </button>
-                    </form>
-                    </p>
-                </div>
+          @csrf
+          <div class="input-group mb-3">
+            <input type="number" id="amount" name="amount" class="form-control" placeholder="Amount" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span>$</span>
+              </div>
             </div>
-       
-        
-                </div>
+          </div>
+          <div class="input-group mb-3">
+            <select name="paymentType" id="paymentType" class="custom-select" required>
+              <option value="" selected disabled>Select payment method</option>
+              <option value="paystack">PayStack</option>
+              <option value="flutterwave">FlutterWave</option>
+            </select>
+          </div>
+          <input type="hidden" id="email" value="{{$user->email}}">
+          <!-- <input type="hidden" id="amount" value="10">  -->
+          <input type="hidden" id="phone" value="{{$user->phone}}">
+          <input type="hidden" id="userid" value="{{$user->slug}}">        
+            <div class="col-12">
+              <button class="btn btn-success btn-lg btn-block" type="submit" value="Pay Now!">
+                <i class="fa fa-plus-circle fa-lg"></i> Pay Now!
+              </button>
+            </div>
+            <!-- /.col -->        
+        </form>      
+      </div> 
+    </div>   
+  </div>   
 </div>
 @endsection
 @section('script')
