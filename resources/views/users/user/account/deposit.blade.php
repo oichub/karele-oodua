@@ -25,8 +25,7 @@
               <option value="flutterwave">FlutterWave</option>
             </select>
           </div>
-          <input type="hidden" id="email" value="{{$user->email}}">
-          <!-- <input type="hidden" id="amount" value="10">  -->
+          <input type="hidden" id="email" value="{{$user->email}}">          
           <input type="hidden" id="phone" value="{{$user->phone}}">
           <input type="hidden" id="userid" value="{{$user->slug}}">        
             <div class="col-12">
