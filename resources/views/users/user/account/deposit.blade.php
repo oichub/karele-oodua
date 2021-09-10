@@ -21,7 +21,7 @@
           <div class="input-group mb-3">
             <select name="paymentType" id="paymentType" class="custom-select" required>
               <option value="" selected disabled>Select payment method</option>
-              <option value="paystack">PayStack</option>
+              <option value="paystack">PayPal</option>
               <option value="flutterwave">FlutterWave</option>
             </select>
           </div>
