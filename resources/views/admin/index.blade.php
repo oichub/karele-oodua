@@ -31,9 +31,7 @@
         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
-    <!-- ./col -->
     <div class="col-lg-3 col-6">
-      <!-- small box -->
       <div class="small-box bg-warning ">
         <div class="inner text-white">
           <h3>{{ $totalvideo }}</h3>
@@ -46,9 +44,7 @@
         <a href="#" class="small-box-footer text-white">More info <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
-    <!-- ./col -->
     <div class="col-lg-3 col-6">
-      <!-- small box -->
       <div class="small-box bg-danger">
         <div class="inner">
           <h3><i class="fa fa">&#8358;</i>{{ $totalrevenue }}</h3>
@@ -61,19 +57,25 @@
         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
-    <!-- ./col -->
   </div>
-  <!-- /.row -->
 
 
-  {{-- country and subscribers --}}
   <div class="row">
     <!-- Left col -->
     <section class="col-lg-7 connectedSortable">
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">
-            RECENT SITE VIEW COUNT
+            @php
+             if (strtotime(date("Y/m/d h.i A")) >=  strtotime($livevideo->date . " ".$livevideo->time))
+             {
+                echo "Live Video";
+             } 
+             else{
+                   echo "Upcoming Event";
+             }
+            @endphp
+           
           </h3>
           <div class="card-tools">
 
@@ -81,39 +83,18 @@
               <i class="fas fa-minus"></i>
             </i>
           </div>
-        </div><!-- /.card-header -->
-
+        </div>
 
         <div class="card-body">
-            <div class="d-flex">
-              <p class="d-flex flex-column">
-                <span class="text-bold text-lg">820</span>
-                <span>Visitors Over Time</span>
-              </p>
-              <p class="ml-auto d-flex flex-column text-right">
-                <span class="text-success">
-                  <i class="fas fa-arrow-up"></i> 12.5%
-                </span>
-                <span class="text-muted">Since last week</span>
-              </p>
-            </div>
-            <!-- /.d-flex -->
-
-            <div class="position-relative mb-4">
-              <canvas id="visitors-chart" height="200"></canvas>
-            </div>
-
-            <div class="d-flex flex-row justify-content-end">
-              <span class="mr-2">
-                <i class="fas fa-square text-primary"></i> This Week
-              </span>
-
-              <span>
-                <i class="fas fa-square text-gray"></i> Last Week
-              </span>
-            </div>
+             <!--------Live Video------------->
+           {!! $livevideo->embeded!!}
+           {!! $livevideo->chat!!}
+             <!--------Live Video------------->
           </div>
+
+
       </div>
+
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">LATEST USERS</h3>
@@ -180,73 +161,6 @@
     </section>
 
     <section class="col-lg-5 connectedSortable">
-
-        <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Browser Usage</h3>
-
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-8">
-                  <div class="chart-responsive">
-                    <canvas id="pieChart" height="150"></canvas>
-                  </div>
-                  <!-- ./chart-responsive -->
-                </div>
-                <!-- /.col -->
-                <div class="col-md-4">
-                  <ul class="chart-legend clearfix">
-                    <li><i class="far fa-circle text-danger"></i> Chrome</li>
-                    <li><i class="far fa-circle text-success"></i> IE</li>
-                    <li><i class="far fa-circle text-warning"></i> FireFox</li>
-                    <li><i class="far fa-circle text-info"></i> Safari</li>
-                    <li><i class="far fa-circle text-primary"></i> Opera</li>
-                    <li><i class="far fa-circle text-secondary"></i> Navigator</li>
-                  </ul>
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.card-body -->
-            <div class="card-footer bg-white p-0">
-              <ul class="nav nav-pills flex-column">
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    United States of America
-                    <span class="float-right text-danger">
-                      <i class="fas fa-arrow-down text-sm"></i>
-                      12%</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    India
-                    <span class="float-right text-success">
-                      <i class="fas fa-arrow-up text-sm"></i> 4%
-                    </span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    China
-                    <span class="float-right text-warning">
-                      <i class="fas fa-arrow-left text-sm"></i> 0%
-                    </span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <!-- /.footer -->
-          </div>
       <div class="card">
         <div class="card-header border-0">
           <div class="d-flex justify-content-between">

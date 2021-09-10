@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\admin;
 
 use App\Event;
-use App\DemoFile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Intervention\Image\Facades\Image;
 
 class AdminUpcomingEvent extends Controller
 {
@@ -43,21 +41,19 @@ class AdminUpcomingEvent extends Controller
             $request, 
             [
                 'name' => 'required | string',
-                'description' => 'required | string',
-                'price' => 'required',
+                'embeded' => 'required',
+                'chat' => 'required',
                 'date' => 'required |date',
                 'time' => 'required',
-                'file' => 'required|file|mimes:jpeg,png'
+                
             ],
             [
-                'name.required' => 'Event\'s name is required',
-                'name.string' => 'Inavlid name',
-                'description.required' => "Event Short description is required",
-                'price.required' => 'Event\'s price is required',
+                'name.required' => 'Event\'s title is required',
+                'name.string' => 'Inavlid title',
+                'embeded.required' => "Embeded code is required",
+                'chat.required' => 'Chat code is required',
                 'date.date' => 'Date is required',
                 'time.required' => 'Time is required',
-                'file.file' => 'It must be a valid file', 
-                'file.mime' => 'Only PNG and Jpeg image format are allowed',
             ]
         );
         function createRandomPassword() {
@@ -79,28 +75,14 @@ class AdminUpcomingEvent extends Controller
             return $pass;
         }
 // end of random code
-$input= $request->all();
-if($file = $request->file('file'))
-{
-    $img = Image::make($request->file('file'))->resize(640, 426)->insert('images/logo/watermark.png','top-right', 50, 10);
-    $extension = $file->getClientOriginalExtension();
-    $files_name= str_replace(" ", "-", time(). "karele".$request->name.".".$extension);
-    $img->save('images/events/'.$files_name);
-    $photo= DemoFile::create(['name' => $files_name]);
-   $file_id= $photo->id;
-}
-else{
-    $file_id=null;
-}
 $slu=$request->name."-".createRandomPassword();
 $slug= strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $slu), '-'));
 $post = new Event;
 $post->name = $request->name; 
-$post->price = $request->price;
+$post->chat = $request->chat;
 $post->date = $request->date;
-$post->description = $request->description;
+$post->embeded = $request->embeded;
 $post->time = $request->time;
-$post->demo_file_id = $file_id;
 $post->slug = $slug;
 $post->user_id =Auth::user()->id;
 $post->save();

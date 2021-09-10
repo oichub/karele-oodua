@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\User;
 use App\Admin;
+use App\Event;
 use App\Video;
 use App\Subscriber;
 use Illuminate\Http\Request;
@@ -25,8 +26,8 @@ class AdminController extends Controller
         $totalsub = count(Subscriber::pluck('user_id')->unique());
         $totalvideo = count(Video::get());
         $totalrevenue = Subscriber::sum('amount');
-        // return $totalsub;
-        return view('admin.index', compact(['totaluser', 'totalsub', 'totalvideo', 'totalrevenue']));
+        $livevideo= Event::first();
+        return view('admin.index', compact(['totaluser', 'totalsub', 'totalvideo', 'totalrevenue', 'livevideo']));
     }
     public function gotochangepassword(){
         return view('admin.change_password');

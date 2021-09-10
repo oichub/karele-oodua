@@ -60,7 +60,7 @@ class VideoController extends Controller
         [
             'title' => 'required|string',
             'description' => 'required|string',
-           'video' => 'required|video',
+            'video' => 'required|file|mimes:mp4,mkv,3gp',
         ],
         
         [
@@ -69,18 +69,15 @@ class VideoController extends Controller
             'video.required' => 'Please upload a  video',
             'video.mimes' => 'Must be a video format(mp4, mkv, 3gp)',
         ]);
-
-       
-        
     $url= $vimeo->upload($request->video,
       [
           'name'=> $request->title,
           'description' => $request->description
       ]
       );
-return $url;
+    dd($url);
 
-            }
+}
 
     /**
      * Display the specified resource.

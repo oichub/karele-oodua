@@ -27,48 +27,42 @@
 
             <form class="form-horizontal"  action="{{ route('events.store') }}" enctype="multipart/form-data" method="POST">
                 {{ csrf_field() }}
-                <div class="form-group row">
-                  <label for="inputName" class="col-sm-2 col-form-label">Event's Name </label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} " id="inputName" name="name" value="{{ old('name') }}" placeholder="Event's name">
-                    @if ($errors->has('name'))
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $errors->first('name') }}</strong>
-                    </span>
-                    @endif
-                </div>
-                </div>
-                <div class="form-group row">
-                    <label for="inputName" class="col-sm-2 col-form-label">Price</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control{{ $errors->has('price') ? ' is-invalid' : '' }} " id="inputName" name="price" value="{{ old('price') }}"  placeholder="Price(Don't include #/$ symbol and comma ,)">
-                      @if ($errors->has('price'))
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('price') }}</strong>
-                      </span>
-                      @endif
-                  </div>
-
-                  </div>
-   <!-----------Brief description---------------->
+    <!-----------Embeded Code---------------->
    <div class="form-group row">
-    <label for="inputName" class="col-sm-2 col-form-label">Short Descriptions</label>
+    <label for="inputName" class="col-sm-2 col-form-label">Embeded Code</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }} " id="inputName" name="description" value="{{ old('description') }}"  placeholder="Short Descriptions" maxlength="100">
-      @if ($errors->has('description'))
+      <textarea row="5" name="embeded" class="form-control{{ $errors->has('embeded') ? ' is-invalid' : '' }}"></textarea>
+       @if ($errors->has('embeded'))
       <span class="invalid-feedback" role="alert">
-        <strong>{{ $errors->first('description') }}</strong>
+        <strong>{{ $errors->first('embeded') }}</strong>
       </span>
       @endif
   </div>
-
   </div>
+  <div class="form-group row">
+    <label for="inputName" class="col-sm-2 col-form-label">Embeded Chat</label>
+    <div class="col-sm-10">
+      <textarea row="5" name="chat" class="form-control{{ $errors->has('chat') ? ' is-invalid' : '' }}"></textarea>
+       @if ($errors->has('chat'))
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $errors->first('chat') }}</strong>
+      </span>
+      @endif
+  </div>
+  </div>
+        <div class="form-group row">
+            <label for="inputName" class="col-sm-2 col-form-label">Event's Title </label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} " id="inputName" name="name" value="{{ old('name') }}" placeholder="Event's name">
+              @if ($errors->has('name'))
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ $errors->first('name') }}</strong>
+              </span>
+              @endif
+          </div>
+          </div>
 
-
-
-
-   <!------------------------------------------>
-                
+   <!----------------------Date-------------------->
                   <div class="form-group row">
                   <label for="inputEmail" class="col-sm-2 col-form-label">Date</label>
                   <div class="col-sm-10">
@@ -92,17 +86,6 @@
                       @if ($errors->has('time'))
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $errors->first('time') }}</strong>
-                    </span>
-                    @endif
-                </div>
-                </div>
-                <div class="form-group row">
-                  <label for="inputName2" class="col-sm-2 col-form-label">Choose attached image</label>
-                  <div class="col-sm-10">
-                    <input type="file"  name="file" value="{{ old('file') }}" class="form-control{{ $errors->has('file') ? ' is-invalid' : '' }} " id="file" placeholder="Choose File(Optional)">
-                    @if ($errors->has('file'))
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $errors->first('file') }}</strong>
                     </span>
                     @endif
                 </div>
