@@ -1,28 +1,24 @@
 @extends('admin.adminlayout')
 @section('title', "Admin Dashboard")
 @section('content')
- <!-- Small boxes (Stat box) -->
  <div class="row">
     <div class="col-lg-3 col-6">
-      <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
           <h3>{{ $totaluser }}</h3>
           <p>Users</p>
         </div>
+
         <div class="icon">
           <i class="fa fa-user"></i>
         </div>
         <a href="{{ route('users.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
-    <!-- ./col -->
     <div class="col-lg-3 col-6">
-      <!-- small box -->
       <div class="small-box bg-success">
         <div class="inner">
           <h3>{{ $totalsub }}</h3>
-
           <p>Subscribers</p>
         </div>
         <div class="icon">
@@ -35,8 +31,7 @@
       <div class="small-box bg-warning ">
         <div class="inner text-white">
           <h3>{{ $totalvideo }}</h3>
-
-          <p>Live Videos</p>
+          <p>Today's Subscriber</p>
         </div>
         <div class="icon">
           <i class="fa fa-video"></i>
@@ -59,10 +54,10 @@
     </div>
   </div>
 
-
+  <!----------// Live Video ----------------->
   <div class="row">
-    <!-- Left col -->
-    <section class="col-lg-7 connectedSortable">
+  
+    <section class=" col-lg-12 connectedSortable">
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">
@@ -88,79 +83,17 @@
         <div class="card-body">
              <!--------Live Video------------->
            {!! $livevideo->embeded!!}
-           {!! $livevideo->chat!!}
+           {{-- {!! $livevideo->chat!!} --}}
              <!--------Live Video------------->
           </div>
 
 
       </div>
-
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">LATEST USERS</h3>
-
-          <div class="card-tools">
-
-            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-            </button>
-
-          </div>
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body p-0">
-          <ul class="users-list clearfix">
-            <li>
-              <img src="{{ url('plugins/dist/img/user1-128x128.jpg') }}" alt="User Image">
-              <a class="users-list-name" href="#">Alexander Pierce</a>
-              <span class="users-list-date">Today</span>
-            </li>
-            <li>
-              <img src="{{ url('plugins/dist/img/user8-128x128.jpg') }}" alt="User Image">
-              <a class="users-list-name" href="#">Norman</a>
-              <span class="users-list-date">Yesterday</span>
-            </li>
-            <li>
-              <img src="{{ url('plugins/dist/img/user7-128x128.jpg') }}" alt="User Image">
-              <a class="users-list-name" href="#">Jane</a>
-              <span class="users-list-date">12 Jan</span>
-            </li>
-            <li>
-              <img src="{{ url('plugins/dist/img/user6-128x128.jpg') }}" alt="User Image">
-              <a class="users-list-name" href="#">John</a>
-              <span class="users-list-date">12 Jan</span>
-            </li>
-            <li>
-              <img src="{{ url('plugins/dist/img/user2-160x160.jpg') }}" alt="User Image">
-              <a class="users-list-name" href="#">Alexander</a>
-              <span class="users-list-date">13 Jan</span>
-            </li>
-            <li>
-              <img src="{{ url('plugins/dist/img/user5-128x128.jpg') }}" alt="User Image">
-              <a class="users-list-name" href="#">Sarah</a>
-              <span class="users-list-date">14 Jan</span>
-            </li>
-            <li>
-              <img src="{{ url('plugins/dist/img/user4-128x128.jpg') }}" alt="User Image">
-              <a class="users-list-name" href="#">Nora</a>
-              <span class="users-list-date">15 Jan</span>
-            </li>
-            <li>
-              <img src="{{ url('plugins/dist/img/user3-128x128.jpg') }}" alt="User Image">
-              <a class="users-list-name" href="#">Nadia</a>
-              <span class="users-list-date">15 Jan</span>
-            </li>
-          </ul>
-          <!-- /.users-list -->
-        </div>
-        <!-- /.card-body -->
-        <div class="card-footer text-center">
-          <a href="javascript::">View All Users</a>
-        </div>
-        <!-- /.card-footer -->
-      </div>
     </section>
-
-    <section class="col-lg-5 connectedSortable">
+     </div>
+     
+     <div class="row">
+    <section class="col-lg-7 connectedSortable">
       <div class="card">
         <div class="card-header border-0">
           <div class="d-flex justify-content-between">
@@ -198,6 +131,8 @@
           </div>
         </div>
       </div>
+    </section>
+    <div class="col-lg-5 connectedSortable">
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">RECENT VIDEO</h3>
@@ -271,12 +206,10 @@
         </div>
         <!-- /.card-footer -->
       </div>
-      <!-- Map card -->
-
-      <!-- /.card-tools -->
+    </div>
 
   </div>
-
+   <!--- Live video------>
      <?php
 
 $startdate =  strtotime("-6 day");
