@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\users;
 
 use App\User;
+use App\Account;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -14,8 +15,10 @@ class UserPaymentController extends Controller
         $user =User::where('email', Auth::user()->email)->firstOrFail();
         return view('users.user.account.deposit', compact(['user']));
     }
-        public function verifypayment(Request $request){
+    public function verifypayment(Request $request){        
+        
         $curl = curl_init();
+
         curl_setopt_array($curl, array(
         CURLOPT_URL => "https://api.flutterwave.com/v3/transactions/{$request->transaction_id}/verify",
         CURLOPT_RETURNTRANSFER => true,
@@ -30,12 +33,19 @@ class UserPaymentController extends Controller
         "Authorization: Bearer FLWSECK_TEST-924a32c2ea4c89e9a6bd4d54eaaa0376-X"
         ),
         ));
-        $response = curl_exec($curl);
-        curl_close($curl);
 
-        print_r($response);
-        // $res = json_decode($response);
-        // echo $res->status;
+        $response = curl_exec($curl);
+
+        curl_close($curl);        
+        $res = json_decode($response);
+        // return $res->data->tx_ref;
+       return Account::create([
+            'user_id' => Auth::user()->id,
+            'ref' =>  $res->data->tx_ref,            
+            'status' => $res->status,
+            'payment_method' => 'flutterwave',
+            'amount' => $res->data->amount,
+        ]);
        
         }
 }
