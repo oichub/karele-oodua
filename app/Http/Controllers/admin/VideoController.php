@@ -1,11 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-
-use App\File;
 use App\Video;
 use Illuminate\Http\Request;
-use Vimeo\Laravel\VimeoManager;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,7 +27,7 @@ class VideoController extends Controller
     public function index()
     {
         //
-        $videos = Video::with(['file', 'user'])->orderBy('id', 'desc')->get();
+        $videos = Video::with(['user'])->orderBy('id', 'desc')->get();
         // return $video;
         return view('admin.video.manage_video', compact(['videos']) );
     }
@@ -41,6 +38,7 @@ class VideoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function confirmVideoDelete(Request $request){
+       
         $id = $request->delete;
         $video = Video::with(['file'])->where('id', $id)->firstOrFail();
         return view('modal.confirm_video_delete', compact(['video']));
@@ -52,31 +50,26 @@ class VideoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, VimeoManager $vimeo)
+    public function store(Request $request)
     {
-    
         $this->validate(
             $request, 
         [
-            'title' => 'required|string',
-            'description' => 'required|string',
-            'video' => 'required|file|mimes:mp4,mkv,3gp',
+            'name' => 'required|string|unique:videos,title',
+            'embeded' => 'required',
         ],
         
         [
-            'title.required' => 'Please provide video title',
-            'description.required' => 'Please provide the video\'s description',
-            'video.required' => 'Please upload a  video',
-            'video.mimes' => 'Must be a video format(mp4, mkv, 3gp)',
+            'name.required' => 'Please provide video title',
+            'embeded.required' => 'Embeded code is required'
         ]);
-    $url= $vimeo->upload($request->video,
-      [
-          'name'=> $request->title,
-          'description' => $request->description
-      ]
-      );
-    dd($url);
-
+     $video = new Video;
+     $video->title = $request->name;
+     $video->embeded = $request->embeded;
+     $video->user_id = Auth::user()->id;
+     $video->slug = str_replace(" ", "-", strtolower($request->name)."-".time());
+     $video->save();
+     return redirect()->back()->with('success','Video has been successfully uploaded');
 }
 
     /**

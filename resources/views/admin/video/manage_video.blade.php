@@ -10,8 +10,6 @@
     </div>
     @endif
     @if (count($videos) > 0)
-
-
     <div class="row">
 @foreach ($videos as $video)
 
@@ -19,11 +17,7 @@
 <div class="col-md-4">
     <div class="card card-dark card-outline">
         <div class="card-body">
-            <video controls width="100%">
-                <source src="{{ url($video->file->video) }}" type="video/mp4">
-                {{--  <source src="{{ asset('videos/oicvideo.mp4') }}" type="video/mp4">  --}}
-                Your browser does not support HTML5 video.
-              </video>
+           {!! $video->embeded !!}
 
         </div>
         <h3 class="card-title">{{ $video->title }}</h3>
@@ -34,7 +28,7 @@
             <div class="row">
                   <div class="col">
                 <button type="button" class="btn btn-info">
-                    Subscriber <span class="badge badge-danger">{{ $video->totalsubscriber }}</span>
+                    Subscriber <span class="badge badge-danger">34</span>
                   </button>
                 </div>
                   <div class="col">
@@ -47,7 +41,7 @@
             <div class="row">
 
                 <div class="col">
-                    <a href="{{ url($video->file->video) }}" target="_blank" class="btn btn-sm btn-primary btn-block">Watch</a>
+                    <a href="#" target="_blank" class="btn btn-sm btn-primary btn-block">Watch</a>
                 </div>
                 <div class="col">
                     <a href="#delete" data-toggle="modal" delete="{{ $video->id }}" class="btn btn-sm btn-danger btn-block">Delete</a>

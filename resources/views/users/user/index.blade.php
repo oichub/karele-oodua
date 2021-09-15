@@ -1,5 +1,5 @@
 @extends('layouts.users.userlayout')
-@section('title', "USER DASHBOARD")
+@section('title', "User Dashboard")
 @section('content')
 
 

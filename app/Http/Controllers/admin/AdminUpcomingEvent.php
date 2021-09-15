@@ -16,7 +16,8 @@ class AdminUpcomingEvent extends Controller
      */
     public function index()
     {
-        return view('admin.events.index');
+        $events = Event::orderBy('id', 'desc')->get();
+        return view('admin.events.index', compact(['events']));
     }
 
     /**
@@ -42,7 +43,6 @@ class AdminUpcomingEvent extends Controller
             [
                 'name' => 'required | string',
                 'embeded' => 'required',
-                'chat' => 'required',
                 'date' => 'required |date',
                 'time' => 'required',
                 
@@ -51,7 +51,6 @@ class AdminUpcomingEvent extends Controller
                 'name.required' => 'Event\'s title is required',
                 'name.string' => 'Inavlid title',
                 'embeded.required' => "Embeded code is required",
-                'chat.required' => 'Chat code is required',
                 'date.date' => 'Date is required',
                 'time.required' => 'Time is required',
             ]
@@ -88,49 +87,19 @@ $post->user_id =Auth::user()->id;
 $post->save();
 return redirect()->back()->with('success', 'Upcoming event has been added successfully');
  }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function update(Request $request)
     {
-        //
+          Event::where('slug', $request->slug)
+          ->update(['name'=> $request->name, 
+          'embeded'=>$request->embeded, 'chat'=>$request->chat,
+           'date'=> $request->date, 'time'=>$request->time ]);
+           return redirect()->back()->with('success', "Event has been updated succefully");
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function destroy(Request $request)
     {
-        //
-    }
+        Event::where('id', $request->id)->delete();
+        return redirect()->back()->with('success', "Event has been updated succefully");
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

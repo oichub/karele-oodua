@@ -159,36 +159,20 @@
                 <a href="{{route('adminvideo.upload')}}" class="nav-link"> 
                    <i class="fas fa-upload"></i> 
                   <p>Upload Video</p>
-
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-video"></i>
-                  <p>My Video</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link"> 
+                <a href="{{route('adminvideo.index')}}" class="nav-link"> 
                   <i class="fas fa-video"></i>
                   <p>Manage Video</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="{{ route('adminvideo.live') }}" class="nav-link">
-                  <i class="fas fa-wifi"></i>
-                  <p>Go live</p>
-                </a>
-              </li>
-             
-
-
             </ul>
           </li>
           <!-- // video -->
 
 
-             <!-- Agents -->
+             <!-- Admin -->
              <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>

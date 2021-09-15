@@ -1,4 +1,5 @@
 <?php
+namespace App;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -40,13 +41,20 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::any('users/admin/store-plans', 'admin\PlanController@store')->name('adminplan.store');
     Route::put('users/admin/update-plans', 'admin\PlanController@update')->name('adminplan.update');
     Route::delete('users/admin/delete-plans', 'admin\PlanController@delete')->name('adminplan.delete');
+    Route::post('/users/admin/events', 'admin\AdminUpcomingEvent@store')->name('events.store');
+    Route::get('/users/admin/create-event', 'admin\AdminUpcomingEvent@create')->name('events.create');
+    Route::get('/users/admin/events', 'admin\AdminUpcomingEvent@index')->name('events.index');
+    Route::put('/users/admin/events-update', 'admin\AdminUpcomingEvent@update')->name('events.update');
+    Route::delete('/users/admin/events-delete', 'admin\AdminUpcomingEvent@destroy')->name('events.delete');
     Route::resource('/users/admin/events', 'admin\AdminUpcomingEvent');
     Route::post('confirm_video_delete', 'admin\VideoController@confirmVideoDelete')->name('confirmVideoDelete');
     Route::resource('/admin/users', 'admin\UsersController');
       Route::get('/admin/videos/upload', 'admin\VideoController@uploadvideo')->name('adminvideo.upload');
       Route::post('/admin/videos/save', 'admin\VideoController@store')->name('uploadvideo');
-    Route::get('/admin/live-video', 'admin\VideoController@livevideo')->name('adminvideo.live');
-    Route::get('/users/admin/change_password', 'admin\AdminController@gotochangepassword')->name('admins_change_password');
+      Route::get('/admin/videos', 'admin\VideoController@index')->name('adminvideo.index');
+      Route::put('/admin/videos-update{id}', 'admin\VideoController@update')->name('adminvideo.update');
+      Route::get('/admin/live-video', 'admin\VideoController@livevideo')->name('adminvideo.live');
+      Route::get('/users/admin/change_password', 'admin\AdminController@gotochangepassword')->name('admins_change_password');
     Route::put('admin_change_password', 'users\UsersController@changepassword')->name('admin_change_password');
 });
 Route::group(['middleware' => ['auth', 'user', 'verified']], function () {

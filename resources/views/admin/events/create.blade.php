@@ -1,7 +1,7 @@
 @extends('admin.adminlayout')
 @section('title', "Add  New Event")
 @section('content')
-<h3 class="font-weight-bold text-uppercase text-center py-3">Add New Upcoming Event</h3>
+<h3 class="font-weight-bold text-center py-3">Add New Upcoming Event</h3>
 <div class="container">
     <div class="row">
         <div class="col-md-2"></div>
@@ -27,7 +27,7 @@
 
             <form class="form-horizontal"  action="{{ route('events.store') }}" enctype="multipart/form-data" method="POST">
                 {{ csrf_field() }}
-    <!-----------Embeded Code---------------->
+    <!-----------Embeded Code ---------------->
    <div class="form-group row">
     <label for="inputName" class="col-sm-2 col-form-label">Embeded Code</label>
     <div class="col-sm-10">

@@ -1,7 +1,7 @@
 @extends('admin.adminlayout')
 @section('title', "Add Video")
 @section('content')
-<h3 class="font-weight-bold text-uppercase text-center py-3">add new videos</h3>
+<h3 class="font-weight-bold text-center py-3">Add New  Video</h3>
 <div class="container">
     <div class="row">
         <div class="col-md-2"></div>
@@ -26,45 +26,35 @@
             </div>
             @endif
 
-            <form method="POST"  action="{{ route('uploadvideo') }}" enctype="multipart/form-data" >
+            <form method="POST"  action="{{ route('uploadvideo') }}">
                 {{ csrf_field() }}
-                <div class="form-group row">
-                  <label for="inputName" class="col-sm-2 col-form-label">Title</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }} " id="inputName" name="title" value="{{ old('title') }}" placeholder="Full name">
-                    @if ($errors->has('title'))
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $errors->first('title') }}</strong>
-                    </span>
-                    @endif
-                </div>
-              </div>
-                <div class="form-group row">
-                  <label for="description" class="col-sm-2 col-form-label">Video Decription</label>
-                  <div class="col-sm-10">
-                    <textarea name="description" col="3" class="form-control{{$errors->has('description') ? ' is-invalid' : ''}}"></textarea>
-                    </span>
-                       @if ($errors->has('description'))
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $errors->first('description') }}</strong>
-                    </span>
-                    @endif
-                </div>
-                </div>
-                <div class="form-group row">
-                  <label for="video" class="col-sm-2 col-form-label">Choose Video</label>
-                  <div class="col-sm-10">
-                    <input type="file"  name="video">
-                    @if ($errors->has('video'))
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $errors->first('video') }}</strong>
-                    </span>
-                    @endif
-                </div>
-                </div>
+               <!-----------Embeded Code---------------->
+   <div class="form-group row">
+    <label for="inputName" class="col-sm-2 col-form-label">Embeded Code</label>
+    <div class="col-sm-10">
+      <textarea row="5" name="embeded" class="form-control{{ $errors->has('embeded') ? ' is-invalid' : '' }}"></textarea>
+       @if ($errors->has('embeded'))
+      <span class="invalid-feedback" role="alert">
+        <strong>{{ $errors->first('embeded') }}</strong>
+      </span>
+      @endif
+  </div>
+  </div>
+        <div class="form-group row">
+            <label for="inputName" class="col-sm-2 col-form-label">Event's Title </label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} " id="inputName" name="name" value="{{ old('name') }}" placeholder="Event's name">
+              @if ($errors->has('name'))
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ $errors->first('name') }}</strong>
+              </span>
+              @endif
+          </div>
+          </div>
+        
                 <div class="form-group row">
                   <div class="offset-sm-2 col-sm-10">
-                    <button type="submit" class="btn btn-success btn-block btn-lg">Add Video</button>
+                    <button type="submit" class="btn btn-success btn-lg">Add Video </button>
                   </div>
                 </div>
               </form>
@@ -75,6 +65,6 @@
 @endsection
 
 @section('script')
-
+<script src="https://player.vimeo.com/api/player.js"></script>
 @endsection
 
