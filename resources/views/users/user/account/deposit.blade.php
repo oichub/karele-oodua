@@ -44,7 +44,7 @@
         <!-- Paypal form start -->
         <form id="payPalForm" style="display: none;">
           @csrf
-          <p class="card-box-msg">Enter amount to fund your Account <a style="float: right;" href="javascript:document.location.reload();"><i class="fa fa-sync" aria-hidden="tr</p>
+          <p class="card-box-msg">Enter amount to fund your Account <a style="float: right;" href="javascript:document.location.reload();"><i class="fa fa-sync" aria-hidden="tr"></i></a></p>
           <div class="input-group mb-3">
             <input type="number" id="amount" name="amount" class="form-control" placeholder="Amount" required>
             <div class="input-group-append">
