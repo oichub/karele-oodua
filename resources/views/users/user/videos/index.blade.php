@@ -84,7 +84,7 @@ h1{
   <div class="row pt-3" >  
     <div class="col-md-3 gallery">
       <a href="#" target="_parent">
-        <img src="{{asset('videos/video.png')}}" alt="" style=" width:100%; height: auto">
+        <img src="{{asset('videos/video.PNG')}}" alt="" style=" width:100%; height: auto">
         <span class="play"><i class="fa fa-play"></i></span>
         <div class="text">
           <h5 class="float-left">OSTraining Event</h5> <i class="float-right">tomorrow</i>
@@ -94,7 +94,7 @@ h1{
     </div>
     <div class="col-md-3 gallery">
       <!-- <a href="{{asset('videos/oicvideo.mp4')}}" target="_parent"> -->
-        <img src="{{asset('videos/video2.png')}}" alt="" style=" width:100%; height: auto">
+        <img src="{{asset('videos/video2.PNG')}}" alt="" style=" width:100%; height: auto">
         <span class="play"><i class="fa fa-play"></i></span>
         <div class="text">
         <h5 class="float-left">OICTraining Event</h5> <i class="float-right">saturday</i>
@@ -104,7 +104,7 @@ h1{
     </div>
     <div class="col-md-3 gallery ">
       <!-- <a href="{{asset('videos/wordpress_1607771314.mp4')}}" target="_parent"> -->
-        <img src="{{asset('videos/video.png')}}" alt="" style=" width:100%; height: auto">
+        <img src="{{asset('videos/video.PNG')}}" alt="" style=" width:100%; height: auto">
         <span class="play"><i class="fa fa-play"></i></span>
         <div class="text">
         <h5 class="float-left">OSTraining Event</h5> <i class="float-right">{{date('12-10-21')}}</i>
@@ -114,7 +114,7 @@ h1{
     </div>
     <div class="col-md-3 gallery">
       <a href="#">
-        <img src="{{asset('videos/video2.png')}}" alt="" style=" width:100%; height: auto">
+        <img src="{{asset('videos/video2.PNG')}}" alt="" style=" width:100%; height: auto">
         <span class="play"><i class="fa fa-play"></i></span>
         <div class="text">
         <h5 class="float-left">OSTraining Event</h5> <i class="float-right">5hours ago</i>
@@ -146,7 +146,7 @@ h1{
                 </thead>
                 <tbody> 
                   <tr>
-                    <td><img src="{{asset('videos/video.png')}}" alt="" style=" width:100px; height:70px"></td>
+                    <td><img src="{{asset('videos/video.PNG')}}" alt="" style=" width:100px; height:70px"></td>
                     <td>Ostraining</td>
                     <td>Karele Event</td>
                     <td>Training of karele oodua staffs video</td>
@@ -154,7 +154,7 @@ h1{
                     <td><a href="{{asset('videos/video.mp4')}}" target="_parent">View</a></td>
                   </tr>
                   <tr>
-                    <td><img src="{{asset('videos/video2.png')}}" alt="" style=" width:100px; height:70px"></td>
+                    <td><img src="{{asset('videos/video2.PNG')}}" alt="" style=" width:100px; height:70px"></td>
                     <td>OICTrainig</td>
                     <td>Karele Event</td>
                     <td>Training of karele oodua affliated staffs video</td>
@@ -162,7 +162,7 @@ h1{
                     <td><a href="{{asset('videos/oicvideo.mp4')}}" target="_parent">View</a></td>
                   </tr>
                   <tr>
-                    <td><img src="{{asset('videos/video.png')}}" alt="" style=" width:100px; height:70px"></td>
+                    <td><img src="{{asset('videos/video.PNG')}}" alt="" style=" width:100px; height:70px"></td>
                     <td>Ostraining</td>
                     <td>Karele Event</td>
                     <td>Training of karele oodua staffs video</td>
@@ -170,7 +170,7 @@ h1{
                     <td><a href="{{asset('videos/video.mp4')}}" target="_parent">View</a></td>
                   </tr>
                   <tr>
-                    <td><img src="{{asset('videos/video2.png')}}" alt="" style=" width:100px; height:70px"></td>
+                    <td><img src="{{asset('videos/video2.PNG')}}" alt="" style=" width:100px; height:70px"></td>
                     <td>Ostraining</td>
                     <td>Karele Event</td>
                     <td>Training of karele oodua staffs video</td>

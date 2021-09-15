@@ -10,7 +10,7 @@
             <div class="info-box-content">
                 <span class="info-box-text">Balance</span>
                 <span class="info-box-number">
-                    {{ $user->balance }}
+                      $5566
                 </span>
             </div>
             <!-- /.info-box-content -->
@@ -24,7 +24,7 @@
 
             <div class="info-box-content">
                 <span class="info-box-text">Subscribed Video</span>
-                <span class="info-box-number">{{ $user->totalsub }}</span>
+                <span class="info-box-number">2</span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -41,7 +41,7 @@
 
             <div class="info-box-content">
                 <span class="info-box-text">Incoming Event</span>
-                <span class="info-box-number">{{ $upcoming }}</span>
+                <span class="info-box-number">56</span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -465,26 +465,22 @@
                             <li class="list-group-item">
                                 <b>Title </b> <a class="float-right">Price</a>
                             </li>
-                            @php
+                            @php/*
                             function checkSub($user, $video){
                             $subscri = App\Subscriber::where(['user_id'=>$user,'video_id'=>$video])->get();
                             return count($subscri);
-                            }
+                            } */
                             @endphp
-                            @foreach ($videos as $video)
-
-
+                        
                             <li class="list-group-item">
-                                <a href="{{ route('video.show', $video->slug) }}"><b
-                                        class="text-uppercase">{{ $video->title }}</b>
-                                    @if (checkSub(Auth::user()->id, $video->id))
+                                <b>class="text-uppercase">ggkggmm mg</b>
+                                        
                                     <span class="ml-3 text-danger">Subscribed <span
                                             class="ml-2 fab fa-youtube"></span></span></a>
-                                @else
-                                @endif
-                                <a class="float-right"><i class="fa fa">&#8358;</i>{{ $video->price }}</a>
+                        
+                                <a class="float-right"><i class="fa fa">&#8358;</i>#4555</a>
                             </li>
-                            @endforeach
+                           
                         </ul>
 
                     </div>
@@ -513,7 +509,7 @@
                                 @php
                                 $userlogin = Auth::user()->id;
                                 @endphp
-                                @foreach ($recentsub as $sub)
+                              
 
 
                                 <li class="item">
@@ -521,14 +517,13 @@
                             <img src="" alt="Product Image" class="img-size-50">
                           </div> --}}
                                     <div class="product-info">
-                                        <a href="{{ route('subscribed_videos', ['userid'=> $userlogin, 'videoid'=>$sub->video_id,'subid'=>$sub->id, 'video'=>$sub->video->slug]) }}"
-                                            class="product-title">{{ strtoupper($sub->video->title) }}
+                                            class="product-title"> Ade
                                             {{-- <span class="product-description">
                             Lorem, ipsum dolor sit amet consectetur adipisicing elit. sapiente doloribus ullam ab..
                             </span> --}}
                                     </div>
                                 </li>
-                                @endforeach
+                                
 
                             </ul>
                         </div>
@@ -558,22 +553,18 @@
                                 @php
                                 $userlogin = Auth::user()->id;
                                 @endphp
-                                @foreach ($allsub as $sub)
-
-
                                 <li class="item">
                                     {{-- <div class="product-img">
                             <img src="" alt="Product Image" class="img-size-50">
                           </div> --}}
                                     <div class="product-info">
-                                        <a href="{{ route('subscribed_videos', ['userid'=> $userlogin, 'videoid'=>$sub->video_id,'subid'=>$sub->id, 'video'=>$sub->video->slug]) }}"
-                                            class="product-title">{{ strtoupper($sub->video->title) }}
+                                             class="product-title"> Asde
                                             {{-- <span class="product-description">
                             Lorem, ipsum dolor sit amet consectetur adipisicing elit. sapiente doloribus ullam ab..
                             </span> --}}
                                     </div>
                                 </li>
-                                @endforeach
+                               
 
                             </ul>
                         </div>
