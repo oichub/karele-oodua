@@ -42,6 +42,9 @@ Route::group(['middleware' => ['auth', 'user', 'verified']], function () {
     Route::get('/users/dashboard', 'users\UsersController@index')->name('usersdashboard');
     Route::get('/users/user/makepayment', 'users\UserPaymentController@makepayment');
     Route::post('/users/user/verify-payment', 'users\UserPaymentController@verifypayment');
+    Route::get('/users/user/payment', 'users\PayPalController@payment')->name('payment');
+    Route::get('/users/user/cancel', 'users\PayPalController@cancel')->name('payment.cancel');
+    Route::get('/users/user/payment/success', 'users\PayPalController@success')->name('payment.success');
     Route::resource('/users/user', 'users\UsersController');
     Route::resource('/users/account', 'users\UsersAccount');
     Route::resource('/user/videos/previousvideos', 'users\UserVideoController');    

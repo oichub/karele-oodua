@@ -6,6 +6,13 @@
   <div class="col-md-4 offset-md-4">
     <h4 style="text-align: center; padding-bottom:10px;">Fund your Karele Account</h4>
     <div class="card">
+    @if (session('error') || session('success'))
+    <div class="alert alert-success alert-dismissible fade show">
+      <p class="{{ session('error') ? 'error':'success' }}">
+        {{ session('error') ?? session('success') }}
+      </p>
+    </div>
+    @endif 
       <div class="card-body">
         <p class="card-box-msg">Choose your payment method</p>
        
@@ -42,7 +49,7 @@
         </form> 
         <!-- Flutterwave form end -->
         <!-- Paypal form start -->
-        <form id="payPalForm" style="display: none;">
+        <form id="payPalForm" action="{{ route('payment') }}" style="display: none;">
           @csrf
           <p class="card-box-msg">Enter amount to fund your Account <a style="float: right;" href="javascript:document.location.reload();"><i class="fa fa-sync" aria-hidden="tr"></i></a></p>
           <div class="input-group mb-3">
@@ -54,7 +61,7 @@
             </div>
           </div>         
           <input type="hidden" id="email" value="{{$user->email}}"> 
-          <input type="hidden" id="name" value="{{$user->name}}">          
+          <input type="hidden" id="name" name="name" value="{{$user->name}}">          
           <input type="hidden" id="phone" value="{{$user->phone}}">
           <input type="hidden" id="userid" value="{{$user->slug}}">        
             <div class="col-12">
