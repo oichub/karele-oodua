@@ -96,7 +96,13 @@
               <li class="nav-item">
                 <a href="{{ url('/users/user/makepayment') }}" class="nav-link">
                   <i class="fas fa-user-plus nav-icon"></i>
-                  <p>Make Payment</p>
+                  <p>Fund Account</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('/users/user/subscribe') }}" class="nav-link">
+                  <i class="fas fa-user-plus nav-icon"></i>
+                  <p>Subscribe</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -120,6 +126,12 @@
     <a href="{{ route('account.index') }}" class="nav-link">
       <i class="fas fa-clock"></i>
       <p>Account History</p>
+    </a>
+  </li> 
+  <li class="nav-item">
+    <a href="{{ route('usersprofile') }}" class="nav-link">
+      <i class="fas fa-user"></i>
+      <p>My Profile</p>
     </a>
   </li>  
 <!-- // Account -->
@@ -154,13 +166,13 @@
 </nav>
   </div>
   </aside>
-  {{--  @include('users.admin.layout.navbar')  --}}
+  
   <div class="content-wrapper">
    <div class="container-fluid">
   @yield('content')
   </div>
   </div>
-  {{--  @include('users.admin.layout.footer')  --}}
+  
 
   <!-- /.content-wrapper -->
 <footer class="main-footer">

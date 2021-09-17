@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\users;
 
+use App\User;
 use App\Account;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -59,15 +60,23 @@ class PayPalController extends Controller
     {
         $provider = new ExpressCheckout;
         $response = $provider->getExpressCheckoutDetails($request->token);
-
+        $tx_ref= "RX1_". (substr(rand(0, time()), 0, 7));
         if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
             Account::create([
                 'user_id' => Auth::user()->id,
-                'ref' =>  'RX1_'.$response['PAYERID'],            
+                'transaction_id' => $response['PAYERID'],
+                'ref' =>  $tx_ref,
                 'status' => $response['ACK'],
                 'payment_method' => 'paypal',
                 'amount' => $response['AMT'],
-            ]);            
+            ]);  
+            $bal = User::where('id', Auth::user()->id)->firstOrFail();
+            $getbal = $bal->balance;
+            $newbal = $response['AMT'] + $getbal;
+    
+            $data['newbal'] = User::where('id', Auth::user()->id)->first()->update([
+                'balance' => $newbal,
+            ]);           
             return redirect('/users/user/makepayment')->withSuccess('Payment made successfully');                
             // dd('Your payment was successfully. You can create success page here.');
         }

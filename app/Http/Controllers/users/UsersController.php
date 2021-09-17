@@ -37,6 +37,17 @@ class UsersController extends Controller
         return view('users.user.index', compact(['user']));
     }
 
+    public function profile()
+    {            
+        $user  = User::where('id', Auth::user()->id)->firstOrFail();             
+        return view('users.user.profile', compact(['user']));
+    }
+    public function subscribe()
+    {            
+        // $user  = User::where('id', Auth::user()->id)->firstOrFail();             
+        return view('users.user.account.subscribe');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

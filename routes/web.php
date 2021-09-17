@@ -40,6 +40,8 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
 Route::group(['middleware' => ['auth', 'user', 'verified']], function () {
     //Route::get('/home', 'HomeController@index')->name('index');
     Route::get('/users/dashboard', 'users\UsersController@index')->name('usersdashboard');
+    Route::get('/users/profile', 'users\UsersController@profile')->name('usersprofile');
+    Route::get('/users/user/subscribe', 'users\UsersController@subscribe')->name('subscribe');
     Route::get('/users/user/makepayment', 'users\UserPaymentController@makepayment');
     Route::post('/users/user/verify-payment', 'users\UserPaymentController@verifypayment');
     Route::get('/users/user/payment', 'users\PayPalController@payment')->name('payment');
@@ -52,7 +54,7 @@ Route::group(['middleware' => ['auth', 'user', 'verified']], function () {
     Route::get('/subscibed/video/{userid}/{videoid}/{subid}/{video}', 'users\SubscribeController@subscriber')->name('subscribed_videos');
     Route::get('/users/change_password', 'users\UsersController@gotochangepassword')->name('change_password');
     Route::put('user_change_password', 'users\UsersController@changepassword')->name('user_change_password');
-    Route::post('congirmed_subscription', 'users\UserVideoController@confirm_subscription')->name('confirm_subscription');
-
+    Route::post('/users/user/confirm_subscription', 'users\UserVideoController@confirm_subscription')->name('confirm_subscription');
+    // 
 });
 
