@@ -50,9 +50,8 @@ Route::group(['middleware' => ['auth', 'user', 'verified']], function () {
     Route::get('/users/user/payment/success', 'users\PayPalController@success')->name('payment.success');
     Route::resource('/users/user', 'users\UsersController');
     Route::resource('/users/account', 'users\UsersAccount');
-    Route::resource('/user/videos/previousvideos', 'users\UserVideoController');    
-    Route::resource('/users/usersubscribed', 'users\SubscribeController');
-    Route::get('/subscibed/video/{userid}/{videoid}/{subid}/{video}', 'users\SubscribeController@subscriber')->name('subscribed_videos');
+    Route::resource('/user/videos/previousvideos', 'users\UserVideoController');   
+    Route::get('/users/videos/livevideo', 'users\UserVideoController@livevideo')->name('livevideos');
     Route::get('/users/change_password', 'users\UsersController@gotochangepassword')->name('change_password');
     Route::put('user_change_password', 'users\UsersController@changepassword')->name('user_change_password');
     Route::post('/users/user/confirm_subscription', 'users\UserVideoController@confirm_subscription')->name('confirm_subscription');

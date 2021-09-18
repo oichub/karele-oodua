@@ -42,8 +42,8 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto mr-2">
-        <li class="nav-item">
-          <a href="{{asset('videos/oicvideo.mp4')}}" target="_parent" class="btn btn-danger"><i class="fa fa-video"></i> Live</a>          
+        <li class="nav-item">          
+          <a href="{{route('livevideos')}}" class="btn btn-danger" style="opacity: .6;"><i class="fa fa-video"></i> Live</a>
         </li>
       </ul>
     </nav>    
@@ -99,12 +99,14 @@
                   <p>Fund Account</p>
                 </a>
               </li>
+        
               <li class="nav-item">
                 <a href="{{ url('/users/user/subscribe') }}" class="nav-link">
                   <i class="fas fa-user-plus nav-icon"></i>
                   <p>Subscribe</p>
                 </a>
               </li>
+        
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="fas fa-clock"></i>

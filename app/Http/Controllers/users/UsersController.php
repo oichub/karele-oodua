@@ -45,10 +45,19 @@ class UsersController extends Controller
         return view('users.user.profile', compact(['user']));
     }
     public function subscription()
-    {            
+    {   
+        
         $plans= Plan::orderBy('name', 'desc')->get();
-        // $user  = User::where('id', Auth::user()->id)->firstOrFail();             
-        return view('users.user.account.subscribe', compact(['plans']));
+        $present = Carbon::now();        
+        if($check = subscriber::where('user_id', Auth::user()->id)->where('status', 'active')->where('end_date', '>', $present)->first()){
+            $end = $check->end_date;
+            $status = $check->status;    
+            if($status == 'active' and $present<$end){
+                return redirect()->route('usersdashboard')->with('error', 'Sorry you still have an active subscription');
+            }              
+            return view('users.user.account.subscribe', compact(['plans']));
+        }return view('users.user.account.subscribe', compact(['plans']));
+        
     }
     public function subscribe(Request $request)    
     {   
