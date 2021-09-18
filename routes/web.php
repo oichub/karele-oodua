@@ -41,10 +41,11 @@ Route::group(['middleware' => ['auth', 'user', 'verified']], function () {
     //Route::get('/home', 'HomeController@index')->name('index');
     Route::get('/users/dashboard', 'users\UsersController@index')->name('usersdashboard');
     Route::get('/users/profile', 'users\UsersController@profile')->name('usersprofile');
-    Route::get('/users/user/subscribe', 'users\UsersController@subscribe')->name('subscribe');
+    Route::get('/users/user/subscribe', 'users\UsersController@subscription')->name('subscribe');
+    Route::post('/users/user/subscribed', 'users\UsersController@subscribe')->name('subscribe.now');
     Route::get('/users/user/makepayment', 'users\UserPaymentController@makepayment');
     Route::post('/users/user/verify-payment', 'users\UserPaymentController@verifypayment');
-    Route::get('/users/user/payment', 'users\PayPalController@payment')->name('payment');
+    Route::post('/users/user/payment', 'users\PayPalController@payment')->name('payment');
     Route::get('/users/user/cancel', 'users\PayPalController@cancel')->name('payment.cancel');
     Route::get('/users/user/payment/success', 'users\PayPalController@success')->name('payment.success');
     Route::resource('/users/user', 'users\UsersController');

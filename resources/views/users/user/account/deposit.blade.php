@@ -49,7 +49,7 @@
         </form> 
         <!-- Flutterwave form end -->
         <!-- Paypal form start -->
-        <form id="payPalForm" action="{{ route('payment') }}" style="display: none;">
+        <form id="payPalForm" action="{{ route('payment') }}" method="post" style="display: none;">
           @csrf
           <p class="card-box-msg">Enter amount to fund your Account <a style="float: right;" href="javascript:document.location.reload();"><i class="fa fa-sync" aria-hidden="tr"></i></a></p>
           <div class="input-group mb-3">

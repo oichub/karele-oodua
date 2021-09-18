@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\users;
 
+use App\Plan;
 use App\User;
 use App\Video;
 use App\Account;
+use Carbon\Carbon;
 use App\Subscriber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -42,19 +44,47 @@ class UsersController extends Controller
         $user  = User::where('id', Auth::user()->id)->firstOrFail();             
         return view('users.user.profile', compact(['user']));
     }
-    public function subscribe()
+    public function subscription()
     {            
+        $plans= Plan::orderBy('name', 'desc')->get();
         // $user  = User::where('id', Auth::user()->id)->firstOrFail();             
-        return view('users.user.account.subscribe');
+        return view('users.user.account.subscribe', compact(['plans']));
     }
+    public function subscribe(Request $request)    
+    {   
+        $plan = $request->plan;
+        $amount = Plan::where('name', $plan)->firstOrFail();
+        $price = $amount->price;    
+        $dt = Carbon::now();        
+        $end_date = $dt->addyear(1);
+        
+        $bal = User::where('id', Auth::user()->id)->firstOrFail();
+        $balance = $bal->balance;
+        if($balance < $price){
+            return redirect()->back()->with('error', 'Sorry you dont have sufficient balance, please fund your account and try again');
+        }
 
+        $newbal = $balance - $price;            
+        Subscriber::create([
+            'user_id' => Auth::user()->id,
+            'amount' => $price,
+            'plan' => $plan,
+            'status' => 'active',
+            'end_date' => $end_date,
+        ]);
+        User::where('id', Auth::user()->id)->update([
+            'balance' => $newbal,
+        ]);
+        return redirect('/users/user/subscribe')->withSuccess('You have successfully subscribed to our videos');
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create()    
     {
+       
         //
     }
 

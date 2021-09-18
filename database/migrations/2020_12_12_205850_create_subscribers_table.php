@@ -16,8 +16,12 @@ class CreateSubscribersTable extends Migration
         Schema::create('subscribers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('user_id');
-            $table->string('video_id');
+            $table->string('amount');
+            $table->string('plan');
+            $table->string('status');
+            $table->string('end_date');
             $table->timestamps();
+            
         });
     }
 

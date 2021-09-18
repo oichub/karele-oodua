@@ -38,7 +38,7 @@ class UserPaymentController extends Controller
 
         curl_close($curl);        
         $res = json_decode($response);
-        // return $res->data->tx_ref;
+        // return $response;
           
         $bal = User::where('id', Auth::user()->id)->firstOrFail();
         $getbal = $bal->balance;
@@ -50,7 +50,7 @@ class UserPaymentController extends Controller
 
        return Account::create([
             'user_id' => Auth::user()->id,
-            'transaction_id' => "cbc",
+            'transaction_id' => $res->data->id,
             'ref' =>  $res->data->tx_ref,            
             'status' => $res->status,
             'payment_method' => 'flutterwave',
