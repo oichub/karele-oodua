@@ -31,12 +31,18 @@ class UsersController extends Controller
     {
        
         $user  = User::where('id', Auth::user()->id)->firstOrFail();
-      //  $videos  = Video::where('date', '>', now())->get();
+        $videos = Video::get();
+        $recentvideos = Video::where('created_at', '<', now())->paginate(5);  
+        $lastvideo = Video::latest()->first();          
+        if($livevideo  = Video::where('created_at', now())->first()){
+            return view('users.user.index', compact(['user', 'livevideo','recentvideos']));
+        }
         //$upcoming = count($videos);
        // $recentsub = Subscriber::with(['user', 'video'])->orderBy('id', 'desc')->where(['user_id'=>Auth::user()->id])->limit(10)->get();
         //$allsub = Subscriber::with(['user', 'video'])->orderBy('id', 'desc')->where(['user_id'=>Auth::user()->id])->get();
     //    return $subscribed;
-        return view('users.user.index', compact(['user']));
+        $livevideo = $lastvideo;
+        return view('users.user.index', compact(['user', 'recentvideos', 'livevideo']));
     }
 
     public function profile()

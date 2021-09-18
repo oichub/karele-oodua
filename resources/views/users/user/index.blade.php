@@ -94,137 +94,53 @@
         </div>
         @endif
         <div class="row">
-            <div class="col-md-5">
-
-                <!-- /.card -->
-                <div class="card card-primary card-outline">
-                    <div class="card-body box-profile">
-
-
-                        <h3 class="profile-username text-center text-uppercase">upcoming event</h3>
-
-                        {{-- <p class="text-muted text-center">Software Engineer</p>  --}}
-
-                        <ul class="list-group list-group-unbordered mb-3">
-                            <li class="list-group-item">
-                                <b>Title </b> <a class="float-right">Price</a>
-                            </li>
-                            @php/*
-                            function checkSub($user, $video){
-                            $subscri = App\Subscriber::where(['user_id'=>$user,'video_id'=>$video])->get();
-                            return count($subscri);
-                            } */
-                            @endphp
-                        
-                            <li class="list-group-item">
-                                <b>class="text-uppercase">ggkggmm mg</b>
-                                        
-                                    <span class="ml-3 text-danger">Subscribed <span
-                                            class="ml-2 fab fa-youtube"></span></span></a>
-                        
-                                <a class="float-right"><i class="fa fa">&#8358;</i>#4555</a>
-                            </li>
-                           
-                        </ul>
-
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-
+            <section class="col-lg-7 connectedSortable">
+            <div class="class">
+                  <!--------Live Video------------->
+                @if($livevideo)    
+                    {!! $livevideo->embeded!!}                      
+                @endif
+                
+                <!--------Live Video------------->
             </div>
-            <!-- /.col -->
-            <div class="col-md-7">
-                <div id="subscribe">
-                    <div class="card collapse show" id="recentsub" data-parent="#subscribe">
-                        <div class="card-header">
-                            <h3 class="card-title">SUBSCRIBED VIDEO</h3>
-
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-
-                            </div>
-                        </div>
-                        <!-- /.card-header -->
-
-                        <div class="card-body p-0">
-                            <ul class="products-list product-list-in-card pl-2 pr-2">
-                                @php
-                                $userlogin = Auth::user()->id;
-                                @endphp
-                              
-
-
-                                <li class="item">
-                                    {{-- <div class="product-img">
-                            <img src="" alt="Product Image" class="img-size-50">
-                          </div> --}}
-                                    <div class="product-info">
-                                            class="product-title"> Ade
-                                            {{-- <span class="product-description">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. sapiente doloribus ullam ab..
-                            </span> --}}
-                                    </div>
-                                </li>
-                                
-
-                            </ul>
-                        </div>
-
-                        <!-- /.card-body -->
-                        <div class="card-footer text-center">
-                            <a href="#totalsub" class="text-uppercase" data-toggle="collapse">View All videos</a>
-                        </div>
-                        <!-- /.card-footer -->
-                    </div>
-                    <!-- /.nav-tabs-custom -->
-                    <div class="card collapse" id="totalsub" data-parent="#subscribe">
-                        <div class="card-header">
-                            <h3 class="card-title">SUBSCRIBED VIDEO</h3>
-
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-
-                            </div>
-                        </div>
-                        <!-- /.card-header -->
-
-                        <div class="card-body p-0">
-                            <ul class="products-list product-list-in-card pl-2 pr-2">
-                                @php
-                                $userlogin = Auth::user()->id;
-                                @endphp
-                                <li class="item">
-                                    {{-- <div class="product-img">
-                            <img src="" alt="Product Image" class="img-size-50">
-                          </div> --}}
-                                    <div class="product-info">
-                                             class="product-title"> Asde
-                                            {{-- <span class="product-description">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. sapiente doloribus ullam ab..
-                            </span> --}}
-                                    </div>
-                                </li>
-                               
-
-                            </ul>
-                        </div>
-
-                        <!-- /.card-body -->
-                        <div class="card-footer text-center">
-                            <a href="#recentsub" class="text-uppercase" data-toggle="collapse">View Less videos</a>
-                        </div>
-                        <!-- /.card-footer -->
+            </section>
+            <div class="col-lg-5 connectedSortable">
+            <div class="card">
+                <div class="card-header">
+                <h3 class="card-title" style="font-weight:bold">RECENT VIDEOS</h3>                
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                        <i class="fas fa-minus"></i>
+                        </button>
                     </div>
                 </div>
+                <!-- /.card-header -->
+                <div class="card-body p-0">
+                <ul class="products-list product-list-in-card pl-2 pr-2">
+                    @foreach($recentvideos as $recentvideo)
+                    <li class="item">
+                    <div class="product-img">
+                        <img src="" alt="video Image" class="img-size-50">
+                    </div>
+                    <div class="product-info">                        
+                        <span class="product-description">
+                        {{$recentvideo->title}} 
+                        </span>
+                    </div>
+                    </li>
+                   
+                    @endforeach                    
+                </ul>
                 </div>
-                <!-- /.col -->
+                <!-- /.card-body -->
+                <div class="card-footer text-center">
+                    <a href="{{route('previousvideos.index')}}" class="uppercase">View All Videos</a>
+                </div>
+                <!-- /.card-footer -->
             </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
+            </div>
+        </div>
+        
 </section>
 <!-- /.content -->
 @endsection
