@@ -93,6 +93,7 @@
             @endforeach
         </div>
         @endif
+        @if($livevideo || $recentvideos)
         <div class="row">
             <section class="col-lg-7 connectedSortable">
             <div class="class">
@@ -140,7 +141,9 @@
             </div>
             </div>
         </div>
-        
+        @else
+        <marquee behavior="" direction="left" class="text-bold text-danger"> Sorry you haven't subscribed to any watch any of our videos, kindly subscribe to watch now.</marquee>
+        @endif
 </section>
 <!-- /.content -->
 @endsection

@@ -28,21 +28,34 @@ class UsersController extends Controller
 //         return count($subscri);
 //       }
     public function index()
-    {
-       
+    {   
         $user  = User::where('id', Auth::user()->id)->firstOrFail();
-        $videos = Video::get();
-        $recentvideos = Video::where('created_at', '<', now())->paginate(5);  
-        $lastvideo = Video::latest()->first();          
-        if($livevideo  = Video::where('created_at', now())->first()){
-            return view('users.user.index', compact(['user', 'livevideo','recentvideos']));
-        }
+        $present = Carbon::now();        
+        if($check = subscriber::where('user_id', Auth::user()->id)->where('status', 'active')->where('end_date', '>', $present)->first()){
+            $end = $check->end_date;
+            $status = $check->status;    
+            if($status == 'active' and $present<$end){
+                $videos = Video::get();
+                $recentvideos = Video::where('created_at', '<', now())->paginate(5);  
+                $lastvideo = Video::latest()->first();          
+                if($livevideo  = Video::where('created_at', now())->first()){
+                    return view('users.user.index', compact(['user', 'livevideo','recentvideos']));
+                }
+                $livevideo = $lastvideo;
+                return view('users.user.index', compact(['user', 'recentvideos', 'livevideo']));
+            }              
+            $recentvideos = false; $livevideo = false;
+            return view('users.user.index', compact(['user', 'recentvideos', 'livevideo']));
+        }       
+            $recentvideos = false; $livevideo = false;
+            return view('users.user.index', compact(['user', 'recentvideos', 'livevideo']));
+        
+        
         //$upcoming = count($videos);
        // $recentsub = Subscriber::with(['user', 'video'])->orderBy('id', 'desc')->where(['user_id'=>Auth::user()->id])->limit(10)->get();
         //$allsub = Subscriber::with(['user', 'video'])->orderBy('id', 'desc')->where(['user_id'=>Auth::user()->id])->get();
     //    return $subscribed;
-        $livevideo = $lastvideo;
-        return view('users.user.index', compact(['user', 'recentvideos', 'livevideo']));
+        
     }
 
     public function profile()
