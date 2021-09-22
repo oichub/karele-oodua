@@ -3,10 +3,9 @@
 @section('content')
 <!-- Main content -->
 <section class="content">
-    <div class="container-fluid">
+    <div class="container" style="padding-top: 80px;">
         <div class="row">
-            <div class="col-md-5">
-
+            <div class="offset-md-3 col-md-6">
                 <!-- Profile Image -->
                 <div id="profile">
                     <div class="card card-primary card-outline collapse show " data-parent="#profile"

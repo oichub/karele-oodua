@@ -1,6 +1,7 @@
 @extends('layouts.users.userlayout')
 @section('title', 'Previous Video')
 @section('style')
+<link rel="stylesheet" href="{{asset('style.css') }}">
 <style>
 .gallery{
   border: 1px transparent solid;  
@@ -34,32 +35,7 @@
   padding: 0px 10px 0px 0px;
   color: black;
 }
-/* input[type=text] {
-    width: 130px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 12px;
-    background-color: white;
-    background-image: url('../../images/searchicon.png');
-    background-position: 10px 10px; 
-    background-repeat: no-repeat;
-    padding: 12px 20px 12px 40px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-}
-input[type=text]:focus {
-    width: 100%;
-}
-@media (max-width:500px){
-  input[type=text]{
-    width: 2px;
-    background-image: url('../../images/searchicon.png');
-  }
-  input[type=text]:focus {
-    width: 100%;
-}
-} */
+
 h1{
   padding-left:10px;
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -125,91 +101,44 @@ h1{
   </div>
 </div>
 
-<div class="row mt-3">
-    <div class="col-12">            
-    <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">Previous Videos</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body table-responsive">
-              <table id="example1" class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Video</th>
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>Description(s)</th>                    
-                    <th>Event Date</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody> 
-                  <tr>
-                    <td><img src="{{asset('videos/video.PNG')}}" alt="" style=" width:100px; height:70px"></td>
-                    <td>Ostraining</td>
-                    <td>Karele Event</td>
-                    <td>Training of karele oodua staffs video</td>
-                    <td>{{date('12-01-21')}}</td>
-                    <td><a href="{{asset('videos/video.mp4')}}" target="_parent">View</a></td>
-                  </tr>
-                  <tr>
-                    <td><img src="{{asset('videos/video2.PNG')}}" alt="" style=" width:100px; height:70px"></td>
-                    <td>OICTrainig</td>
-                    <td>Karele Event</td>
-                    <td>Training of karele oodua affliated staffs video</td>
-                    <td>{{('yesterday')}}</td>
-                    <td><a href="{{asset('videos/oicvideo.mp4')}}" target="_parent">View</a></td>
-                  </tr>
-                  <tr>
-                    <td><img src="{{asset('videos/video.PNG')}}" alt="" style=" width:100px; height:70px"></td>
-                    <td>Ostraining</td>
-                    <td>Karele Event</td>
-                    <td>Training of karele oodua staffs video</td>
-                    <td>{{('2hours ago')}}</td>
-                    <td><a href="{{asset('videos/video.mp4')}}" target="_parent">View</a></td>
-                  </tr>
-                  <tr>
-                    <td><img src="{{asset('videos/video2.PNG')}}" alt="" style=" width:100px; height:70px"></td>
-                    <td>Ostraining</td>
-                    <td>Karele Event</td>
-                    <td>Training of karele oodua staffs video</td>
-                    <td>{{date('02-06-21')}}</td>
-                    <td><a href="{{asset('videos/oicvideo.mp4')}}" target="_parent">View</a></td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <th>Video</th>
-                    <th>Title</th>
-                    <th>Category</th>
-                    <th>Description(s)</th>                    
-                    <th>Event Date</th>
-                    <th>Action</th>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-            <!-- /.card-body -->
-          </div>
-        <!-- /.card -->
+<div class="card">
+  <h3 class="heading">Previous Videos</h3>
+  <div class="contained">
+    <div class="main-video">
+      <div class="video">
+        <iframe src="{{$latestvideo->url}}" preload="none" frameborder="0" width="640" height="360" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        <h3 class="title"> {{$latestvideo->title}}</h3>        
+      </div>
     </div>
-    <!-- /.col -->
+    <div class="video-list">
+    @foreach($recentvideos as $recentvideo)
+      <div class="vid active">
+        <iframe src="{{$recentvideo->url}}"></iframe>
+        <h3 class="title">{{$recentvideo->title}}</h3>      
+      </div>    
+    @endforeach
+    </div>
+  </div>
 </div>
-
+</body>
 @endsection
 @section('script')
-<script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-    });
+<script>  
+  let listVideo = document.querySelectorAll('.video-list .vid');
+  let mainVideo = document.querySelector('.main-video iframe')
+  let title = document.querySelector('.main-video .title');
+  listVideo.forEach(iframe =>{    
+      iframe.onclick = () =>{
+        listVideo.forEach(vid => vid.classList.remove('active'));
+        iframe.classList.add('active');
+        if(iframe.classList.contains('active')){
+          let src = iframe.children[0].getAttribute('src');
+          mainVideo.src = src;
+          let text = iframe.children[1].innerHTML;
+          title.innerHTML = text;
+        }
+     
+      }
   });
 </script>
 @endsection

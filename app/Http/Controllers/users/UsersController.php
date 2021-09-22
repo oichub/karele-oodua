@@ -6,6 +6,7 @@ use App\Plan;
 use App\User;
 use App\Video;
 use App\Account;
+use App\Event;
 use Carbon\Carbon;
 use App\Subscriber;
 use Illuminate\Http\Request;
@@ -36,11 +37,20 @@ class UsersController extends Controller
             $status = $check->status;    
             if($status == 'active' and $present<$end){
                 $videos = Video::get();
-                $recentvideos = Video::where('created_at', '<', now())->paginate(5);  
-                $lastvideo = Video::latest()->first();          
-                if($livevideo  = Video::where('created_at', now())->first()){
+                $recentvideos = Video::where('created_at', '<', now())->latest()->paginate(5);  
+                $lastvideo = Video::latest()->first();
+                $date = date('Y-m-d');
+                // date_default_timezone_set('Afica/Lagos');
+                $time = date('h:i');            
+                
+                if($livevideo  = Event::where('date', $date)->where('time', $time)->first()){
+                    // show live video                    
+                    return view('users.user.index', compact(['user', 'livevideo','recentvideos']));
+                }elseif($livevideo = Event::where('date', '>=', $date)->where('time', '>', $time)->first()){
+                    // show upcoming video                    
                     return view('users.user.index', compact(['user', 'livevideo','recentvideos']));
                 }
+                // show last recent video
                 $livevideo = $lastvideo;
                 return view('users.user.index', compact(['user', 'recentvideos', 'livevideo']));
             }              
@@ -65,7 +75,7 @@ class UsersController extends Controller
     }
     public function subscription()
     {   
-        
+        $user = User::where('id', Auth::user()->id)->firstOrFail();
         $plans= Plan::orderBy('name', 'desc')->get();
         $present = Carbon::now();        
         if($check = subscriber::where('user_id', Auth::user()->id)->where('status', 'active')->where('end_date', '>', $present)->first()){
@@ -74,12 +84,13 @@ class UsersController extends Controller
             if($status == 'active' and $present<$end){
                 return redirect()->route('usersdashboard')->with('error', 'Sorry you still have an active subscription');
             }              
-            return view('users.user.account.subscribe', compact(['plans']));
-        }return view('users.user.account.subscribe', compact(['plans']));
+            return view('users.user.account.subscribe', compact(['plans', 'user']));
+        }return view('users.user.account.subscribe', compact(['plans', 'user']));
         
     }
     public function subscribe(Request $request)    
     {   
+        
         $plan = $request->plan;
         $amount = Plan::where('name', $plan)->firstOrFail();
         $price = $amount->price;    
@@ -144,7 +155,8 @@ class UsersController extends Controller
  
 
 public function gotochangepassword(){
-    return view('users.user.change_password');
+    $user = User::where('id', Auth::user()->id)->firstOrFail();
+    return view('users.user.change_password', compact(['user']));
 }
 
 public function changepassword(ChangePassword $request)

@@ -7,7 +7,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <div class="card-title"><h2 class="text-uppercase text-center font-weight-bold py-3">Manage users</h2></div>
+            <div class="card-title"><h3 class="text-uppercase text-center font-weight-bold py-3">Payment History</h3></div>
           </div>
           <!-- /.card-header -->
           <div class="card-body">

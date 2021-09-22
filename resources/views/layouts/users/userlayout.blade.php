@@ -43,8 +43,11 @@
       </ul>
       <ul class="navbar-nav ml-auto mr-2">
         <li class="nav-item">          
-          <a href="{{route('livevideos')}}" class="btn btn-danger" style="opacity: .6;"><i class="fa fa-video"></i> Live</a>
-        </li>
+          <button class="btn btn-info"><span class="info-box-text">Balance: </span> ${{$user->balance}}</button>
+        </li> 
+        <!-- <li class="nav-item ml-3">
+          <button class="btn btn-warning"><span class="info-box-text">Upcoming Event: </span> </button>
+        </li>        -->
       </ul>
     </nav>    
     <!-- /.navbar -->
