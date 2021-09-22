@@ -52,59 +52,24 @@ h1{
   <input type="text" name="search" placeholder="Search..">
 </form> -->
 </div>
-<h5 style="padding-left: 10px; font-family:serif;">Don't miss out any of our event videos, watch our previous videos and look forward to our upcoming events. </h5>
-<div class="card mt-2 px-2">
-  <div class="card-header" >   
-    <h3 class="card-title"> Upcoming Events</h3>
-  </div>
-  <div class="row pt-3" >  
-    <div class="col-md-3 gallery">
-      <a href="#" target="_parent">
-        <img src="{{asset('videos/video.PNG')}}" alt="" style=" width:100%; height: auto">
-        <span class="play"><i class="fa fa-play"></i></span>
-        <div class="text">
-          <h5 class="float-left">OSTraining Event</h5> <i class="float-right">tomorrow</i>
-          <p style="clear:both"> Description of the video </p>
-        </div>
-      </a>
-    </div>
-    <div class="col-md-3 gallery">
-      <!-- <a href="{{asset('videos/oicvideo.mp4')}}" target="_parent"> -->
-        <img src="{{asset('videos/video2.PNG')}}" alt="" style=" width:100%; height: auto">
-        <span class="play"><i class="fa fa-play"></i></span>
-        <div class="text">
-        <h5 class="float-left">OICTraining Event</h5> <i class="float-right">saturday</i>
-          <p style="clear:both"> Description of the video </p>
-        </div>
-      <!-- </a> -->
-    </div>
-    <div class="col-md-3 gallery ">
-      <!-- <a href="{{asset('videos/wordpress_1607771314.mp4')}}" target="_parent"> -->
-        <img src="{{asset('videos/video.PNG')}}" alt="" style=" width:100%; height: auto">
-        <span class="play"><i class="fa fa-play"></i></span>
-        <div class="text">
-        <h5 class="float-left">OSTraining Event</h5> <i class="float-right">{{date('12-10-21')}}</i>
-          <p style="clear:both"> Description of the video </p>
-        </div>
-      <!-- </a> -->
-    </div>
-    <div class="col-md-3 gallery">
-      <a href="#">
-        <img src="{{asset('videos/video2.PNG')}}" alt="" style=" width:100%; height: auto">
-        <span class="play"><i class="fa fa-play"></i></span>
-        <div class="text">
-        <h5 class="float-left">OSTraining Event</h5> <i class="float-right">5hours ago</i>
-          <p style="clear:both"> Description of the video </p>      
-        </div>
-      </a>
-    </div>
-  </div>
-</div>
-
-<div class="card">
+<h5 style="padding-left: 10px; font-family:serif;" class="float-left">Don't miss out any of our event videos, watch all our previous videos. </h5>
+<a href="{{route('previousvideos.index')}}" class="float-right pr-3 text-danger" >
+  <span class="fas fa-sync-alt"></span>
+</a>
+<div class="card" style="clear:both">
   <div class="card-header">
     <div class="card-title">
-  <h4 class="heading">Previous Videos</h4></div>
+      <h4 class="heading float-left">Previous Videos</h4>      
+    </div>
+      <form action="{{route('previousvideos.create')}}" method="get" class="float-right">
+        @csrf
+        <div class="input-group ">
+          <input type="text" name="search" id="search" class="form-control" placeholder="Search...">
+          <div class="input-group-append">
+            <button class="btn btn-info" type="submit"><i class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </form>
 </div>
   <div class="contained">
     <div class="main-video">

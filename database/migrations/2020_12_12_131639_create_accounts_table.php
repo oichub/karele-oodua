@@ -20,6 +20,8 @@ class CreateAccountsTable extends Migration
             $table->string('transaction_id');
             $table->string('ref');
             $table->string('payment_method');
+            $table->string('payment_type');
+            $table->string('payment_reference');
             $table->string('status');
             $table->timestamps();
         });

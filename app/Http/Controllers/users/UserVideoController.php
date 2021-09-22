@@ -40,9 +40,20 @@ class UserVideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $latestvideo = Video::latest()->first();
+        $user = User::where('id', Auth::user()->id)->firstOrFail();
+        $recentvideos = Video::where([
+            ['title', '!=', Null],
+            [function($query) use($request) {
+                if (($search = $request->search)){
+                    $query->orwhere('title', 'like', '%' .$search. '%')->get();
+                }
+            }]
+        ])->orderby('id', 'desc')->get();
+
+        return view('users.user.videos.index', compact(['recentvideos', 'latestvideo', 'user']));
     }
 
     /**

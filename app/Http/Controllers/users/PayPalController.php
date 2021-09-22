@@ -60,14 +60,17 @@ class PayPalController extends Controller
     {
         $provider = new ExpressCheckout;
         $response = $provider->getExpressCheckoutDetails($request->token);
+        // return $response;
         $tx_ref= "RX1_". (substr(rand(0, time()), 0, 7));
         if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
             Account::create([
                 'user_id' => Auth::user()->id,
-                'transaction_id' => $response['PAYERID'],
+                'transaction_id' => $response['TOKEN'],
                 'ref' =>  $tx_ref,
                 'status' => $response['ACK'],
                 'payment_method' => 'paypal',
+                'payment_type' => 'card',
+                'payment_reference' => $response['CORRELATIONID'],
                 'amount' => $response['AMT'],
             ]);  
             $bal = User::where('id', Auth::user()->id)->firstOrFail();

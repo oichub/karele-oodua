@@ -54,8 +54,10 @@ class UserPaymentController extends Controller
             'ref' =>  $res->data->tx_ref,            
             'status' => $res->status,
             'payment_method' => 'flutterwave',
+            'payment_type' => $res->data->payment_type,
+            'payment_reference' => $res->data->flw_ref,
             'amount' => $res->data->amount,
         ]);
-       
+    
         }
 }
