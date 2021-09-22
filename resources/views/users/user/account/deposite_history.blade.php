@@ -17,6 +17,7 @@
                 <th>S/N</th>
                 <th>Amount</th>
                 <th>Referrence Number</th>
+                <th>Payment Type</th>
                 <th>Date</th>
 
               </tr>
@@ -30,6 +31,7 @@
     <td>{{ ++$i }}</td>
     <td>{{ $user->amount }}</td>
     <td>{{ $user->ref }}</td>
+    <td>{{ $user->payment_type}}</td>
     <td>{{ $user->created_at }}</td>
 
 </tr>
@@ -40,7 +42,8 @@
               <tr>
                 <th>S/N</th>
                 <th>Amount</th>
-                <th>Referrence</th>
+                <th>Reference</th>
+                <th>Payment Type</th>
                 <th>Date</th>
               </tr>
               </tfoot>
