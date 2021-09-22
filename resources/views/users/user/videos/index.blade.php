@@ -102,7 +102,10 @@ h1{
 </div>
 
 <div class="card">
-  <h3 class="heading">Previous Videos</h3>
+  <div class="card-header">
+    <div class="card-title">
+  <h4 class="heading">Previous Videos</h4></div>
+</div>
   <div class="contained">
     <div class="main-video">
       <div class="video">

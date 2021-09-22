@@ -99,6 +99,7 @@
         @if($livevideo || $recentvideos)        
         <div class="card">     
             <div class="card-header">
+                <div class="card-title">
                 @php
                 if($livevideo->date == date('Y-m-d') and $livevideo->time == date('h:i')){
                     echo "Live video";
@@ -107,7 +108,8 @@
                 }else{
                     echo "Recent Events";
                 }
-                @endphp                
+                @endphp 
+            </div>               
             </div>   
         <div class="contained">
             <div class="main-video">

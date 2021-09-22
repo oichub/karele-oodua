@@ -12,9 +12,8 @@ body{
 }
 .heading{
   color: #444;
-  font-size: 30px;
-  text-align: center;
-  padding: 10px;
+  font-size: 20px;  
+  padding: 5px;
 }
 .contained{
   display: grid;
