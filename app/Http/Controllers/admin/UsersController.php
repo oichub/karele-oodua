@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Account;
 use App\User;
 use App\Video;
 use App\Subscriber;
@@ -55,6 +56,7 @@ class UsersController extends Controller
         $user->role ="user";
         $user->slug =strtolower(str_replace(" ", "-", $request->name)).time();
         $user->totalsub = 0;
+        $user->status = "active";
         $user->balance =0.00;
         $user->password = Hash::make($request->phone);
         $user->save();
@@ -67,16 +69,20 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
         //
-        $user = User::where('slug', $id)->firstOrFail();
-        $videos  = Video::where('date', '>', now())->get();
-        $upcoming = count($videos);
-        $recentsub = Subscriber::with(['user', 'video'])->orderBy('id', 'desc')->where(['user_id'=>$user->id])->limit(10)->get();
-        $allsub = Subscriber::with(['user', 'video'])->orderBy('id', 'desc')->where(['user_id'=>$user->id])->get();
-    //    return $subscribed;
-        return view('users.admin.users.users_details', compact(['user', 'upcoming', 'videos','recentsub', 'allsub']));
+        $user = User::where('slug', $slug)->firstOrFail();  
+        $user_id = $user->id;              
+        $historys  = Account::where('user_id', $user_id)->get();    
+        return view('admin.users.users_details', compact(['user', 'historys']));
+    }
+
+    public function pending(){        
+         //
+         $pending_users  = User::where('role', 'user')->where('status', 'pending')->get();
+         // return $users;
+         return view('admin.users.pending_users', compact(['pending_users']));
     }
 
     /**
@@ -98,11 +104,16 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
-        //
+        $input= $request->all();
+        $status = 'active';
+        $input['status'] = $status;       
+        User::where('slug', $slug)->first()->update($input);        
+        return redirect()->back()->with('success', "User activated successfully");
+        
     }
-
+   
     /**
      * Remove the specified resource from storage.
      *
@@ -110,7 +121,8 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {                     
+        User::findOrfail($id)->forceDelete();
+        return redirect()->back()->with('success', "User details deleted successfully");
     }
 }

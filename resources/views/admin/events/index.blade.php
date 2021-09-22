@@ -6,7 +6,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1> EVents</h1>
+          <h1> Events</h1>
         </div>
       </div>
     </div>
@@ -57,7 +57,7 @@
       $today = strtotime(date("Y-m-d"));
 
      @endphp
-    <td>{{$event->name}}</td>
+    <td>{{$event->title}}</td>
     <td>{{ $date}}</td>
     <td>
       @if($today > $eventdate)

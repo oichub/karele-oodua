@@ -81,8 +81,8 @@
         </div>
 
         <div class="card-body">
-             <!--------Live Video------------->
-           {!! $livevideo->embeded!!}
+             <!--------Live Video------------->           
+           <iframe src="{{$livevideo->url}}" preload="none" frameborder="0" width="100%" height="500" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
            {{-- {!! $livevideo->chat!!} --}}
              <!--------Live Video------------->
           </div>

@@ -90,16 +90,21 @@
           <!-- Users -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
+              <i class="nav-icon fas fa-user"></i>
               <p>Users</p>
               <i class="right fas fa-angle-left"></i>
-
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('users.create') }}" class="nav-link">
                   <i class="fas fa-user-plus nav-icon"></i>
                   <p>Add Users</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('/users/admin/users/pending') }}" class="nav-link">
+                  <i class="fas fa-user-minus nav-icon"></i>
+                  <p>Pending Users</p>
                 </a>
               </li>
               <li class="nav-item">

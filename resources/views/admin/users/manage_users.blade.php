@@ -7,19 +7,18 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <div class="card-title"><h2 class="text-uppercase text-center font-weight-bold py-3">Manage users</h2></div>
+            <div class="card-title"><h4 class="text-uppercase text-center font-weight-bold">Manage users</h4></div>
           </div>
           <!-- /.card-header -->
-          <div class="card-body">
+          <div class="card-body table-responsive">
             <table id="example1" class="table table-bordered table-hover">
               <thead>
               <tr>
                 <th>S/N</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Phone Number</th>
-                <th>Total Subscribed</th>
-                <th>Action</th>
+                <th>Phone Number</th>                
+                <th>Payment History</th>
               </tr>
               </thead>
               <tbody>
@@ -31,10 +30,9 @@
     <td>{{ ++$i }}</td>
     <td>{{ $user->name }}</td>
     <td>{{ $user->email }}</td>
-    <td>{{ $user->phone }}</td>
-    <td>{{ $user->totalsub }}</td>
+    <td>{{ $user->phone }}</td>    
     <td>
-        <a href="{{route('users.show', $user->slug)}}"   class="btn btn-sm btn-primary"  >More<i class="ml-2 fa fa-angle-double-right"></i></a>
+        <a href="{{route('users.show', $user->slug)}}"   class="btn btn-sm btn-primary"  >View<i class="ml-2 fa fa-angle-double-right"></i></a>
 
     </td>
 </tr>
@@ -46,9 +44,8 @@
                 <th>S/N</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Phone Number</th>
-                <th>Total Subscribed</th>
-                <th>Action</th>
+                <th>Phone Number</th>                
+                <th>Payment History</th>
               </tr>
               </tfoot>
             </table>
