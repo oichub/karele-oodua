@@ -147,7 +147,7 @@
         headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
-        url:'{{route('confirm_subscription')}}',
+        url: "{{URL::to('/users/user/confirmed_subscription')}}",        
         data:'subscribed='+id,
         success:function(data){
           $('#subscribe').html(data);

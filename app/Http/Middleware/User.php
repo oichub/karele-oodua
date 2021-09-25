@@ -20,9 +20,6 @@ class User
             return redirect()->route('login')->with('status', 'Please Login');
         }elseif(Auth::user()->role =="admin"){
              return redirect()->route('adminDashboard');
-        // }elseif(Auth::user()->role =="user"){
-            // return redirect()->route('index');
-
         }else{
             return $next($request);
         }

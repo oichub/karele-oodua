@@ -128,6 +128,8 @@ class RegisterController extends Controller
             ->subject('Welcome to Karele Oodua')
             ->from('info@kareleoodua.com', 'Karele-Oodua');
         });
+
+        
         return $user;
     }
 }

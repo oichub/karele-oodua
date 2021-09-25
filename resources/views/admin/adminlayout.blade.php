@@ -174,9 +174,13 @@
               </li>
             </ul>
           </li>
+<<<<<<< HEAD
           <!-- // video -->
 
 
+=======
+          <!-- // video --
+>>>>>>> 8faade6f352016cac07b31ab12272b61abc50cfc
              <!-- Admin -->
              <li class="nav-item has-treeview">
               <a href="#" class="nav-link">

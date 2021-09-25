@@ -15,13 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
- //  Paystack
-Route::post('/pay', 'Paystack\PaymentController@redirectToGateway')->name('pay');
-Route::get('/payment/callback', 'Paystack\PaymentController@handleGatewayCallback');
-
-
-
-
 // Route::get('/', function () {
 //     return view('pages.index');
 // })->name('home');
@@ -59,17 +52,25 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::get('users/admin/users/pending', 'admin\UsersController@pending')->name('users.pending');
     
 });
+
 Route::group(['middleware' => ['auth', 'user', 'verified']], function () {
     //Route::get('/home', 'HomeController@index')->name('index');
     Route::get('/users/dashboard', 'users\UsersController@index')->name('usersdashboard');
+    Route::get('/users/profile', 'users\UsersController@profile')->name('usersprofile');
+    Route::get('/users/user/subscribe', 'users\UsersController@subscription')->name('subscribe');
+    Route::post('/users/user/subscribed', 'users\UsersController@subscribe')->name('subscribe.now');
+    Route::get('/users/user/makepayment', 'users\UserPaymentController@makepayment');
+    Route::post('/users/user/verify-payment', 'users\UserPaymentController@verifypayment');
+    Route::post('/users/user/payment', 'users\PayPalController@payment')->name('payment');
+    Route::get('/users/user/cancel', 'users\PayPalController@cancel')->name('payment.cancel');
+    Route::get('/users/user/payment/success', 'users\PayPalController@success')->name('payment.success');
     Route::resource('/users/user', 'users\UsersController');
     Route::resource('/users/account', 'users\UsersAccount');
-    Route::resource('/user/videos/video', 'users\UserVideoController');
-    Route::resource('/users/usersubscribed', 'users\SubscribeController');
-    Route::get('/subscibed/video/{userid}/{videoid}/{subid}/{video}', 'users\SubscribeController@subscriber')->name('subscribed_videos');
+    Route::resource('/user/videos/previousvideos', 'users\UserVideoController');   
+    // Route::get('/users/videos/livevideo', 'users\UserVideoController@livevideo')->name('livevideos');
     Route::get('/users/change_password', 'users\UsersController@gotochangepassword')->name('change_password');
     Route::put('user_change_password', 'users\UsersController@changepassword')->name('user_change_password');
-    Route::post('congirmed_subscription', 'users\UserVideoController@confirm_subscription')->name('confirm_subscription');
-
+    Route::post('/users/user/confirm_subscription', 'users\UserVideoController@confirm_subscription')->name('confirm_subscription');
+    // 
 });
 

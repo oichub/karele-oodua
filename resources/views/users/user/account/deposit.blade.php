@@ -1,72 +1,139 @@
 @extends('layouts.users.userlayout')
-@section('title', ' Payment')
+@section('title', ' Make Payment')
 @section('content')
-<div class="container">
-    <div class="w-50 ml-auto mr-auto">
-        <form method="POST" action="{{ route('pay') }}" accept-charset="UTF-8" class="form-horizontal" role="form">
-            <div class="row" style="margin-bottom:40px;">
-                <div class="col-md-8 col-md-offset-2">
-                    <p>
-                        <div>
-                            Lagos Eyo Print Tee Shirt
-                            ₦ 2,950
-                        </div>
-                    </p>
-                    <input type="hidden" name="email" value="otemuyiwa@gmail.com"> {{-- required --}}
-                    <input type="hidden" name="orderID" value="345">
-                    <input type="hidden" name="amount" value="800"> {{-- required in kobo --}}
-                    <input type="hidden" name="quantity" value="3">
-                    <input type="hidden" name="currency" value="NGN">
-                    <input type="hidden" name="metadata" value="{{ json_encode($array = ['key_name' => 'value',]) }}" > {{-- For other necessary things you want to add to your payload. it is optional though --}}
-                    <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
-                    {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
+<div class="container row" style="padding-top: 100px;">
 
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}"> {{-- employ this in place of csrf_field only in laravel 5.0 --}}
-                    <p>
-                        <button class="btn btn-success btn-lg btn-block" type="submit" value="Pay Now!">
-                            <i class="fa fa-plus-circle fa-lg"></i> Pay Now!
-                        </button>
-                    </p>
-                </div>
-            </div>
-        </form
-        {{--  <h2 class="text-center text-uppercase font-weight-bold py-5">Deposit</h2>
-        @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong style="font-size:15px;">Success :{{session('success') }}</strong><br/>
-        </div>
-        @endif
-        @if($errors->any())
-        <div class="alert alert-danger alert-dismissible fade show">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <strong style="font-size:20px;">Oops!
-               {{ "Kindly rectify below errors" }}</strong><br/>
-          @foreach ($errors->all() as $error)
-          {{$error }} <br/>
-          @endforeach
-        </div>
-        @endif
-
-        <form action="{{ route('account.store') }}" method="post">
-            @csrf
-            <div class="form-group row">
-                <label for="inputEmail" class="col-sm-2 col-form-label">Amount</label>
-                <div class="col-sm-10">
-                  <input type="number" value="{{ old('amount') }}" class="form-control{{ $errors->has('amount') ? ' is-invalid' : '' }} " name="amount" placeholder="Enter Amount ">
-                  @if ($errors->has('amount'))
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $errors->first('amount') }}</strong>
-                  </span>
-                  @endif
-                 </div>
-                 {{-- <div class="form-group">
-                    <div class="offset-sm-2 col-sm-10 my-2">
-                      <button type="submit" class="btn btn-success btn-block btn-lg">Deposit</button>
-                    </div>
-                   </div> --}}
-                </div>
-        </form>
+  <div class="col-md-4 offset-md-4">
+    <h4 style="text-align: center; padding-bottom:10px;">Fund your Karele Account</h4>
+    <div class="card">
+    @if (session('error') || session('success'))
+    <div class="alert alert-success alert-dismissible fade show">
+      <p class="{{ session('error') ? 'error':'success' }}">
+        {{ session('error') ?? session('success') }}
+      </p>
     </div>
+    @endif 
+      <div class="card-body">
+        <p class="card-box-msg">Choose your payment method</p>
+       
+        <form id="form-shower">
+          <div class="input-group mb-3">
+            <select id="paymentType" class="custom-select" required>
+              <option value="" selected disabled>Select payment method</option>
+              <option value="payPalForm">PayPal</option>
+              <option value="paymentform">FlutterWave</option>
+            </select>
+          </div>
+        </form> 
+        <!-- flutterwave form start     -->
+        <form id="paymentform" style="display: none;">
+          @csrf
+          <p class="card-box-msg">Enter amount to fund your Account <a style="float: right;" href="javascript:document.location.reload();"><i class="fa fa-sync" aria-hidden="true"></i></a></p>          
+          <div class="input-group mb-3">
+            <input type="number" id="amount" name="amount" class="form-control" placeholder="Amount" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span>$</span>
+              </div>
+            </div>
+          </div>         
+          <input type="hidden" id="email" value="{{$user->email}}"> 
+          <input type="hidden" id="name" value="{{$user->name}}">          
+          <input type="hidden" id="phone" value="{{$user->phone}}">
+          <input type="hidden" id="userid" value="{{$user->slug}}">        
+            <div class="col-12">
+              <button class="btn btn-success btn-lg btn-block" type="submit" value="Pay Now!">
+                <i class="fa fa-plus-circle fa-lg"></i> Pay Now!
+              </button>
+            </div>            
+        </form> 
+        <!-- Flutterwave form end -->
+        <!-- Paypal form start -->
+        <form id="payPalForm" action="{{ route('payment') }}" method="post" style="display: none;">
+          @csrf
+          <p class="card-box-msg">Enter amount to fund your Account <a style="float: right;" href="javascript:document.location.reload();"><i class="fa fa-sync" aria-hidden="tr"></i></a></p>
+          <div class="input-group mb-3">
+            <input type="number" id="amount" name="amount" class="form-control" placeholder="Amount" required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span>$</span>
+              </div>
+            </div>
+          </div>         
+          <input type="hidden" id="email" value="{{$user->email}}"> 
+          <input type="hidden" id="name" name="name" value="{{$user->name}}">          
+          <input type="hidden" id="phone" value="{{$user->phone}}">
+          <input type="hidden" id="userid" value="{{$user->slug}}">        
+            <div class="col-12">
+            <button class="btn btn-warning btn-lg btn-block"><i class="fab fa-paypal"></i> Pay With <span style="color:midnightblue;">Pay</span><span style="color:blue;">pal</button>          
+            </div>          
+        </form>  
+        <!-- Paypal form end     -->
+      </div> 
+    </div>   
+  </div>   
 </div>
+@endsection
+@section('script')
+  <script src="https://checkout.flutterwave.com/v3.js"></script>
+  <script>
+    $("#paymentType").on("change", function(){
+      $("#" + $(this).val()).show().siblings().hide();
+    })
+  </script>
+ <script>
+     $(document).ready(function () {
+         $('#paymentform').submit(function (e) { 
+             e.preventDefault();
+             var name = $('#name').val();
+             var email = $('#email').val();
+             var phone_number = $('#phone').val();             
+             var amount = parseInt($('#amount').val()) ;
+             // function payment
+             makePayment(email,name, phone_number, amount)
+         });
+     });
+ </script>
+ <script>
+    function makePayment(email,name, phone_number, amount) {
+      FlutterwaveCheckout({
+        public_key: "FLWPUBK_TEST-f1d619076aaca1ba96dc7890df05f884-X",
+        tx_ref: "RX1_{{substr(rand(0, time()), 0, 7)}}",
+        amount,
+        currency: "USD",
+        country: "NG",
+        payment_options: " ",
+        customer: {
+          email,
+          phone_number,
+          name,
+        },
+        callback: function (data) {
+          // console.log(data);
+         var transaction_id = data.transaction_id;
+         var _token = $("input[name='_token']").val();
+          $.ajax({
+            type: "POST",
+            url: "{{URL::to('users/user/verify-payment')}}",
+            data: {
+              _token,
+              transaction_id,
+          },
+            success: function (response) {              
+              console.log(response);
+            }
+          });
+        },
+        onclose: function() {
+          
+          // console.log('Trasaction cancelled');
+        },
+        customizations: {
+          title: "Karele Oodua Lafefe",
+          description: "Karele Oodua Lafefe yearly subscription",
+          logo: "https://drive.google.com/file/d/1i_8vlVvXi8HG1sbh7IFv2Z2c_zPu4OaD/view",
+        },
+      });
+    }
+  </script>
 @endsection

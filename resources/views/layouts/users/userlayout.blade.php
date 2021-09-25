@@ -17,8 +17,8 @@
   <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('plugins/dist/css/adminlte.min.css') }}">
-  {{--  <script src="{{ asset('plugins/datatables/jquery.dataTables.js')}}"></script>  --}}
-  {{--  <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>  --}}
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css')}}">
   <!-- Google Font: Source Sans Pro -->
@@ -41,7 +41,15 @@
           <a href="{{ url('/') }}" class="nav-link">Home</a>
         </li>
       </ul>
-    </nav>
+      <ul class="navbar-nav ml-auto mr-2">
+        <li class="nav-item">          
+          <button class="btn btn-info"><span class="info-box-text">Balance: </span> ${{$user->balance}}</button>
+        </li> 
+        <!-- <li class="nav-item ml-3">
+          <button class="btn btn-warning"><span class="info-box-text">Upcoming Event: </span> </button>
+        </li>        -->
+      </ul>
+    </nav>    
     <!-- /.navbar -->
  <!-- Body -->
 
@@ -51,7 +59,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ url('/') }}" class="brand-link">
-      <span class="brand-text font-weight-light">KARELE</span>
+      <span class="brand-text font-weight-light">KARELE OODUA</span>
     </a>
 
     <!-- Sidebar -->
@@ -71,7 +79,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="{{ route('usersdashboard') }}" class="nav-link active">
+            <a href="{{ route('usersdashboard') }}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -79,35 +87,59 @@
             </a>
 
           </li>
-
           <!-- Students -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
-              <p>Account</p>
+              <p>Payment</p>
               <i class="right fas fa-angle-left"></i>
 
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('account.create') }}" class="nav-link">
+                <a href="{{ url('/users/user/makepayment') }}" class="nav-link">
                   <i class="fas fa-user-plus nav-icon"></i>
-                  <p>Deposit</p>
+                  <p>Fund Account</p>
                 </a>
               </li>
+        
               <li class="nav-item">
-                <a href="{{ route('account.index') }}" class="nav-link">
-                  <i class="fas fa-clock"></i>
-                  <p>Account History</p>
+                <a href="{{ url('/users/user/subscribe') }}" class="nav-link">
+                  <i class="fas fa-user-plus nav-icon"></i>
+                  <p>Subscribe</p>
                 </a>
               </li>
-
-
+        
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-clock"></i>
+                  <p>Payment History</p>
+                </a>
+              </li>
             </ul>
           </li>
-          <!-- // Students -->
+          <!-- // Account -->
 
-
+  <!-- Video -->
+  <li class="nav-item">
+    <a href="{{route('previousvideos.index')}}" class="nav-link">
+      <i class="nav-icon fa fa-tv"></i>
+      <p>Videos</p>    
+    </a>
+  </li>  
+  <li class="nav-item">
+    <a href="{{ route('account.index') }}" class="nav-link">
+      <i class="fas fa-clock"></i>
+      <p>Account History</p>
+    </a>
+  </li> 
+  <li class="nav-item">
+    <a href="{{ route('usersprofile') }}" class="nav-link">
+      <i class="fas fa-user"></i>
+      <p>My Profile</p>
+    </a>
+  </li>  
+<!-- // Account -->
 
 
 
@@ -139,13 +171,13 @@
 </nav>
   </div>
   </aside>
-  {{--  @include('users.admin.layout.navbar')  --}}
+  
   <div class="content-wrapper">
    <div class="container-fluid">
   @yield('content')
   </div>
   </div>
-  {{--  @include('users.admin.layout.footer')  --}}
+  
 
   <!-- /.content-wrapper -->
 <footer class="main-footer">
