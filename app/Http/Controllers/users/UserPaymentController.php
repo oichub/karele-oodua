@@ -38,14 +38,26 @@ class UserPaymentController extends Controller
 
         curl_close($curl);        
         $res = json_decode($response);
-        // return $res->data->tx_ref;
+        // return $response;
+          
+        $bal = User::where('id', Auth::user()->id)->firstOrFail();
+        $getbal = $bal->balance;
+        $newbal = $res->data->amount + $getbal;
+
+        $data['newbal'] = User::where('id', Auth::user()->id)->first()->update([
+            'balance' => $newbal,
+        ]); 
+
        return Account::create([
             'user_id' => Auth::user()->id,
+            'transaction_id' => $res->data->id,
             'ref' =>  $res->data->tx_ref,            
             'status' => $res->status,
             'payment_method' => 'flutterwave',
+            'payment_type' => $res->data->payment_type,
+            'payment_reference' => $res->data->flw_ref,
             'amount' => $res->data->amount,
         ]);
-       
+    
         }
 }

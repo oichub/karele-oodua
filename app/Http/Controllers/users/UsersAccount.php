@@ -18,10 +18,12 @@ class UsersAccount extends Controller
      */
     public function index()
     {
-        //
-        $historys = Account::with(['user'])->where('user_id', Auth::user()->id)->get();
+        $user = User::where('id', Auth::user()->id)->firstOrFail();
+        if($historys = Account::with(['user'])->where('user_id', Auth::user()->id)->get()){          
+            return view('users.user.account.deposite_history', compact(['historys', 'user']));
+        }
         
-        return view('users.user.account.deposite_history', compact(['historys']));
+        return view('users.user.account.deposite_history', compact(['historys', 'user']));
 
     }
 
@@ -33,6 +35,7 @@ class UsersAccount extends Controller
     public function create()
     {
         //
+        
         return view('users.user.account.deposit');
     }
 

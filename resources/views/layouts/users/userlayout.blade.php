@@ -42,9 +42,12 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto mr-2">
-        <li class="nav-item">
-          <a href="{{asset('videos/oicvideo.mp4')}}" target="_parent" class="btn btn-danger"><i class="fa fa-video"></i> Live</a>          
-        </li>
+        <li class="nav-item">          
+          <button class="btn btn-info"><span class="info-box-text">Balance: </span> ${{$user->balance}}</button>
+        </li> 
+        <!-- <li class="nav-item ml-3">
+          <button class="btn btn-warning"><span class="info-box-text">Upcoming Event: </span> </button>
+        </li>        -->
       </ul>
     </nav>    
     <!-- /.navbar -->
@@ -96,9 +99,17 @@
               <li class="nav-item">
                 <a href="{{ url('/users/user/makepayment') }}" class="nav-link">
                   <i class="fas fa-user-plus nav-icon"></i>
-                  <p>Make Payment</p>
+                  <p>Fund Account</p>
                 </a>
               </li>
+        
+              <li class="nav-item">
+                <a href="{{ url('/users/user/subscribe') }}" class="nav-link">
+                  <i class="fas fa-user-plus nav-icon"></i>
+                  <p>Subscribe</p>
+                </a>
+              </li>
+        
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="fas fa-clock"></i>
@@ -120,6 +131,12 @@
     <a href="{{ route('account.index') }}" class="nav-link">
       <i class="fas fa-clock"></i>
       <p>Account History</p>
+    </a>
+  </li> 
+  <li class="nav-item">
+    <a href="{{ route('usersprofile') }}" class="nav-link">
+      <i class="fas fa-user"></i>
+      <p>My Profile</p>
     </a>
   </li>  
 <!-- // Account -->
@@ -154,13 +171,13 @@
 </nav>
   </div>
   </aside>
-  {{--  @include('users.admin.layout.navbar')  --}}
+  
   <div class="content-wrapper">
    <div class="container-fluid">
   @yield('content')
   </div>
   </div>
-  {{--  @include('users.admin.layout.footer')  --}}
+  
 
   <!-- /.content-wrapper -->
 <footer class="main-footer">
