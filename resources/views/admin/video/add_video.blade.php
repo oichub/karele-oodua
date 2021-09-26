@@ -28,14 +28,14 @@
 
             <form method="POST"  action="{{ route('uploadvideo') }}">
                 {{ csrf_field() }}
-               <!-----------Embeded Code---------------->
+               <!-----------url Code---------------->
    <div class="form-group row">
-    <label for="inputName" class="col-sm-2 col-form-label">Embeded Code</label>
+    <label for="inputName" class="col-sm-2 col-form-label">Video URL</label>
     <div class="col-sm-10">
-      <textarea row="5" name="embeded" class="form-control{{ $errors->has('embeded') ? ' is-invalid' : '' }}"></textarea>
-       @if ($errors->has('embeded'))
+      <textarea row="3" name="url" class="form-control{{ $errors->has('url') ? ' is-invalid' : '' }}"></textarea>
+       @if ($errors->has('url'))
       <span class="invalid-feedback" role="alert">
-        <strong>{{ $errors->first('embeded') }}</strong>
+        <strong>{{ $errors->first('url') }}</strong>
       </span>
       @endif
   </div>
@@ -43,10 +43,10 @@
         <div class="form-group row">
             <label for="inputName" class="col-sm-2 col-form-label">Event's Title </label>
             <div class="col-sm-10">
-              <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }} " id="inputName" name="name" value="{{ old('name') }}" placeholder="Event's name">
-              @if ($errors->has('name'))
+              <input type="text" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }} "  name="title" value="{{ old('title') }}" placeholder="Event's title">
+              @if ($errors->has('title'))
               <span class="invalid-feedback" role="alert">
-                <strong>{{ $errors->first('name') }}</strong>
+                <strong>{{ $errors->first('title') }}</strong>
               </span>
               @endif
           </div>

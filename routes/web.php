@@ -1,4 +1,5 @@
 <?php
+
 namespace App;
 
 use Illuminate\Support\Facades\Auth;
@@ -42,15 +43,15 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::resource('/users/admin/events', 'admin\AdminUpcomingEvent');
     Route::post('confirm_video_delete', 'admin\VideoController@confirmVideoDelete')->name('confirmVideoDelete');
     Route::resource('/admin/users', 'admin\UsersController');
-    Route::get('/admin/videos/upload', 'admin\VideoController@uploadvideo')->name('adminvideo.upload');      
+    Route::get('/admin/videos/upload', 'admin\VideoController@uploadvideo')->name('adminvideo.upload');
     Route::post('/admin/videos/save', 'admin\VideoController@store')->name('uploadvideo');
     Route::get('/admin/videos', 'admin\VideoController@index')->name('adminvideo.index');
     Route::put('/admin/videos-update{id}', 'admin\VideoController@update')->name('adminvideo.update');
+    Route::delete('/admin/videos-delete{id}', 'admin\VideoController@destroy')->name('adminvideo.delete');
     Route::get('/admin/live-video', 'admin\VideoController@livevideo')->name('adminvideo.live');
     Route::get('/users/admin/change_password', 'admin\AdminController@gotochangepassword')->name('admins_change_password');
     Route::put('admin_change_password', 'users\UsersController@changepassword')->name('admin_change_password');
     Route::get('users/admin/users/pending', 'admin\UsersController@pending')->name('users.pending');
-    
 });
 
 Route::group(['middleware' => ['auth', 'user', 'verified']], function () {
@@ -66,11 +67,10 @@ Route::group(['middleware' => ['auth', 'user', 'verified']], function () {
     Route::get('/users/user/payment/success', 'users\PayPalController@success')->name('payment.success');
     Route::resource('/users/user', 'users\UsersController');
     Route::resource('/users/account', 'users\UsersAccount');
-    Route::resource('/user/videos/previousvideos', 'users\UserVideoController');   
+    Route::resource('/user/videos/previousvideos', 'users\UserVideoController');
     // Route::get('/users/videos/livevideo', 'users\UserVideoController@livevideo')->name('livevideos');
     Route::get('/users/change_password', 'users\UsersController@gotochangepassword')->name('change_password');
     Route::put('user_change_password', 'users\UsersController@changepassword')->name('user_change_password');
     Route::post('/users/user/confirm_subscription', 'users\UserVideoController@confirm_subscription')->name('confirm_subscription');
     // 
 });
-

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+
 use App\Video;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,23 +14,23 @@ class VideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function livevideo(){
+    public function livevideo()
+    {
 
         return "Working";
-         
-     }
-     public function uploadvideo(){
+    }
+    public function uploadvideo()
+    {
 
         return view('admin.video.add_video');
-         
-     }
+    }
 
     public function index()
     {
         //
         $videos = Video::with(['user'])->orderBy('id', 'desc')->get();
         // return $video;
-        return view('admin.video.manage_video', compact(['videos']) );
+        return view('admin.video.manage_video', compact(['videos']));
     }
 
     /**
@@ -37,13 +38,14 @@ class VideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function confirmVideoDelete(Request $request){
-       
+    public function confirmVideoDelete(Request $request)
+    {
+
         $id = $request->delete;
         $video = Video::with(['file'])->where('id', $id)->firstOrFail();
         return view('modal.confirm_video_delete', compact(['video']));
     }
- 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -53,24 +55,25 @@ class VideoController extends Controller
     public function store(Request $request)
     {
         $this->validate(
-            $request, 
-        [
-            'name' => 'required|string|unique:videos,title',
-            'embeded' => 'required',
-        ],
-        
-        [
-            'name.required' => 'Please provide video title',
-            'embeded.required' => 'Embeded code is required'
-        ]);
-     $video = new Video;
-     $video->title = $request->name;
-     $video->embeded = $request->embeded;
-     $video->user_id = Auth::user()->id;
-     $video->slug = str_replace(" ", "-", strtolower($request->name)."-".time());
-     $video->save();
-     return redirect()->back()->with('success','Video has been successfully uploaded');
-}
+            $request,
+            [
+                'title' => 'required|string|unique:videos,title',
+                'url' => 'required',
+            ],
+
+            [
+                'title.required' => 'Please provide video title',
+                'url.required' => 'URL is required'
+            ]
+        );
+        $video = new Video;
+        $video->title = $request->title;
+        $video->url = $request->url;
+        $video->user_id = Auth::user()->id;
+        $video->slug = str_replace(" ", "-", strtolower($request->title) . "-" . time());
+        $video->save();
+        return redirect()->back()->with('success', 'Video has been successfully uploaded');
+    }
 
     /**
      * Display the specified resource.
@@ -103,7 +106,9 @@ class VideoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Video::where('slug', $request->slug)
+            ->update(['url' => $request->url, 'title' => $request->title]);
+        return redirect()->back()->with('success', 'Video has been successfully updated');
     }
 
     /**
@@ -114,12 +119,7 @@ class VideoController extends Controller
      */
     public function destroy($id)
     {
-        $video = Video::with(['file'])->where('id', $id)->firstOrFail();
-        $file = File::where('id', $video->file->id)->firstOrFail();
-        unlink(\public_path().$video->file->video);
-        $file->forceDelete();
-        $video->forceDelete();
-        return redirect()->back()->with('success', $video->title." deleted successfully");
-
+        Video::where('id', $id)->delete();
+        return redirect()->back()->with('success', " Video deleted successfully");
     }
 }

@@ -27,22 +27,22 @@
 
             <form class="form-horizontal"  action="{{ route('events.store') }}" enctype="multipart/form-data" method="POST">
                 {{ csrf_field() }}
-    <!-----------Embeded Code ---------------->
+    <!-----------url Code ---------------->
    <div class="form-group row">
-    <label for="inputName" class="col-sm-2 col-form-label">Embeded Code</label>
+    <label for="inputName" class="col-sm-2 col-form-label">Event UrL</label>
     <div class="col-sm-10">
-      <textarea row="5" name="embeded" class="form-control{{ $errors->has('embeded') ? ' is-invalid' : '' }}"></textarea>
-       @if ($errors->has('embeded'))
+      <input  name="url" class="form-control{{ $errors->has('url') ? ' is-invalid' : '' }}" />
+       @if ($errors->has('url'))
       <span class="invalid-feedback" role="alert">
-        <strong>{{ $errors->first('embeded') }}</strong>
+        <strong>{{ $errors->first('url') }}</strong>
       </span>
       @endif
   </div>
   </div>
   <div class="form-group row">
-    <label for="inputName" class="col-sm-2 col-form-label">Embeded Chat</label>
+    <label for="inputName" class="col-sm-2 col-form-label">Chat Url</label>
     <div class="col-sm-10">
-      <textarea row="5" name="chat" class="form-control{{ $errors->has('chat') ? ' is-invalid' : '' }}"></textarea>
+      <input  name="chat" class="form-control{{ $errors->has('chat') ? ' is-invalid' : '' }}" />
        @if ($errors->has('chat'))
       <span class="invalid-feedback" role="alert">
         <strong>{{ $errors->first('chat') }}</strong>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="form-group row">
                   <div class="offset-sm-2 col-sm-10">
-                    <button type="submit" class="btn btn-success btn-lg">Add Event</button>
+                    <button type="submit" class="btn btn-danger btn-lg">Add Event</button>
                   </div>
                 </div>
               </form>
