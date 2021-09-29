@@ -91,41 +91,8 @@
                 <span style="--i:9">s</span>
             </div>
          <div class="row">
-              <!-----//--EVent from database------->
-              @foreach ($events as $event)
-              @php
-              $event_picture=$event->demo_file ? $event->demo_file->name : "Not available";
-              @endphp
-                <div class="col-lg-4 col-md-6 item">
-                    <div class="card">
-                        <div class="card-header p-0 position-relative">
-                            <a href="#single">
-                                <img class="card-img-bottom d-block radius-image-full" src="{{asset( $event_picture)}}"
-                                    alt="Card image cap">
-                            </a>
-                        </div>
-                        <div class="card-body blog-details">
-                            <span class="label-blue">{{$event->name}}</span>
-                            <a href="#single" class="blog-desc">{{$event->description}}
-                            </a>
-                            <div class="author align-items-center mt-3 mb-1">
-                                <img src="pages/assets/images/testi1.jpg" alt="" class="img-fluid rounded-circle" />
-                                <ul class="blog-meta">
-                                    <li>
-                                        <a href="#single">Isabella ava</a> </a>
-                                    </li>
-                                    <li class="meta-item blog-lesson">
-                                        <span class="meta-value"> Jan 28 2021 </span>. <span
-                                            class="meta-value ml-2"><span class="fa fa-clock-o"></span> 1 min</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-                <!-----//--EVent from database------->
-                {{ $events->links() }}
+              <iframe src="{{$event->url}}" preload="none" frameborder="0" width="100%" height="500" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+         
             </div>
                </div>
     </div>

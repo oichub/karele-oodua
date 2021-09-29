@@ -9,9 +9,9 @@ class PagesController extends Controller
 {
    public function index()
    {
-    $today_date= date("Y-m-d");
-    $today_time = date("h:i a");
-    $events = Event::with('demo_file')->where('date', '>', $today_date )->where('time', '>', $today_time)->orderBy('id', 'DESC')->paginate(3);
-     return view('pages.index', compact('events'));
+      $today_date = date("Y-m-d");
+      $today_time = date("h:i");
+      $event = Event::orderBy('updated_at', 'DESC')->first();
+      return view('pages.index', compact(['event']));
    }
 }
