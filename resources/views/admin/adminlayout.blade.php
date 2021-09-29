@@ -90,16 +90,21 @@
           <!-- Users -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-users"></i>
+              <i class="nav-icon fas fa-user"></i>
               <p>Users</p>
               <i class="right fas fa-angle-left"></i>
-
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{{ route('users.create') }}" class="nav-link">
                   <i class="fas fa-user-plus nav-icon"></i>
                   <p>Add Users</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('/users/admin/users/pending') }}" class="nav-link">
+                  <i class="fas fa-user-minus nav-icon"></i>
+                  <p>Pending Users</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -111,6 +116,14 @@
             </ul>
           </li>
           <!-- // Users -->
+          <!-------Plans----------->
+          <li class="nav-item">
+            <a href="{{ route('plan.add') }}" class="nav-link">
+              <i class="fas fa-users"></i>
+              <p> Subscription Plan</p>
+            </a>
+          </li>
+         <!--------//-- Plan-------------->
           <!--------- Upcoming events -------->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -148,56 +161,29 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('videos.create') }}" class="nav-link">
-                   <i class="fas fa-upload"></i>
+                <a href="{{route('adminvideo.upload')}}" class="nav-link"> 
+                   <i class="fas fa-upload"></i> 
                   <p>Upload Video</p>
-
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('videos.index') }}" class="nav-link">
-                  <i class="fas fa-video"></i>
-                  <p>My Video</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('videos.index') }}" class="nav-link">
+                <a href="{{route('adminvideo.index')}}" class="nav-link"> 
                   <i class="fas fa-video"></i>
                   <p>Manage Video</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-wifi"></i>
-                  <p>Go live</p>
-                </a>
-              </li>
-             
-
-
             </ul>
           </li>
           <!-- // video -->
-
-
-             <!-- Agents -->
              <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
                 <p> Admin</p>
                 <i class="right fas fa-angle-left"></i>
-
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="fas fa-user-plus nav-icon"></i>
-                    <p>Add Admin</p>
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="{{route('adminsmanagement')}}" class="nav-link">
                     <i class="fas fa-users"></i>
                     <p>Manage Admin</p>
                   </a>

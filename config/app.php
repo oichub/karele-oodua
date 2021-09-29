@@ -175,7 +175,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        StuYam\KickboxValidator\KickboxValidatorServiceProvider::class // kickbox package
+        StuYam\KickboxValidator\KickboxValidatorServiceProvider::class, // kickbox package
+        Srmklive\PayPal\Providers\PayPalServiceProvider::class,
 
     ],
 
@@ -228,7 +229,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,  // paystack
-
+        'PayPal' => Srmklive\PayPal\Facades\PayPal::class
     ],
 
 ];

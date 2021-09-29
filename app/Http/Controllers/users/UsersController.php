@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\users;
 
+use App\Plan;
 use App\User;
 use App\Video;
+use App\Account;
+use App\Event;
+use Carbon\Carbon;
 use App\Subscriber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,24 +29,101 @@ class UsersController extends Controller
 //         return count($subscri);
 //       }
     public function index()
-    {
-        //
+    {   
         $user  = User::where('id', Auth::user()->id)->firstOrFail();
-        $videos  = Video::where('date', '>', now())->get();
-        $upcoming = count($videos);
-        $recentsub = Subscriber::with(['user', 'video'])->orderBy('id', 'desc')->where(['user_id'=>Auth::user()->id])->limit(10)->get();
-        $allsub = Subscriber::with(['user', 'video'])->orderBy('id', 'desc')->where(['user_id'=>Auth::user()->id])->get();
+        $present = Carbon::now();        
+        if($check = subscriber::where('user_id', Auth::user()->id)->where('status', 'active')->where('end_date', '>', $present)->first()){
+            $end = $check->end_date;
+            $status = $check->status;    
+            if($status == 'active' and $present<$end){
+                $videos = Video::get();
+                $recentvideos = Video::where('created_at', '<', now())->latest()->paginate(5);  
+                $lastvideo = Video::latest()->first();
+                $date = date('Y-m-d');
+                // date_default_timezone_set('Afica/Lagos');
+                $time = date('h:i');            
+                
+                if($livevideo  = Event::where('date', $date)->where('time', $time)->first()){
+                    // show live video                    
+                    return view('users.user.index', compact(['user', 'livevideo','recentvideos']));
+                }elseif($livevideo = Event::where('date', '>=', $date)->where('time', '>', $time)->first()){
+                    // show upcoming video                    
+                    return view('users.user.index', compact(['user', 'livevideo','recentvideos']));
+                }
+                // show last recent video
+                $livevideo = $lastvideo;
+                return view('users.user.index', compact(['user', 'recentvideos', 'livevideo']));
+            }              
+            $recentvideos = false; $livevideo = false;
+            return view('users.user.index', compact(['user', 'recentvideos', 'livevideo']));
+        }       
+            $recentvideos = false; $livevideo = false;
+            return view('users.user.index', compact(['user', 'recentvideos', 'livevideo']));
+        
+        
+        //$upcoming = count($videos);
+       // $recentsub = Subscriber::with(['user', 'video'])->orderBy('id', 'desc')->where(['user_id'=>Auth::user()->id])->limit(10)->get();
+        //$allsub = Subscriber::with(['user', 'video'])->orderBy('id', 'desc')->where(['user_id'=>Auth::user()->id])->get();
     //    return $subscribed;
-        return view('users.user.index', compact(['user', 'upcoming', 'videos','recentsub', 'allsub']));
+        
     }
 
+    public function profile()
+    {            
+        $user  = User::where('id', Auth::user()->id)->firstOrFail();             
+        return view('users.user.profile', compact(['user']));
+    }
+    public function subscription()
+    {   
+        $user = User::where('id', Auth::user()->id)->firstOrFail();
+        $plans= Plan::orderBy('name', 'desc')->get();
+        $present = Carbon::now();        
+        if($check = subscriber::where('user_id', Auth::user()->id)->where('status', 'active')->where('end_date', '>', $present)->first()){
+            $end = $check->end_date;
+            $status = $check->status;    
+            if($status == 'active' and $present<$end){
+                return redirect()->route('usersdashboard')->with('error', 'Sorry you still have an active subscription');
+            }              
+            return view('users.user.account.subscribe', compact(['plans', 'user']));
+        }return view('users.user.account.subscribe', compact(['plans', 'user']));
+        
+    }
+    public function subscribe(Request $request)    
+    {   
+        
+        $plan = $request->plan;
+        $amount = Plan::where('name', $plan)->firstOrFail();
+        $price = $amount->price;    
+        $dt = Carbon::now();        
+        $end_date = $dt->addyear(1);
+        
+        $bal = User::where('id', Auth::user()->id)->firstOrFail();
+        $balance = $bal->balance;
+        if($balance < $price){
+            return redirect()->back()->with('error', 'Sorry you dont have sufficient balance, please fund your account and try again');
+        }
+
+        $newbal = $balance - $price;            
+        Subscriber::create([
+            'user_id' => Auth::user()->id,
+            'amount' => $price,
+            'plan' => $plan,
+            'status' => 'active',
+            'end_date' => $end_date,
+        ]);
+        User::where('id', Auth::user()->id)->update([
+            'balance' => $newbal,
+        ]);
+        return redirect('/users/user/subscribe')->withSuccess('You have successfully subscribed to our videos');
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create()    
     {
+       
         //
     }
 
@@ -54,7 +135,15 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $account = new Account();
+        $account->amount = $request->amount;
+        $account->ref = "karele".time();
+        $account->user_id = Auth::user()->id;
+        $user = User::where('id', Auth::user()->id)->firstOrFail();
+        $user->balance +=$request->amount;
+        $user->update();
+        $account->save();
+        return redirect()->route('usersdashboard')->with('success', 'You have deposit '. $request->amount. ' naira successfully');
     }
 
     /**
@@ -63,12 +152,11 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+ 
+
 public function gotochangepassword(){
-    return view('users.user.change_password');
+    $user = User::where('id', Auth::user()->id)->firstOrFail();
+    return view('users.user.change_password', compact(['user']));
 }
 
 public function changepassword(ChangePassword $request)

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\users;
 
+use App\User;
 use App\Video;
+use Carbon\Carbon;
 use App\Subscriber;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -17,7 +19,20 @@ class UserVideoController extends Controller
      */
     public function index()
     {
-        //
+        $present = Carbon::now();  
+        $user = User::where('id', Auth::user()->id)->firstOrFail();
+        if($check = subscriber::where('user_id', Auth::user()->id)->where('status', 'active')->where('end_date', '>', $present)->first()){
+            $end = $check->end_date;
+            $status = $check->status;    
+            if($status == 'active' and $present<$end){
+                $latestvideo = Video::latest()->first();
+                $recentvideos = Video::where('created_at', '<', now())->get();
+               return view('users.user.videos.index', compact(['recentvideos', 'latestvideo', 'user']));
+            }              
+            return redirect()->route('usersdashboard')->with('error', 'Sorry your subscription is expired, Please again subscribe to watch our videos');          
+        }       
+        return redirect()->route('usersdashboard')->with('error', 'Sorry you dont have any active subscription, Please subscribe to watch our videos');          
+        
     }
 
     /**
@@ -25,9 +40,20 @@ class UserVideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $latestvideo = Video::latest()->first();
+        $user = User::where('id', Auth::user()->id)->firstOrFail();
+        $recentvideos = Video::where([
+            ['title', '!=', Null],
+            [function($query) use($request) {
+                if (($search = $request->search)){
+                    $query->orwhere('title', 'like', '%' .$search. '%')->get();
+                }
+            }]
+        ])->orderby('id', 'desc')->get();
+
+        return view('users.user.videos.index', compact(['recentvideos', 'latestvideo', 'user']));
     }
 
     /**
@@ -36,10 +62,22 @@ class UserVideoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    // public function livevideo()
+    // {
+    //     //
+    //     $present = Carbon::now();        
+    //     if($check = subscriber::where('user_id', Auth::user()->id)->where('status', 'active')->where('end_date', '>', $present)->first()){
+    //         $end = $check->end_date;
+    //         $status = $check->status;    
+    //         if($status == 'active' and $present<$end){
+    //             return redirect(asset('videos/oicvideo.mp4'));
+    //         }              
+    //         return redirect()->route('usersdashboard')->with('error', 'Sorry your subscription is expired, Please again subscribe to watch our videos');          
+    //     }       
+    //     return redirect()->route('usersdashboard')->with('error', 'Sorry you dont have any active subscription, Please subscribe to watch our videos');          
+        
+        
+    // }
 
     /**
      * Display the specified resource.
