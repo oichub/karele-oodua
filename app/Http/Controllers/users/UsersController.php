@@ -24,86 +24,95 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-//   public  function checkSub($user, $video){
-//         $subscri = Subscriber::where(['user_id'=>$user,'video_id'=>$video])->get();
-//         return count($subscri);
-//       }
+    //   public  function checkSub($user, $video){
+    //         $subscri = Subscriber::where(['user_id'=>$user,'video_id'=>$video])->get();
+    //         return count($subscri);
+    //       }
     public function index()
-    {   
+    {
+
+        // $timestamp = "2016-04-20 00:37:15";
+        // $start_date = date($timestamp);
+
+        // $expires = strtotime('+7 days', strtotime($timestamp));
+        // //$expires = date($expires);
+
+        // $date_diff = ($expires - strtotime($timestamp)) / 86400;
+
+        // echo "Start: " . $timestamp . "<br>";
+        // echo "Expire: " . date('Y-m-d H:i:s', $expires) . "<br>";
+
+        // return round($date_diff, 0) . " days left";
+
         $user  = User::where('id', Auth::user()->id)->firstOrFail();
-        $present = Carbon::now();        
-        if($check = subscriber::where('user_id', Auth::user()->id)->where('status', 'active')->where('end_date', '>', $present)->first()){
-            $end = $check->end_date;
-            $status = $check->status;    
-            if($status == 'active' and $present<$end){
-                $videos = Video::get();
-                $recentvideos = Video::where('created_at', '<', now())->latest()->paginate(5);  
-                $lastvideo = Video::latest()->first();
-                $date = date('Y-m-d');
-                // date_default_timezone_set('Afica/Lagos');
-                $time = date('h:i');            
-                
-                if($livevideo  = Event::where('date', $date)->where('time', $time)->first()){
-                    // show live video                    
-                    return view('users.user.index', compact(['user', 'livevideo','recentvideos']));
-                }elseif($livevideo = Event::where('date', '>=', $date)->where('time', '>', $time)->first()){
-                    // show upcoming video                    
-                    return view('users.user.index', compact(['user', 'livevideo','recentvideos']));
-                }
-                // show last recent video
-                $livevideo = $lastvideo;
-                return view('users.user.index', compact(['user', 'recentvideos', 'livevideo']));
-            }              
-            $recentvideos = false; $livevideo = false;
-            return view('users.user.index', compact(['user', 'recentvideos', 'livevideo']));
-        }       
-            $recentvideos = false; $livevideo = false;
-            return view('users.user.index', compact(['user', 'recentvideos', 'livevideo']));
-        
-        
-        //$upcoming = count($videos);
-       // $recentsub = Subscriber::with(['user', 'video'])->orderBy('id', 'desc')->where(['user_id'=>Auth::user()->id])->limit(10)->get();
-        //$allsub = Subscriber::with(['user', 'video'])->orderBy('id', 'desc')->where(['user_id'=>Auth::user()->id])->get();
-    //    return $subscribed;
-        
+        $present = Carbon::now()->toDateTimeString();
+        $subscriber = subscriber::where('user_id', Auth::user()->id)->where('status', 'active')->first();
+        $end = $subscriber->end_date;
+        $status = $subscriber->status;
+        $date_diff = (strtotime($end) - strtotime('now')) / 86400;
+        $day_left = round($date_diff, 0);
+        if ($status == 'active' and $present < $end) {
+
+            $videos = Video::orderBy('updated_at', 'DESC')->get();
+            $recentvideos = Video::orderBy('created_at', 'DESC')->paginate(10);
+            $lastvideo = Video::latest()->first();
+            $date = date('Y-m-d');
+            // date_default_timezone_set('Afica/Lagos');
+            $time = date('h:i');
+            if ($livevideo  = Event::orderBy('updated_at', 'DESC')->first()) {
+                // show live video                    
+                return view('users.user.index', compact(['user', 'livevideo', 'recentvideos', 'day_left', 'subscriber']));
+            }
+            // } elseif ($livevideo = Event::where('date', '>=', $date)->where('time', '>', $time)->first()) {
+            //     // show upcoming video                    
+            //     return view('users.user.index', compact(['user', 'livevideo', 'recentvideos', 'day_left', 'subscriber']));
+            // }
+            // show last recent video
+            // $livevideo = $lastvideo;
+            // return view('users.user.index', compact(['user', 'recentvideos', 'livevideo', 'day_left', 'subscriber']));
+        }
+
+        $recentvideos = false;
+        $livevideo = false;
+        return view('users.user.index', compact(['user', 'recentvideos', 'livevideo', 'day_left', 'subscriber']));
     }
 
     public function profile()
-    {            
-        $user  = User::where('id', Auth::user()->id)->firstOrFail();             
+    {
+        $user  = User::where('id', Auth::user()->id)->firstOrFail();
         return view('users.user.profile', compact(['user']));
     }
     public function subscription()
-    {   
+    {
         $user = User::where('id', Auth::user()->id)->firstOrFail();
-        $plans= Plan::orderBy('name', 'desc')->get();
-        $present = Carbon::now();        
-        if($check = subscriber::where('user_id', Auth::user()->id)->where('status', 'active')->where('end_date', '>', $present)->first()){
+        $plans = Plan::orderBy('name', 'desc')->get();
+        $present = Carbon::now();
+        if ($check = subscriber::where('user_id', Auth::user()->id)->where('status', 'active')->where('end_date', '>', $present)->first()) {
             $end = $check->end_date;
-            $status = $check->status;    
-            if($status == 'active' and $present<$end){
+            $status = $check->status;
+            if ($status == 'active' and $present < $end) {
                 return redirect()->route('usersdashboard')->with('error', 'Sorry you still have an active subscription');
-            }              
+            }
             return view('users.user.account.subscribe', compact(['plans', 'user']));
-        }return view('users.user.account.subscribe', compact(['plans', 'user']));
-        
+        }
+        return view('users.user.account.subscribe', compact(['plans', 'user']));
     }
-    public function subscribe(Request $request)    
-    {   
-        
+    public function subscribe(Request $request)
+    {
+
         $plan = $request->plan;
         $amount = Plan::where('name', $plan)->firstOrFail();
-        $price = $amount->price;    
-        $dt = Carbon::now();        
+        $price = $amount->price;
+        $dt = Carbon::now();
         $end_date = $dt->addyear(1);
-        
+
         $bal = User::where('id', Auth::user()->id)->firstOrFail();
         $balance = $bal->balance;
-        if($balance < $price){
+        if ($balance < $price) {
             return redirect()->back()->with('error', 'Sorry you dont have sufficient balance, please fund your account and try again');
         }
 
-        $newbal = $balance - $price;            
+        $newbal = $balance - $price;
         Subscriber::create([
             'user_id' => Auth::user()->id,
             'amount' => $price,
@@ -121,9 +130,9 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()    
+    public function create()
     {
-       
+
         //
     }
 
@@ -137,13 +146,13 @@ class UsersController extends Controller
     {
         $account = new Account();
         $account->amount = $request->amount;
-        $account->ref = "karele".time();
+        $account->ref = "karele" . time();
         $account->user_id = Auth::user()->id;
         $user = User::where('id', Auth::user()->id)->firstOrFail();
-        $user->balance +=$request->amount;
+        $user->balance += $request->amount;
         $user->update();
         $account->save();
-        return redirect()->route('usersdashboard')->with('success', 'You have deposit '. $request->amount. ' naira successfully');
+        return redirect()->route('usersdashboard')->with('success', 'You have deposit ' . $request->amount . ' naira successfully');
     }
 
     /**
@@ -152,30 +161,31 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
- 
 
-public function gotochangepassword(){
-    $user = User::where('id', Auth::user()->id)->firstOrFail();
-    return view('users.user.change_password', compact(['user']));
-}
 
-public function changepassword(ChangePassword $request)
-{
-    // return $id;
-    if (!(Hash::check($request->get('oldpassword'), Auth::user()->password))) {
-        return redirect()->back()->with('error', 'Sorry current password is wrong!!!');
+    public function gotochangepassword()
+    {
+        $user = User::where('id', Auth::user()->id)->firstOrFail();
+        return view('users.user.change_password', compact(['user']));
     }
-    if (strcmp($request->get('oldpassword'), $request->get('password')) == 0) {
-        return redirect()->back()->with('error', 'Sorry new password cannot be the same with current password!!!');
+
+    public function changepassword(ChangePassword $request)
+    {
+        // return $id;
+        if (!(Hash::check($request->get('oldpassword'), Auth::user()->password))) {
+            return redirect()->back()->with('error', 'Sorry current password is wrong!!!');
+        }
+        if (strcmp($request->get('oldpassword'), $request->get('password')) == 0) {
+            return redirect()->back()->with('error', 'Sorry new password cannot be the same with current password!!!');
+        }
+        $password = Hash::make($request->password);
+        User::findOrfail(Auth::user()->id)->update([
+            'password' => $password
+        ]);
+        // auth()->logout();
+        Auth::logout();
+        return redirect()->route('login')->with('success', 'Password changed successfully, please re-login to continue');
     }
-    $password = Hash::make($request->password);
-    User::findOrfail(Auth::user()->id)->update([
-        'password' => $password
-    ]);
-    // auth()->logout();
-    Auth::logout();
-    return redirect()->route('login')->with('success', 'Password changed successfully, please re-login to continue');
-}
 
     /**
      * Show the form for editing the specified resource.
