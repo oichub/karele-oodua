@@ -42,24 +42,20 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto mr-2">
-        <li class="nav-item">          
+         <li class="nav-item">          
           <button class="btn btn-info"><span class="info-box-text">Balance: </span> ${{$user->balance}}</button>
         </li> 
-        <!-- <li class="nav-item ml-3">
-          <button class="btn btn-warning"><span class="info-box-text">Upcoming Event: </span> </button>
-        </li>        -->
       </ul>
     </nav>    
     <!-- /.navbar -->
  <!-- Body -->
 
- {{-- @require('.contact') --}}
 
 
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ url('/') }}" class="brand-link">
-      <span class="brand-text font-weight-light">KARELE OODUA</span>
+      <span class="brand-text font-weight-light">Karele Oodua Lafefe</span>
     </a>
 
     <!-- Sidebar -->
@@ -177,14 +173,12 @@
   @yield('content')
   </div>
   </div>
-  
-
   <!-- /.content-wrapper -->
 <footer class="main-footer">
-    <strong>Copyright &copy; {{ date('Y')}} KARELE OODUA</strong>
+    <strong>Copyright &copy; {{ date('Y')}} Karele Oodua Lafefe</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
-      <b>Designed By OIC Hub
+      <b>Powered By OIC Hub
     </div>
   </footer>
 

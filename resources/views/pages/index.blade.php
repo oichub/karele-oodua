@@ -92,8 +92,7 @@
             </div>
          <div class="row">
               <iframe src="{{$event->url}}" preload="none" frameborder="0" width="100%" height="500" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-         
-            </div>
+                     </div>
                </div>
     </div>
     <!-- //blog section -->

@@ -2,51 +2,8 @@
 @section('title', 'Previous Video')
 @section('style')
 <link rel="stylesheet" href="{{asset('style.css') }}">
-<style>
-.gallery{
-  border: 1px transparent solid;  
-  /* padding: 50px; */
-  margin-top: 20px;
-  padding-left: 5px;
-  position: relative;  
-}
-.gallery .play{
-   position: absolute;
-   top: 40%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   -webkit-transform: translate(-50%, -50%);
-   background-color: #555;   
-   font-size:16px;
-   padding: 12px 18px;
-   border: none;
-   color: #fff;
-   cursor: pointer;
-   opacity: .8;
-   border-radius: 20px;   
-}
-.gallery .play:hover{
-  background-color: #ff4c4c;
-  /* padding: 10px; */
-}
-.text{
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  margin-top: 5px;
-  padding: 0px 10px 0px 0px;
-  color: black;
-}
-
-h1{
-  padding-left:10px;
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-}
-
-</style>
 @endsection
 @section('content')
-
-
-<div>
 <h1>Videos</h1>
 <!-- <form class="float-right mt-2">
   <input type="text" name="search" placeholder="Search..">
@@ -59,7 +16,7 @@ h1{
 <div class="card" style="clear:both">
   <div class="card-header">
     <div class="card-title">
-      <h4 class="heading float-left">Previous Videos</h4>      
+      <h4 class="heading float-left">Videos</h4>      
     </div>
       <form action="{{route('previousvideos.create')}}" method="get" class="float-right">
         @csrf
