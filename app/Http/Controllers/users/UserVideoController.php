@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\users;
 
 use App\User;
+use App\Event;
 use App\Video;
 use Carbon\Carbon;
 use App\Subscriber;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,7 +28,9 @@ class UserVideoController extends Controller
             $status = $check->status;    
             if($status == 'active' and $present<$end){
                 $latestvideo = Video::latest()->first();
-                $recentvideos = Video::where('created_at', '<', now())->get();
+                $date = date('Y-m-d');
+                $events = DB::table('events')->where('date', '<=', $date)->select('url', 'title');                
+                $recentvideos = DB::table('videos')->where('created_at', '<', now())->select('url', 'title')->union($events)->get();               
                return view('users.user.videos.index', compact(['recentvideos', 'latestvideo', 'user']));
             }              
             return redirect()->route('usersdashboard')->with('error', 'Sorry your subscription is expired, Please again subscribe to watch our videos');          

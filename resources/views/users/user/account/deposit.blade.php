@@ -16,19 +16,26 @@
       <div class="card-body">
         <p class="card-box-msg">Choose your payment method</p>
        
-        <form id="form-shower">
+        <!-- <form id="form-shower">
           <div class="input-group mb-3">
-            <select id="paymentType" class="custom-select" required>
+            <select class="custom-select" required>
               <option value="" selected disabled>Select payment method</option>
               <option value="payPalForm">PayPal</option>
               <option value="paymentform">FlutterWave</option>
             </select>
           </div>
-        </form> 
+        </form>  -->
         <!-- flutterwave form start     -->
-        <form id="paymentform" style="display: none;">
+        <form id="paymentform">
           @csrf
-          <p class="card-box-msg">Enter amount to fund your Account <a style="float: right;" href="javascript:document.location.reload();"><i class="fa fa-sync" aria-hidden="true"></i></a></p>          
+          <!-- <p class="card-box-msg">Enter amount to fund your Account <a style="float: right;" href="javascript:document.location.reload();"><i class="fa fa-sync" aria-hidden="true"></i></a></p>           -->
+          <div class="input-group mb-3">
+            <select class="custom-select" required>
+              <option value="" selected disabled>Select payment method</option>
+              <!-- <option value="payPalForm">PayPal</option> -->
+              <option value="flutterwave">FlutterWave</option>
+            </select>
+          </div>
           <div class="input-group mb-3">
             <input type="number" id="amount" name="amount" class="form-control" placeholder="Amount" required>
             <div class="input-group-append">
@@ -49,7 +56,7 @@
         </form> 
         <!-- Flutterwave form end -->
         <!-- Paypal form start -->
-        <form id="payPalForm" action="{{ route('payment') }}" method="post" style="display: none;">
+        <!-- <form id="payPalForm" action="{{ route('payment') }}" method="post" style="display: none;">
           @csrf
           <p class="card-box-msg">Enter amount to fund your Account <a style="float: right;" href="javascript:document.location.reload();"><i class="fa fa-sync" aria-hidden="tr"></i></a></p>
           <div class="input-group mb-3">
@@ -67,7 +74,7 @@
             <div class="col-12">
             <button class="btn btn-warning btn-lg btn-block"><i class="fab fa-paypal"></i> Pay With <span style="color:midnightblue;">Pay</span><span style="color:blue;">pal</button>          
             </div>          
-        </form>  
+        </form>   -->
         <!-- Paypal form end     -->
       </div> 
     </div>   
@@ -76,11 +83,11 @@
 @endsection
 @section('script')
   <script src="https://checkout.flutterwave.com/v3.js"></script>
-  <script>
+  <!-- <script>
     $("#paymentType").on("change", function(){
       $("#" + $(this).val()).show().siblings().hide();
     })
-  </script>
+  </script> -->
  <script>
      $(document).ready(function () {
          $('#paymentform').submit(function (e) { 
