@@ -46,11 +46,12 @@ class UsersController extends Controller
 
         $user  = User::where('id', Auth::user()->id)->firstOrFail();
         $present = Carbon::now()->toDateTimeString();
-        $subscriber = subscriber::where('user_id', Auth::user()->id)->where('status', 'active')->first();
+        if($subscriber = subscriber::where('user_id', Auth::user()->id)->where('status', 'active')->first()){
         $end = $subscriber->end_date;
         $status = $subscriber->status;
         $date_diff = (strtotime($end) - strtotime('now')) / 86400;
         $day_left = round($date_diff, 0);
+        $ending_date= date("Y-m-d", strtotime($subscriber->end_date));
         if ($status == 'active' and $present < $end) {
             $videos = Video::orderBy('updated_at', 'DESC')->get();
             $recentvideos = Video::orderBy('created_at', 'DESC')->paginate(10);
@@ -60,7 +61,7 @@ class UsersController extends Controller
             $time = date('h:i');
             if ($livevideo  = Event::orderBy('updated_at', 'DESC')->first()) {
                 // show live video                    
-                return view('users.user.index', compact(['user', 'livevideo', 'recentvideos', 'day_left', 'subscriber']));
+                return view('users.user.index', compact(['user', 'livevideo', 'recentvideos', 'day_left', 'subscriber', 'ending_date']));
             }
             // } elseif ($livevideo = Event::where('date', '>=', $date)->where('time', '>', $time)->first()) {
             //     // show upcoming video                    
@@ -73,7 +74,13 @@ class UsersController extends Controller
 
         $recentvideos = false;
         $livevideo = false;
-        return view('users.user.index', compact(['user', 'recentvideos', 'livevideo', 'day_left', 'subscriber']));
+        return view('users.user.index', compact(['user', 'recentvideos', 'livevideo', 'day_left', 'subscriber', 'ending_date']));        
+    }$recentvideos = false;
+    $livevideo = false;
+    $day_left=false;
+    $subscriber = false;
+    $ending_date = false;
+    return view('users.user.index', compact(['user', 'recentvideos', 'livevideo', 'day_left', 'subscriber', 'ending_date']));
     }
 
     public function profile()

@@ -38,7 +38,7 @@
               <span class="info-box-icon bg-warning"><i class="far fa-calendar-alt"></i></span>
               <div class="info-box-content">
                 <span class="info-box-text">Plan Ending Date</span>
-                 <span class="info-box-number">@php echo date("Y-m-d", strtotime($subscriber->end_date))@endphp</span>
+                 <span class="info-box-number">{{$ending_date}}</span>
               </div>
             </div>
           </div>
