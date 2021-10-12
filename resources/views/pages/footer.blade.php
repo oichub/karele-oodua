@@ -93,6 +93,8 @@
     <script src="{{ asset('pages/assets/js/jquery.min.js') }}"></script>
     <script src=" {{ asset('pages/assets/js/modernizr-2.6.2.min.js') }}"></script>
     <script src=" {{ asset('pages/assets/js/jquery.zoomslider.min.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- //slider-js -->
 
     <!-- owl carousel -->
@@ -205,3 +207,15 @@
 
     <!--bootstrap-->
     <script src="{{ asset('pages/assets/js/bootstrap.min.js') }}"></script>
+    <script>
+        function preventclick(id){
+        document.getElementById(id).addEventListener('click', function(e)
+        {
+         e.preventDefault();
+         Swal.fire('Check back');
+
+        })
+        }
+         preventclick('prevent-contact');
+          preventclick('prevent-about');
+    </script>

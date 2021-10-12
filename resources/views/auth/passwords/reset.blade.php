@@ -6,12 +6,12 @@
 @section('content')
 <div class="blog-section">
    <!-- ##### Breadcrumb Area Start ##### -->
-      <div class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url('pages/image/img.jpg');">
+   <div class="breadcrumb-area bg-img bg-overlay jarallax" style="background-image: url('../pages/image/img.jpg');">
          <div class="container h-100">
             <div class="row h-100 align-items-center">
             <div class="col-12">
                <div class="breadcrumb-text">
-                  <h2>Sign-In</h2>
+                  <h2> Sign-In</h2>
                </div>
             </div>               
             </div>
@@ -19,8 +19,8 @@
       </div>
    <!-- ##### Breadcrumb Area End ##### -->   
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+        <div class="row justify-content-center my-5">
+            <div class="col-md-6 col-12">
                 <div class="card">
                     <div class="card-header">{{ __('Reset Password') }}</div>
 
@@ -68,7 +68,7 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-outline-danger">
                                         {{ __('Reset Password') }}
                                     </button>
                                 </div>

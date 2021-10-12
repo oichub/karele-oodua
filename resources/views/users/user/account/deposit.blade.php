@@ -54,7 +54,7 @@
               </button>
             </div>            
         </form> 
-        <!-- Flutterwave form end -->
+       {{-- Flutterwave form end -->
         <!-- Paypal form start -->
         <!-- <form id="payPalForm" action="{{ route('payment') }}" method="post" style="display: none;">
           @csrf
@@ -75,7 +75,7 @@
             <button class="btn btn-warning btn-lg btn-block"><i class="fab fa-paypal"></i> Pay With <span style="color:midnightblue;">Pay</span><span style="color:blue;">pal</button>          
             </div>          
         </form>   -->
-        <!-- Paypal form end     -->
+        <!-- Paypal form end     --}}
       </div> 
     </div>   
   </div>   

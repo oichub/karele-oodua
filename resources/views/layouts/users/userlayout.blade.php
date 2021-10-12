@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>KARELE::@yield('title') </title>
+    <title>Kárélé oòduà láféfé::@yield('title') </title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{asset('plugins/dist/css/adminlte.min.css') }}">
+  <link rel="stylesheet" href="{{asset('plugins/dist/css/adminlte.css') }}">
   <!-- DataTables -->
   <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css')}}">
   <!-- overlayScrollbars -->
@@ -55,9 +55,8 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ url('/') }}" class="brand-link">
-      <span class="brand-text font-weight-light">Karele Oodua Lafefe</span>
+      <span class="brand-text font-weight-light">Kárélé oòduà láféfé</span>
     </a>
-
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
@@ -84,53 +83,49 @@
 
           </li>
           <!-- Students -->
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview 
+           @if(request()->path() == 'users/user/makepayment'||
+            request()->path() == 'users/user/subscribe' || request()->path()=='users/account'){
+              {{'menu-open'}}
+            } @endif">
+
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>Payment</p>
               <i class="right fas fa-angle-left"></i>
-
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ url('/users/user/makepayment') }}" class="nav-link">
+                <a href="{{ url('/users/user/makepayment') }}" class="nav-link @if(request()->path()=='users/user/makepayment'){{'active'}}@endif ">
                   <i class="fas fa-user-plus nav-icon"></i>
                   <p>Fund Account</p>
                 </a>
               </li>
         
               <li class="nav-item">
-                <a href="{{ url('/users/user/subscribe') }}" class="nav-link">
+                <a href="{{ url('/users/user/subscribe') }}" class="nav-link @if(request()->path()=='users/user/subscribe'){{'active'}} @endif ">
                   <i class="fas fa-user-plus nav-icon"></i>
                   <p>Subscribe</p>
                 </a>
               </li>
-        
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="fas fa-clock"></i>
-                  <p>Payment History</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+          <li class="nav-item">
+    <a href="{{ route('account.index') }}" class="nav-link @if(request()->path()=='users/account'){{'active'}} @endif ">
+      <i class="fas fa-dollar-sign nav-icon"></i>
+      <p>Account History</p>
+    </a>
+  </li> 
+     </ul>
+     </li>
           <!-- // Account -->
-
   <!-- Video -->
   <li class="nav-item">
-    <a href="{{route('previousvideos.index')}}" class="nav-link">
+    <a href="{{route('previousvideos.index')}}" class="nav-link @if(request()->path()=='user/videos/previousvideos'){{'active'}} @endif">
       <i class="nav-icon fa fa-tv"></i>
       <p>Videos</p>    
     </a>
   </li>  
   <li class="nav-item">
-    <a href="{{ route('account.index') }}" class="nav-link">
-      <i class="fas fa-clock"></i>
-      <p>Account History</p>
-    </a>
-  </li> 
-  <li class="nav-item">
-    <a href="{{ route('usersprofile') }}" class="nav-link">
+    <a href="{{ route('usersprofile') }}" class="nav-link @if(request()->path()=='users/profile'){{'active'}} @endif">
       <i class="fas fa-user"></i>
       <p>My Profile</p>
     </a>
@@ -138,13 +133,10 @@
 <!-- // Account -->
 
 
-
         {{-- @endif --}}
-
-
           <li class="nav-header">Settings</li>
           <li class="nav-item">
-            <a href="{{ route('change_password') }}" class="nav-link">
+            <a href="{{ route('change_password') }}" class="nav-link @if(request()->path()=='users/admin/change_password'){{'active'}} @endif">
               <i class="nav-icon far fa-circle text-danger"></i>
               <p class="text">Change Password</p>
             </a>

@@ -51,7 +51,7 @@
                         @enderror   <div class="clear"></div>
                   </div>  
                <div class="form-group pt-2">
-               <input type="submit" value="Log In" class="btn mb-2" style="background-color:#ff4c4c">
+               <input type="submit" value="Log In" class="btn mb-2  btn-outline-danger">
                <div class="form-group pt-2">
                   @if (Route::has('password.request'))
                         <a class="float-left ml-3" href="{{ route('password.request') }}">
