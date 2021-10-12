@@ -375,7 +375,7 @@
                                         @endif
                                     </div>                                 
                                     <div class="form-group pt-2">
-                                    <input type="submit" value="Sign Up" class="btn mb-2" style="background-color:#ff4c4c">
+                                    <input type="submit" value="Sign Up" class="btn btn-outline-danger mb-2">
                                     </div>
                                     </form>
                                     <p class="text-center"> Do you have account with us? <a href="{{ url('/login') }}">login </a></p>

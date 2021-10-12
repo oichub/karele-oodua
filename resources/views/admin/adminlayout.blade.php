@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{asset('plugins/dist/css/adminlte.min.css') }}">
+  <link rel="stylesheet" href="{{asset('plugins/dist/css/adminlte.css') }}">
   <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
 
   {{--  <script src="{{ asset('plugins/datatables/jquery.dataTables.js')}}"></script>  --}}
@@ -88,27 +88,29 @@
 
 
           <!-- Users -->
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview  @if(request()->path() == 'admin/users/create'||
+            request()->path() == 'users/admin/users/pending' || request()->path() == 'admin/users') 
+              {{'menu-open'}} @endif">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>Users</p>
               <i class="right fas fa-angle-left"></i>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('users.create') }}" class="nav-link">
+              <ul class="nav nav-treeview">
+                 <li class="nav-item">
+                <a href="{{ route('users.create') }}" class="nav-link @if(request()->path() == 'admin/users/create'){{'active'}} @endif">
                   <i class="fas fa-user-plus nav-icon"></i>
                   <p>Add Users</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ url('/users/admin/users/pending') }}" class="nav-link">
+                <a href="{{ url('/users/admin/users/pending') }}" class="nav-link @if(request()->path() == 'users/admin/users/pending'){{'active'}} @endif">
                   <i class="fas fa-user-minus nav-icon"></i>
                   <p>Pending Users</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('users.index') }}" class="nav-link">
+                <a href="{{ route('users.index') }}" class="nav-link @if(request()->path() == 'admin/users'){{'active'}} @endif">
                   <i class="fas fa-users"></i>
                   <p>Manage users</p>
                 </a>
@@ -118,14 +120,16 @@
           <!-- // Users -->
           <!-------Plans----------->
           <li class="nav-item">
-            <a href="{{ route('plan.add') }}" class="nav-link">
+            <a href="{{ route('plan.add') }}" class="nav-link @if(request()->path() == 'users/admin/subscription-plans'){{'active'}} @endif">
               <i class="fas fa-users"></i>
               <p> Subscription Plan</p>
             </a>
           </li>
          <!--------//-- Plan-------------->
           <!--------- Upcoming events -------->
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview @if(request()->path() =='users/admin/events/create'||
+            request()->path() == 'users/admin/events') 
+              {{'menu-open'}} @endif">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>Events</p>
@@ -134,13 +138,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('events.create') }}" class="nav-link">
+                <a href="{{ route('events.create') }}" class="nav-link @if(request()->path() == 'users/admin/events/create') {{'active'}} @endif">
                   <i class="fas fa-user-plus nav-icon"></i>
                   <p>Add Event</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('events.index') }}" class="nav-link">
+                <a href="{{ route('events.index') }}" class="nav-link @if(request()->path() == 'users/admin/events') {{'active'}} @endif">
                   <i class="fas fa-users"></i>
                   <p>Manage Events</p>
                 </a>
@@ -152,7 +156,9 @@
 
 
            <!-- Video -->
-           <li class="nav-item has-treeview">
+           <li class="nav-item has-treeview @if(request()->path() == 'admin/videos/upload'||
+            request()->path() == 'admin/videos') 
+              {{'menu-open'}} @endif">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-video"></i>
               <p> Video</p>
@@ -161,13 +167,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{route('adminvideo.upload')}}" class="nav-link"> 
+                <a href="{{route('adminvideo.upload')}}" class="nav-link @if(request()->path() == 'admin/videos/upload'){{'active'}} @endif"> 
                    <i class="fas fa-upload"></i> 
                   <p>Upload Video</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{route('adminvideo.index')}}" class="nav-link"> 
+                <a href="{{route('adminvideo.index')}}" class="nav-link @if(request()->path() == 'admin/videos'){{'active'}} @endif"> 
                   <i class="fas fa-video"></i>
                   <p>Manage Video</p>
                 </a>
@@ -175,22 +181,12 @@
             </ul>
           </li>
           <!-- // video -->
-             <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-user"></i>
-                <p> Admin</p>
-                <i class="right fas fa-angle-left"></i>
-              </a>
-              <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{route('adminsmanagement')}}" class="nav-link">
+                  <a href="{{route('adminsmanagement')}}" class="nav-link @if(request()->path() == 'users/admin/admin_management'){{'active'}} @endif">
                     <i class="fas fa-users"></i>
                     <p>Manage Admin</p>
                   </a>
                 </li>
-
-              </ul>
-            </li>
             <!-- // Students -->
 
         {{-- @endif --}}
@@ -232,7 +228,7 @@
 
   <!-- /.content-wrapper -->
 <footer class="main-footer">
-    <strong>Copyright &copy; {{ date('Y')}}  Karele Oodua Lafefe</strong>
+    <strong>Copyright &copy; {{ date('Y')}} Kárélé Oòduà Láféfé</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Powered By OIC Hub

@@ -85,9 +85,9 @@
           <!-- Students -->
           <li class="nav-item has-treeview 
            @if(request()->path() == 'users/user/makepayment'||
-            request()->path() == 'users/user/subscribe' || request()->path()=='users/account'){
+            request()->path() == 'users/user/subscribe' || request()->path()=='users/account')
               {{'menu-open'}}
-            } @endif">
+             @endif">
 
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
@@ -167,7 +167,7 @@
   </div>
   <!-- /.content-wrapper -->
 <footer class="main-footer">
-    <strong>Copyright &copy; {{ date('Y')}} Karele Oodua Lafefe</strong>
+    <strong>Copyright &copy; {{ date('Y')}} Kárélé Oòduà Láféfé</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
       <b>Powered By OIC Hub
